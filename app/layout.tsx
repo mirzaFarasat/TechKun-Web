@@ -1,6 +1,9 @@
+import '@radix-ui/themes/styles.css';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from "./NavBar";
+import { Theme } from '@radix-ui/themes';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,11 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en ">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Theme>
+          <NavBar />       
+          <main className=''>{children}</main>
+          <Theme accentColor="iris"></Theme>
+        </Theme>
       </body>
     </html>
   );
