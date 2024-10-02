@@ -15,7 +15,7 @@ const NavBar = () => {
         {lable:'Contact Us', href:'/contact-us'}
     ]
   return (
-    <nav className='flex space-x-8 border-b mb-5 px-8 h-20 bg-slate-200 items-center'>
+    <nav className='flex space-x-8 border-b px-8 h-20 bg-slate-200 items-center'>
         <Link href="/"><FaBug className='hover:text-zinc-500 transition-colors'/></Link>
         <ul className='space-x-6'>
             {links.map(link => 
