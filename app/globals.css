@@ -9,8 +9,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #fafafa;
     --foreground: #ededed;
+    --primary: #5492D7;
   }
 }
 
@@ -23,5 +24,31 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.case-responsive-container {
+  width: 100%;
+  max-width: 1600px; /* You can adjust the maximum width based on your design */
+  margin: 0 auto; /* Center the container */
+  padding-inline: 80px;
+
+  @media only screen and (min-width: 1920px) and (max-width: 2560px) {
+      padding-inline: 80px;
+  }
+  @media only screen and (min-width: 1440px) and (max-width: 1919px) {
+      padding-inline: 80px;
+  }
+
+  @media only screen and (min-width: 1280px) and (max-width: 1441px) {
+      padding-inline: 50px;
+  }
+
+  @media only screen and (min-width: 767px) and (max-width: 1279px) {
+      padding-inline: 30px;
+  }
+
+  @media only screen and (min-width: 100px) and (max-width: 767px) {
+      padding-inline: 30px;
   }
 }
