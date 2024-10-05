@@ -10,7 +10,7 @@ import { Button } from '@radix-ui/themes';
 const NavBar = () => {
     const currentPath = usePathname();
     const links = [
-        { lable: 'Our Work', href: '/services' },
+        { lable: 'Services', href: '/services' },
         { lable: 'Carriers', href: '/' },
         { lable: 'About Us', href: '/about-us' },
         // { lable: 'Contact Us', href: '/contact-us' }
