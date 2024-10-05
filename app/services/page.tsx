@@ -23,7 +23,7 @@ const Services = () => {
       </div> */}
       <div className='case-responsive-container bg-primary-50'>
         <div className='flex flex-col items-center text-center my-24'>
-          <h1 className=' text-5xl font-bold pr-2 text-gray-700'><span className='text-blue-700'>Our Area of Experties </span>Encompasses...</h1>
+          <h1 className=' text-5xl font-bold pr-2 text-gray-700'><span className='text-blue-700'>Our Area of Expertise </span>Encompasses...</h1>
         </div>
         <div className=' grid grid-cols-2 place-content-center'>
           <div className='flex flex-col font-semibold justify-center items-center text-center text-3xl'>
