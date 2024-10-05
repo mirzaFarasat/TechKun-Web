@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 
 const quotesImg = {
-    backgroundImage: "url('/Images/banner-images/banner.png')",
+    backgroundImage: "url('/Images/banner-images/services-banner.png')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center"
