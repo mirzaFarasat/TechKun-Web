@@ -25,12 +25,14 @@ const Services = () => {
                 </div>
                 <div className=''>
                     {zigzagItems.map((item, index) => (
-                        <div className={`${index % 2 !== 0? "bg-primary-50": ""} flex flex-row items-center`}>
-                            <div className='w-1/2'>
-                                <h3 className='mx-auto w-3/4 text-3xl font-semibold text-primary-900 text-center'>{item.text}</h3>
-                            </div>
-                            <div className='w-1/2'>
-                                <Image className='h-80 rounded-lg' src={item.image} alt={item.imageAltText} style={{ objectFit: "cover" }} />
+                        <div className={`${index % 2 !== 0? "bg-primary-50": ""}`}>
+                            <div className='case-responsive-container flex flex-row items-center'>
+                                <div className='w-1/2'>
+                                    <h3 className='mx-auto w-3/4 text-3xl font-semibold text-primary-900 text-center'>{item.text}</h3>
+                                </div>
+                                <div className='w-1/2'>
+                                    <Image className='h-80 rounded-lg' src={item.image} alt={item.imageAltText} style={{ objectFit: "cover" }} />
+                                </div>
                             </div>
                         </div>
                     ))}
