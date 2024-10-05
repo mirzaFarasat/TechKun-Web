@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import classNames from 'classnames';
-import { FaBug } from "react-icons/fa";
 import { Button } from '@radix-ui/themes';
+import Image from 'next/image';
+import techkunLogo from "@/public/Images/icon.png";
 
-
-const NavBar = () => {
+const Navbar = () => {
     const currentPath = usePathname();
     const links = [
         { lable: 'Services', href: '/services' },
@@ -20,24 +20,24 @@ const NavBar = () => {
         <nav className='fixed top-0 shadow border-b w-full h-16 bg-white'>
             <div className='case-responsive-container h-full flex justify-between items-center'>
                 <div className='flex flex-row items-center space-x-16'>
-                    <div className='flex flex-row items-center space-x-2 text-lg font-semibold'>
-                        <Link className='' href="/">
-                            <FaBug className='hover:text-zinc-500 transition-colors' />
+                    <div className='flex flex-row items-center space-x-4'>
+                        <Link className='w-12' href="/">
+                            <Image src={techkunLogo} alt='techkun-logo' className='w-full'/>
                         </Link>
-                        <div>Techkun</div>
+                        <h1 className='text-xl font-semibold'>Techkun</h1>
                     </div>
 
-                    <ul className='space-x-12'>
+                    <div className='flex flex-row space-x-6'>
                         {links.map(link =>
                             <Link key={link.href} className={classNames({
-                                    'text-zinc-900': link.href === currentPath,
-                                    'text-zinc-500': link.href !== currentPath,
-                                    'hover:text-zinc-800 font-semibold transition-colors': true
+                                    'bg-primary-50 text-primary-900': link.href === currentPath,
+                                    'text-primary-600 hover:text-primary-900': link.href !== currentPath,
+                                    'rounded-md px-3 py-2 font-semibold transition-colors': true
                                 })}
                                 href={link.href}>
                                 {link.lable}
                             </Link>)}
-                    </ul>
+                    </div>
                 </div>
 
                 <Button size={"3"} color="blue">Contact Us</Button>
@@ -46,4 +46,4 @@ const NavBar = () => {
     )
 };
 
-export default NavBar;
+export default Navbar;
