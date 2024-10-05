@@ -12,7 +12,7 @@ const Services = () => {
           <h2> Discover our core offerings below.</h2>
         </div>
       </div> */}
-      <div className='case-responsive-container'>
+      <div className='case-responsive-container bg-primary-50'>
         <div className='flex flex-col items-center mt-28 gap-2 text-center'>
           <div className='mb-2 flex flex-row'>
             <h1 className=' text-5xl font-bold pr-2 text-gray-700'>Custom Software</h1>

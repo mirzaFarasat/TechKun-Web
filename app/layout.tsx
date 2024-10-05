@@ -1,7 +1,7 @@
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "./globals.scss";
 import NavBar from "./NavBar";
 import { Theme } from '@radix-ui/themes';
 

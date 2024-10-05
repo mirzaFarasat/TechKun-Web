@@ -16,7 +16,7 @@ const Banner = () => {
                 <div>
                     <h1 className=''>Your Vision, Our Expertise:</h1>
                     <h1>Custom Software to</h1>
-                    <h1 className='text-blue-400'>Elevate Your Business</h1>
+                    <h1 className='text-primary-400'>Elevate Your Business</h1>
                 </div>
             </div>
         </div>
