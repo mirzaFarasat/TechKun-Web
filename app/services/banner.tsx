@@ -13,7 +13,7 @@ const Banner = () => {
         <div className="bg-cover bg-center h-[28rem] w-full flex items-center"
             style={quotesImg}>
             <div className='case-responsive-container font-bold text-white text-6xl'>
-                <h1 className=''>Your Vision, Our Expertise: <br />Custom Software to <br /> <samp className='text-primary-300'>Elevate Your Business</samp></h1>
+                <h1 className=''>Your Vision, Our Expertise: <br />Custom Software to <br /> <span className='text-primary-300'>Elevate Your Business</span></h1>
             </div>
         </div>
     )
