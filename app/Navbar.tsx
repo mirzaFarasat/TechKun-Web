@@ -10,9 +10,9 @@ import techkunLogo from "@/public/Images/icon.png";
 const Navbar = () => {
     const currentPath = usePathname();
     const links = [
-        { lable: 'Services', href: '/services' },
-        { lable: 'Carriers', href: '/' },
-        { lable: 'About Us', href: '/about-us' }
+        { label: 'Services', href: '/services' },
+        // { lable: 'Carriers', href: '/' },
+        { label: 'About Us', href: '/about-us' }
         
         // { lable: 'Contact Us', href: '/contact-us' }
     ];
@@ -36,7 +36,7 @@ const Navbar = () => {
                                     'rounded-md px-3 py-2 font-semibold transition-colors': true
                                 })}
                                 href={link.href}>
-                                {link.lable}
+                                {link.label}
                             </Link>)}
                     </div>
                 </div>
