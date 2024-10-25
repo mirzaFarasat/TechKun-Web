@@ -12,7 +12,8 @@ const Navbar = () => {
     const links = [
         { lable: 'Services', href: '/services' },
         { lable: 'Carriers', href: '/' },
-        { lable: 'About Us', href: '/about-us' },
+        { lable: 'About Us', href: '/about-us' }
+        
         // { lable: 'Contact Us', href: '/contact-us' }
     ];
 
@@ -24,14 +25,14 @@ const Navbar = () => {
                         <Link className='w-12' href="/">
                             <Image src={techkunLogo} alt='techkun-logo' className='w-full'/>
                         </Link>
-                        <h1 className='text-xl font-semibold'>Techkun</h1>
+                        <h1 className='text-xl font-semibold'>TechKun</h1>
                     </div>
 
-                    <div className='flex flex-row space-x-6'>
+                    <div className='flex flex-row space-x-6 '>
                         {links.map(link =>
                             <Link key={link.href} className={classNames({
                                     'bg-primary-50 text-primary-900': link.href === currentPath,
-                                    'text-primary-600 hover:text-primary-900': link.href !== currentPath,
+                                    'text-primary-600 hover:text-gray-600': link.href !== currentPath,
                                     'rounded-md px-3 py-2 font-semibold transition-colors': true
                                 })}
                                 href={link.href}>
