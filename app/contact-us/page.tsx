@@ -1,4 +1,4 @@
-import { Box, Button, CheckboxGroup, Flex, TextArea, TextField } from '@radix-ui/themes';
+import { CheckboxGroup, TextArea, TextField } from '@radix-ui/themes';
 import Link from 'next/link';
 import React from 'react';
 import { AiOutlineMessage } from 'react-icons/ai';
@@ -7,18 +7,14 @@ import { MdOutlineAttachEmail, MdOutlineLocationOn } from 'react-icons/md';
 import { TbPhoneCall } from 'react-icons/tb';
 
 const GetCustomerDetails = () => {
-    const placeHolders = [
-        { lable: 'First Name' },
-        { lable: 'Last Name' },
-        { lable: 'Email' }
-    ]
+   
     return (
         <div className='case-responsive-container'>
             {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
             <div className='py-20'>
                 <div className="relative flex flex-col justify-center items-center font-sans">
-                    <h1 className='text-5xl font-bold my-4 '>Contact our team</h1>
-                    <p className='text-gray-500'>Got any questions about scaling the products or growing you on our platform? We'er here to help.</p>
+                    <h1 className='text-5xl font-bold my-4 '>Contact <span className='text-primary-700'>our team</span></h1>
+                    <p className='text-gray-500'>Got any questions about scaling the products or growing you on our platform? We&apos;re here to help.</p>
                     <p className='text-gray-500'>Chat to our friendly team 24/7.</p>
                 </div>
                 <div className='flex flex-row justify-evenly mt-20'>
@@ -86,7 +82,7 @@ const GetCustomerDetails = () => {
                                 </div>
                             </div>
                             <div>
-                                <button className="bg-zinc-800 text-white py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-96">
+                                <button className="bg-primary-700 text-white py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-96">
                                     Submit
                                 </button>
                             </div>
@@ -118,7 +114,7 @@ const GetCustomerDetails = () => {
                             <p className='text-xs text-gray-500 mb-5'>Chat to us in personal at our Royal Market HQ</p>
                             <div className='flex flex-row'>
                                 <MdOutlineLocationOn className='mt-1 mr-1' />
-                                <h3 className='font-semibold'>Black Gate, Bhopal, M.P 462001</h3>
+                                <h3 className='font-semibold'>Royal Market, Bhopal, M.P 462001</h3>
                             </div>
                         </div>
                     </div>

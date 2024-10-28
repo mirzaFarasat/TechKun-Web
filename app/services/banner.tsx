@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image';
 
 const quotesImg = {
     backgroundImage: "url('/Images/banner-images/services-banner-updated.png')",

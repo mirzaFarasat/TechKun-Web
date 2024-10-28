@@ -1,13 +1,16 @@
+'use client';
 import Image, { StaticImageData } from 'next/image'
 import imageMobileApp from '@/public/Images/landing-page-images/landing-page-image-1.jpg';
 import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
-import imageMobileApp4 from '@/public/Images/landing-page-images/logistic.jpg';
-import Footer from './Footer';
+import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
+import Link from 'next/link';
+
 
 
 export default function Home() {
+
   const cardItems: {
     title: string,
     discription: string,
@@ -18,34 +21,36 @@ export default function Home() {
     discription: "Empowering healthcare with advanced digital solutions. From telemedicine to patient management systems, we develop software that streamlines medical workflows.",
     image: imageMobileApp1,
     imageAltText: "kkr"
-  },{
+  }, {
     title: "Ed-Tech",
     discription: "Transforming education through technology. Our software solutions are designed to create engaging learning experiences, offering tools for online education and personalized learning paths."
 
-,
+    ,
     image: imageMobileApp2,
     imageAltText: "hi"
-  },{
+  }, {
     title: "Food Tech",
     discription: "Redefining the food industry with smart tech. We build solutions for food delivery, inventory management, and customer engagement, making it easier for businesses to serve and satisfy customers efficiently.",
     image: imageMobileApp3,
     imageAltText: "kadak"
-  },{
+  }, {
     title: "Logistics",
     discription: "Optimizing logistics with intelligent software. Our solutions improve supply chain management, automate processes, and enhance real-time tracking for streamlined operations and better delivery outcomes.",
     image: imageMobileApp4,
-    imageAltText:"hhahahah"
+    imageAltText: "hhahahah"
   }]
 
   return (
     <div>
       <div className="case-responsive-container flex py-24 justify-center items-center">
         <div className="flex flex-col gap-7">
-          <h1 className="text-6xl font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT'S ALREADY DONE!</h1>
+          <h1 className="text-6xl font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT&apos;S ALREADY DONE!</h1>
           <p className="text-gray-500 text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
-          <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-60">
-            Give Us A Try
-          </button>
+          <Link href='/contact-us'>
+            <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-60">
+              Give Us A Try
+            </button>
+          </Link>
         </div>
       </div>
       <div className="bg-primary-50">
@@ -72,18 +77,17 @@ export default function Home() {
         <h3 className='text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
         <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
         <div className="flex justify-center items-center text-center w-full gap-10">
-          {cardItems.map((items) => (
-            <div className="flex flex-col w-1/3 h-96 bg-primary-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-t-2xl">
-              <div className="flex justify-center items-center text-center p-5 bg-primary-700 rounded-t-2xl">
+          {cardItems.map((items, index) => (
+            <div key={index} className="flex flex-col w-1/2 h-96 bg-primary-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl">
+              <div className="flex justify-center items-center text-center py-5 bg-primary-700 rounded-t-2xl">
                 <h2 className="text-lg font-semibold">{items.title}</h2>
               </div>
-              <div className="flex flex-col justify-center items-center p-6 gap-4">
-                <div className="flex justify-center items-center text-center w-full h-42 bg-primary-500 rounded-lg">
+              <div className="flex flex-col justify-center items-center text-center gap-2 px-2">
+                <div className="flex justify-center items-center text-center bg-primary-500 rounded-lg py-2 px-3">
                   <Image className='max-h-40 rounded-lg' src={items.image} alt={items.imageAltText} style={{ objectFit: "cover" }} />
                 </div>
-                <p className="text-sm text-gray-100 h-20">{items.discription}</p>
+                <p className="text-sm">{items.discription}</p>
               </div>
-              <div className="flex justify-center items-center p-6 mt-auto bg-primary-700 rounded-b-2xl"></div>
             </div>
           ))}
         </div>
