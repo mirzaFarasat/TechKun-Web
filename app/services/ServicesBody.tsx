@@ -53,15 +53,15 @@ export default function ServicesBody() {
                 </div>
                 <div className=''>
                     {zigzagItems.map((item, index) => (
-                        <div className={`py-24 ${index % 2 !== 0 ? "bg-primary-50" : ""}`}>
+                        <div key={index} className={`py-24 ${index % 2 !== 0 ? "bg-primary-50" : ""}`}>
                             <div className={`case-responsive-container flex ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} justify-center items-center`}>
                                 <div className={`w-1/2 ${index % 2 === 0 ? "pr-14" : "pl-24"}`}>
                                     <div className={`${index % 2 === 0 ? "w-11/12" : ""}`}>
                                         <h3 className='text-4xl font-semibold text-primary-900 pb-5' >{item.title}</h3>
                                         <p className=' text-gray-500 pb-5'>{item.discription}</p>
                                     </div>
-                                    {item.subItems.map((subItem) => (
-                                        <div>
+                                    {item.subItems.map((subItem, subIndex) => (
+                                        <div key={subIndex}>
                                             <ul className='list-disc py-2 px-4 font-semibold'>
                                                 <li className='text-primary-800'>{subItem}</li>
                                             </ul>

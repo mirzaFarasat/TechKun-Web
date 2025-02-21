@@ -37,7 +37,7 @@ const GetCustomerDetails = () => {
             alert('Form submission failed!');
         });
     }
-   
+
     return (
         <div className='case-responsive-container px-4 sm:px-8 lg:px-16'>
             <div className='py-20'>
@@ -77,7 +77,7 @@ const GetCustomerDetails = () => {
                                 ))}
                             </div>
                             <div>
-                                <button 
+                                <button
                                     className="bg-primary-700 text-white py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-full"
                                     onClick={handleSubmit}
                                 >
