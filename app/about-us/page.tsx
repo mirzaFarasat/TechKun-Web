@@ -23,9 +23,9 @@ export default function AboutUs() {
     }];
 
     return (<>
-        <div className="bg-primary-50 ">
-            <h1 className='text-center text-primary-700 uppercase font-bold text-5xl'>Innovating for the Future</h1>
-            <div className='py-16 px-5 md:px-12 lg:px-24'>
+        <div className="bg-primary-50 py-16">
+            <h1 className='mb-16 text-center text-primary-700 uppercase font-bold text-5xl'>Innovating for the Future</h1>
+            <div className='px-5 md:px-12 lg:px-24'>
                 <div className='max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10'>
                     {/* Left side text content */}
                     <div className='md:w-1/2 text-center md:text-left'>
@@ -104,7 +104,7 @@ export default function AboutUs() {
                     {team.map(member => (<div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                         <img
                             src={member.imageSrc}
-                            alt="Placeholder image for Emmy Rosum"
+                            alt="Profile Image"
                             className="w-full h-auto rounded-lg mb-4"
                         />
                         <h2 className="text-lg font-bold text-gray-800">{member.name}</h2>
