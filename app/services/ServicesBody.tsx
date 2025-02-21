@@ -54,7 +54,7 @@ export default function ServicesBody() {
     return (
         <div>
             <div className="py-12 md:py-24">
-                <div className="container mx-auto px-4 mb-8 flex flex-col items-center text-center">
+                <div className="case-responsive-container mx-auto px-4 mb-8 flex flex-col items-center text-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-gray-700">
                         <span className="text-primary-700">Our Area of Expertise </span>Encompasses...
                     </h2>
@@ -62,7 +62,7 @@ export default function ServicesBody() {
                 <div>
                     {zigzagItems.map((item, index) => (
                         <div key={index} className={`py-12 md:py-24 ${index % 2 !== 0 ? "bg-primary-50" : ""}`}>
-                            <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-8">
+                            <div className={`case-responsive-container mx-auto px-4 flex flex-col ${index % 2 !== 0 ? "md:flex-row-reverse": "md:flex-row"} items-center justify-center gap-8`}>
                                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-14" : "md:pl-14"}`}>
                                     <h3 className="text-2xl md:text-4xl font-semibold text-primary-900 pb-5">{item.title}</h3>
                                     <p className="text-gray-500 pb-5">{item.discription}</p>
