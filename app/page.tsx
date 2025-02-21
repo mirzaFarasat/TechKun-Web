@@ -42,29 +42,27 @@ export default function Home() {
 
   return (
     <div>
-      <div className="case-responsive-container flex py-24 justify-center items-center">
+      <div className="case-responsive-container flex py-24 sm:px-6 lg:px-8 justify-center items-center text-center lg:text-left ">
         <div className="flex flex-col gap-7">
-          <h1 className="text-6xl font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT&apos;S ALREADY DONE!</h1>
-          <p className="text-gray-500 text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
-          <Link href='/contact-us'>
-            <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-60">
-              Give Us A Try
-            </button>
-          </Link>
+          <h1 className="text-5xl sm:text-5xl lg:text-6xl  font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT'S ALREADY DONE!</h1>
+          <p className="text-gray-500 text-base sm:text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
+          <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-full sm:w-60">
+            Give Us A Try
+          </button>
         </div>
       </div>
-      <div className="bg-primary-50">
-        <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
-          <h2 className="text-5xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
-          <p className="text-gray-600">Techkun is a pioneerring technology consulting firm, that specializes in catalyzing the success of digital business trasformation for medium to large enterprise. Our goal has been to create simple solutions that can bring agility to any business. We bring digital innovation to business processes by collaborating with our customers (business and technology teams) that provides a competitive edge, scalability, and growth.</p>
-          <div className="flex justify-center items-center text-2xl text-white font-semibold w-1/2 h-14 bg-primary-600 rounded-md">
-            <div className="w-1/3 border-r border-white ">
+      <div className="bg-primary-50 md:">
+        <div className="case-responsive-container flex flex-col justify-center items-center text-center sm:px-6 lg:px-8 py-16 gap-10 pb-24">
+          <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
+          <p className="text-gray-600 text-base  sm:text-lg">Techkun is a pioneerring technology consulting firm, that specializes in catalyzing the success of digital business trasformation for medium to large enterprise. Our goal has been to create simple solutions that can bring agility to any business. We bring digital innovation to business processes by collaborating with our customers (business and technology teams) that provides a competitive edge, scalability, and growth.</p>
+          <div className="flex flex-col sm:flex-row justify-center items-center text-lg sm:text-xl text-white font-semibold w-full sm:w-1/2 bg-primary-600 rounded-md">
+            <div className="w-full sm:w-1/3 p-4 border-b sm:border-b-0 sm:border-r border-white">
               Authenticity
             </div>
-            <div className="w-1/3 border-r border-white">
+            <div className="w-full sm:w-1/3 p-4 border-b sm:border-b-0 sm:border-r border-white">
               Adaptability
             </div>
-            <div className="w-1/3">
+            <div className="w-full sm:w-1/3 p-4">
               Independence
             </div>
           </div>
@@ -73,26 +71,36 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className='case-responsive-container flex flex-col justify-center items-center py-24 gap-10'>
-        <h3 className='text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
+      <div className='case-responsive-container flex flex-col justify-center items-center lg:px-8 sm:px-6 text-center py-24 gap-10'>
+        <h3 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
         <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
-        <div className="flex justify-center items-center text-center w-full gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {cardItems.map((items, index) => (
-            <div key={index} className="flex flex-col w-1/2 h-96 bg-primary-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl">
-              <div className="flex justify-center items-center text-center py-5 bg-primary-700 rounded-t-2xl">
+            <div
+              key={index}
+              className="flex flex-col bg-primary-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-t-2xl"
+            >
+              <div className="flex justify-center items-center text-center p-5 bg-primary-700 rounded-t-2xl">
                 <h2 className="text-lg font-semibold">{items.title}</h2>
               </div>
-              <div className="flex flex-col justify-center items-center text-center gap-2 px-2">
-                <div className="flex justify-center items-center text-center bg-primary-500 rounded-lg py-2 px-3">
-                  <Image className='max-h-40 rounded-lg' src={items.image} alt={items.imageAltText} style={{ objectFit: "cover" }} />
+              <div className="flex flex-col justify-center items-center p-6 gap-4">
+                <div className="w-full h-48 overflow-hidden rounded-lg">
+                  <Image
+                    className="w-full h-full object-cover"
+                    src={items.image}
+                    alt={items.imageAltText}
+                  />
                 </div>
-                <p className="text-sm">{items.discription}</p>
+                <p className="text-sm text-gray-100">{items.discription}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
+  );
+}
+
 
     // <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
     //   <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -189,5 +197,5 @@ export default function Home() {
     //     </a>
     //   </footer>
     // </div>
-  );
-}
+//   );
+// }
