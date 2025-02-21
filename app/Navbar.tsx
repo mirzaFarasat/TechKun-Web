@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Button } from '@radix-ui/themes';
 import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
-import { Menu, X } from 'lucide-react';  
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
     const currentPath = usePathname();
@@ -52,7 +52,7 @@ const Navbar = () => {
                 </button>
             </div>
 
-            
+
             {isMenuOpen && (
                 <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-md border-b">
                     <div className="flex flex-col items-center space-y-4 py-4">

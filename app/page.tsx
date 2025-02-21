@@ -1,13 +1,16 @@
+'use client';
 import Image, { StaticImageData } from 'next/image'
 import imageMobileApp from '@/public/Images/landing-page-images/landing-page-image-1.jpg';
 import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
-import imageMobileApp4 from '@/public/Images/landing-page-images/logistic.jpg';
-import Footer from './Footer';
+import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
+import Link from 'next/link';
+
 
 
 export default function Home() {
+
   const cardItems: {
     title: string,
     discription: string,
@@ -18,23 +21,23 @@ export default function Home() {
     discription: "Empowering healthcare with advanced digital solutions. From telemedicine to patient management systems, we develop software that streamlines medical workflows.",
     image: imageMobileApp1,
     imageAltText: "kkr"
-  },{
+  }, {
     title: "Ed-Tech",
     discription: "Transforming education through technology. Our software solutions are designed to create engaging learning experiences, offering tools for online education and personalized learning paths."
 
-,
+    ,
     image: imageMobileApp2,
     imageAltText: "hi"
-  },{
+  }, {
     title: "Food Tech",
     discription: "Redefining the food industry with smart tech. We build solutions for food delivery, inventory management, and customer engagement, making it easier for businesses to serve and satisfy customers efficiently.",
     image: imageMobileApp3,
     imageAltText: "kadak"
-  },{
+  }, {
     title: "Logistics",
     discription: "Optimizing logistics with intelligent software. Our solutions improve supply chain management, automate processes, and enhance real-time tracking for streamlined operations and better delivery outcomes.",
     image: imageMobileApp4,
-    imageAltText:"hhahahah"
+    imageAltText: "hhahahah"
   }]
 
   return (
@@ -90,7 +93,6 @@ export default function Home() {
                 </div>
                 <p className="text-sm text-gray-100">{items.discription}</p>
               </div>
-              <div className="flex justify-center items-center p-6 mt-auto bg-primary-700 rounded-b-2xl"></div>
             </div>
           ))}
         </div>

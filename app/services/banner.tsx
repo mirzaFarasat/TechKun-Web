@@ -9,7 +9,7 @@ const quotesImg = {
 
 const Banner = () => {
     return (
-        <div 
+        <div
             className="bg-cover bg-center h-[28rem] w-full flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8"
             style={quotesImg}>
             <div className='font-bold text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight'>
