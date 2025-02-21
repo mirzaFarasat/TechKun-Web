@@ -46,14 +46,11 @@ export default function AboutUs() {
                 </div>
             </div>
         </div>
-        <div className="bg-white flex items-center justify-center min-h-screen">
-            <div>
-                <title>Why Choose Us?</title>
-            </div>
+        <div className="py-24 bg-white flex items-center justify-center">
             <div className="text-center">
-                <h1 className="text-4xl font-bold mb-8 text-blue-600">Why choose us?</h1>
+                <h1 className="text-4xl font-bold mb-8 text-blue-600">Why Choose Us?</h1>
                 <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                    <div className="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <div className="bg-white shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
                             <img
                                 src="https://storage.googleapis.com/a1aa/image/dN6hfTYc-McnHkucJ_hD8d3bR5Cq1DLZz9dHsFniFm4.jpg"
@@ -64,7 +61,7 @@ export default function AboutUs() {
                         <h2 className="text-xl font-bold mb-2 text-blue-600"> Post-Launch Support</h2>
                         <p className="text-gray-600">Our partnership doesn’t end at deployment. We offer ongoing support, maintenance, and upgrades</p>
                     </div>
-                    <div className="bg-blue-500 shadow-lg rounded-lg p-6 w-80">
+                    <div className="bg-blue-500 shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
                             <img
                                 src="https://storage.googleapis.com/a1aa/image/3SQ5mGV9gswmkg00u7SFnYEZOHVdltN-Rau4CW8y2JQ.jpg"
@@ -75,7 +72,7 @@ export default function AboutUs() {
                         <h2 className="text-xl font-bold text-white mb-2">INNOVATIVE SOLUTIONS</h2>
                         <p className="text-white">We don’t just build software—we craft cutting-edge solutions that drive business success.</p>
                     </div>
-                    <div className="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <div className="bg-white shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
                             <img
                                 src="https://storage.googleapis.com/a1aa/image/pqKdB5HWcdUsoqgpsDW_MEBsztJuW9U5jWRkznLSV60.jpg"
@@ -100,8 +97,8 @@ export default function AboutUs() {
                 <h1 className="text-4xl font-bold mb-4 text-gray-800">Meet Our Team</h1>
                 <p className="text-xl font-semibold mb-2 text-gray-700">We’ve got an entire team dedicated to supporting you and your business</p>
                 <p className="text-gray-600 mb-12">Get help 24/7, with our award-winning support network of payments experts.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                    {team.map(member => (<div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div className="flex flex-wrap justify-center gap-8">
+                    {team.map(member => (<div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                         <img
                             src={member.imageSrc}
                             alt="Profile Image"
