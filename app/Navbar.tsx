@@ -19,14 +19,14 @@ const Navbar = () => {
 
     return (
         <nav className="fixed top-0 shadow border-b w-full h-16 bg-white z-50">
-            <div className="case-responsive-container h-full flex justify-between items-center px-4 md:px-8">
+            <div className="case-responsive-container h-full flex justify-between items-center gap-8">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="w-10 md:w-12">
                         <Image src={techkunLogo} alt="techkun-logo" className="w-full" />
                     </Link>
                     <h1 className="text-lg md:text-xl font-semibold">TechKun</h1>
                 </div>
-                <div className="hidden md:flex space-x-6 ml-auto">
+                <div className="hidden md:flex gap-4 ml-auto">
                     {links.map(link => (
                         <Link
                             key={link.href}
