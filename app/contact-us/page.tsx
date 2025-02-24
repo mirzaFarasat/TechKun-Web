@@ -72,13 +72,13 @@ const GetCustomerDetails = () => {
                                         <CheckboxGroup.Root className='pt-0.5 pr-2' size="1">
                                             <CheckboxGroup.Item value={service} />
                                         </CheckboxGroup.Root>
-                                        <h3>{service}</h3>
+                                        <div className='font-medium'>{service}</div>
                                     </div>
                                 ))}
                             </div>
                             <div>
                                 <button
-                                    className="bg-primary-700 text-white py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-full"
+                                    className="bg-primary-700 text-white py-2 px-4 rounded-lg hover:bg-primary-900 transition-colors w-full"
                                     onClick={handleSubmit}
                                 >
                                     Submit
