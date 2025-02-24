@@ -7,7 +7,8 @@ import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
 import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
-
+import hireTalentt from '@/public/Images/our-products/hire-talentt-nav-white.png';
+import productivitiIo from '@/public/Images/our-products/productiviti-logo-full-black.png';
 
 export default function Home() {
 
@@ -71,6 +72,65 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
+            
+
+
+            <div className="max-w-6xl mx-auto py-16 bg-white font-sans">
+      <h2 className="text-5xl font-extrabold text-center text-blue-600 mb-8">Our Work</h2>
+      <p className="text-center text-xl text-gray-700 mb-12">Crafting Tailored Software for Your Needs</p>
+      <div className="space-y-24">
+        <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
+          <div className="md:w-1/2">
+            <h3 className="text-3xl font-semibold text-blue-600 mb-4">Productiviti.io</h3>
+            <p className="text-gray-600 mb-4">
+              Transform your organization's productivity with Productiviti, a sophisticated application designed for real-time workforce tracking and analytics.
+            </p>
+            <ul className="list-disc pl-5 text-gray-600">
+              <li><strong>Dynamic Real-Time Tracking:</strong> Monitor remote teams with automated timekeeping and activity logging, ensuring compliance and proactive issue identification.</li>
+              <li><strong>In-Depth Data Analytics:</strong> Utilize advanced analytics to derive actionable insights into employee performance, optimizing workflows and resource allocation.</li>
+              <li><strong>Centralized Workforce Management:</strong> Manage diverse enterprise workforces from a unified platform with role-based access controls for secure oversight.</li>
+              <li><strong>Automated Attendance and Resource Tracking:</strong> Streamline attendance management and asset tracking, providing a holistic view of employee availability and resource utilization.</li>
+              <li><strong>Customizable Reporting and Compliance Framework:</strong> Access interactive reporting tools with customizable dashboards to ensure adherence to industry standards and enhance transparency.</li>
+            </ul>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            {/* <Image
+              src={productivitiIo}
+              alt="Productiviti.io"
+              width={350}
+              height={250}
+              className="object-contain"
+            /> */}
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row-reverse items-center md:items-start md:space-x-8">
+          <div className="md:w-1/2">
+            <h3 className="text-3xl font-semibold text-blue-600 mb-4">HireTalentt</h3>
+            <p className="text-gray-600 mb-4">
+              Discover HireTalent, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
+            </p>
+            <ul className="list-disc pl-5 text-gray-600">
+              <li><strong>Extensive Talent Pool:</strong> Access a diverse and continuously updated database of qualified candidates across various industries to find the perfect fit for your team.</li>
+              <li><strong>Advanced Search Filters:</strong> Utilize sophisticated filters to pinpoint candidates based on specific criteria, streamlining your selection process for optimal results.</li>
+              <li><strong>Integrated Applicant Tracking System (ATS):</strong> Manage applications and track candidate progress seamlessly, enhancing collaboration among hiring teams.</li>
+              <li><strong>AI-Powered Candidate Matching:</strong> Leverage artificial intelligence to match candidates to job openings, improving the quality and relevance of your hires.</li>
+              <li><strong>Comprehensive Analytics Dashboard:</strong> Gain valuable insights into your recruitment efforts with data-driven analytics, allowing for informed decision-making and strategy optimization.</li>
+            </ul>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            {/* <Image
+              src={hireTalentt}
+              alt="HireTalentt"
+              width={350}
+              height={250}
+              className="object-contain"
+            /> */}
+          </div>
+        </div>
+      </div>
+    </div>
+
             <div className='case-responsive-container flex flex-col justify-center items-center text-center py-24 gap-10'>
                 <h3 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
                 <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
