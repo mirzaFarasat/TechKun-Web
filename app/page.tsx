@@ -10,7 +10,21 @@ import AboutUs from './components/AboutUs';
 
 
 export default function Home() {
-
+    const services = [
+        {
+          title: 'AI & Machine Learning Solutions',
+          description:
+            'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
+        //   image: ecomImage,
+        },
+        {
+          title: 'Mobile Application Development',
+          description:
+            "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
+        //   image: webAppImage,
+        },
+        
+      ];
     const cardItems: {
         title: string,
         discription: string,
@@ -36,7 +50,10 @@ export default function Home() {
         discription: "Optimizing logistics with intelligent software. Our solutions improve supply chain management, automate processes, and enhance real-time tracking for streamlined operations and better delivery outcomes.",
         image: imageMobileApp4,
         imageAltText: "hhahahah"
-    }];
+    },
+
+
+        ];
 
     return (
         <div>
@@ -51,6 +68,36 @@ export default function Home() {
                     </button>
                 </div>
             </div>
+
+
+            <section className="bg-gray-100 py-16 px-4">
+                <div className="max-w-6xl mx-auto text-center">
+                    <h2 className="text-5xl font-bold text-blue-600">Our Services</h2>
+                    <p className="text-gray-500 mt-2">Your Vision, Our Expertise</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                        {services.map((service, index) => (
+                            <div
+                                key={index}
+                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                            >
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    className="w-full h-56 object-cover"
+                                />
+                                <div className="p-6 text-center">
+                                    <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
+                                    <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+           
+           
+           
             <div className="bg-primary-50 md:">
                 <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
                     <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
@@ -100,3 +147,5 @@ export default function Home() {
         </div>
     );
 };
+
+
