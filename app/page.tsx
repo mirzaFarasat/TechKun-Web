@@ -7,8 +7,8 @@ import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
 import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
-import hireTalentt from '@/public/Images/our-products/hire-talentt-nav-white.png';
-import productivitiIo from '@/public/Images/our-products/productiviti-logo-full-black.png';
+import aiimg from '@/public/Images/service-landing-page/ai2.webp';
+import mobimg from '@/public/Images/service-landing-page/mobf.webp';
 
 export default function Home() {
     const services = [
@@ -16,13 +16,13 @@ export default function Home() {
           title: 'AI & Machine Learning Solutions',
           description:
             'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
-        //   image: ecomImage,
+          image: aiimg,
         },
         {
           title: 'Mobile Application Development',
           description:
             "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
-        //   image: webAppImage,
+          image: mobimg,
         },
         
       ];
