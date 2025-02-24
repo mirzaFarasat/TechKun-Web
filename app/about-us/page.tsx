@@ -1,25 +1,26 @@
 import React from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import missionImage from '@/public/Images/mission-image/Mission-image.webp';
+import profilePlaceholder from "@/public/Images/profile-placeholder.jpg";
 
 export default function AboutUs() {
 
     const team: {
-        imageSrc: string;
+        imageSrc: string | StaticImageData;
         name: string;
         position: string;
     }[] = [{
-        imageSrc: "https://storage.googleapis.com/a1aa/image/MM8xJhFmxaged6H_NOuAqiV2kyAgyonyvPWgbe2Q9Jw.jpg",
-        name: "Emmy Rosum",
-        position: "Customer Success Agent"
+        imageSrc: profilePlaceholder,
+        name: "Khizar Shakir",
+        position: "Chief Executive Officer"
     }, {
-        imageSrc: "https://storage.googleapis.com/a1aa/image/zEPTNL1RBndwKhRwKZjoCYpy3bNF2fvI4g_Mz993Z3s.jpg",
-        name: "Sophie Chamberlain",
-        position: "Specialized Support"
+        imageSrc: profilePlaceholder,
+        name: "Uzair Mirza",
+        position: "Managing Director"
     }, {
-        imageSrc: "https://storage.googleapis.com/a1aa/image/UgE3tWh5VXbUd2icmcJYKP49IAwXZYPLypNxKqdTFLo.jpg",
-        name: "Lana Stiener",
-        position: "VP of Customer Success"
+        imageSrc: profilePlaceholder,
+        name: "Naved M. Usmani",
+        position: "Chief Technology Officer"
     }];
 
     return (<>
@@ -99,7 +100,7 @@ export default function AboutUs() {
                 <p className="text-gray-600 mb-12">Get help 24/7, with our award-winning support network of payments experts.</p>
                 <div className="flex flex-wrap justify-center gap-8">
                     {team.map(member => (<div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                        <img
+                        <Image
                             src={member.imageSrc}
                             alt="Profile Image"
                             className="w-full h-auto rounded-lg mb-4"
