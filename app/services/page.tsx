@@ -14,7 +14,7 @@ const Services = () => {
                         Transparency | Trust | Agile | Elite Class Architects & Developers
                     </p>
                     <p className='text-sm md:text-base'>
-                        <span className='font-medium'>At Techkun</span>,<br className='hidden md:block' /> we bring together the latest technologies, industry best practices, and a commitment to delivering solutions that help businesses thrive.<br className='hidden md:block' /> Whether you're launching a new product, upgrading your existing systems, or exploring new technological horizons,<br className='hidden md:block' /> we're here to provide expert guidance every step of the way.
+                        <span className='font-medium'>At Techkun</span>,<br className='hidden md:block' /> we bring together the latest technologies, industry best practices, and a commitment to delivering solutions that help businesses thrive.<br className='hidden md:block' /> Whether you&apos;re launching a new product, upgrading your existing systems, or exploring new technological horizons,<br className='hidden md:block' /> we&apos;re here to provide expert guidance every step of the way.
                     </p>
                 </div>
             </div>
