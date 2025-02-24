@@ -2,6 +2,9 @@ import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import missionImage from '@/public/Images/mission-image/Mission-image.webp';
 import profilePlaceholder from "@/public/Images/profile-placeholder.jpg";
+import bus from "@/public/Images/bus.jpg";
+import umbrella from "@/public/Images/umbrella.jpg";
+import star from "@/public/Images/star.jpg";
 
 export default function AboutUs() {
 
@@ -53,10 +56,10 @@ export default function AboutUs() {
                 <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
                     <div className="bg-white shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
-                            <img
-                                src="https://storage.googleapis.com/a1aa/image/dN6hfTYc-McnHkucJ_hD8d3bR5Cq1DLZz9dHsFniFm4.jpg"
+                            <Image
+                                src={bus}
                                 alt="Icon of a delivery truck"
-                                className="w-12 h-12"
+                                className="rounded w-12 h-12"
                             />
                         </div>
                         <h2 className="text-xl font-bold mb-2 text-blue-600"> Post-Launch Support</h2>
@@ -64,10 +67,10 @@ export default function AboutUs() {
                     </div>
                     <div className="bg-blue-500 shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
-                            <img
-                                src="https://storage.googleapis.com/a1aa/image/3SQ5mGV9gswmkg00u7SFnYEZOHVdltN-Rau4CW8y2JQ.jpg"
+                            <Image
+                                src={umbrella}
                                 alt="Icon of an umbrella"
-                                className="w-12 h-12"
+                                className="rounded w-12 h-12"
                             />
                         </div>
                         <h2 className="text-xl font-bold text-white mb-2">INNOVATIVE SOLUTIONS</h2>
@@ -75,10 +78,10 @@ export default function AboutUs() {
                     </div>
                     <div className="bg-white shadow-lg rounded-lg p-6 w-80 self-stretch">
                         <div className="flex items-center justify-center mb-4">
-                            <img
-                                src="https://storage.googleapis.com/a1aa/image/pqKdB5HWcdUsoqgpsDW_MEBsztJuW9U5jWRkznLSV60.jpg"
+                            <Image
+                                src={star}
                                 alt="Icon of a star badge"
-                                className="w-12 h-12"
+                                className="rounded w-12 h-12"
                             />
                         </div>
                         <h2 className="text-xl font-bold mb-2 text-blue-600">Security & Scalability</h2>
@@ -88,18 +91,12 @@ export default function AboutUs() {
             </div>
         </div>
         <div className="bg-gray-100 min-h-screen">
-            <div>
-                <title>Meet Our Team</title>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-            </div>
-
-            <main className="container mx-auto px-4 py-16 text-center">
+            <div className="container mx-auto px-4 py-16 text-center">
                 <h1 className="text-4xl font-bold mb-4 text-gray-800">Meet Our Team</h1>
                 <p className="text-xl font-semibold mb-2 text-gray-700">We’ve got an entire team dedicated to supporting you and your business</p>
                 <p className="text-gray-600 mb-12">Get help 24/7, with our award-winning support network of payments experts.</p>
                 <div className="flex flex-wrap justify-center gap-8">
-                    {team.map(member => (<div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                    {team.map((member, index) => (<div key={index} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                         <Image
                             src={member.imageSrc}
                             alt="Profile Image"
@@ -109,7 +106,7 @@ export default function AboutUs() {
                         <p className="text-gray-600">{member.position}</p>
                     </div>))}
                 </div>
-            </main>
+            </div>
         </div>
     </>)
 }
