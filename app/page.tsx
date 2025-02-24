@@ -5,8 +5,6 @@ import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
 import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
-import Link from 'next/link';
-
 
 
 export default function Home() {
@@ -44,7 +42,7 @@ export default function Home() {
     <div>
       <div className="case-responsive-container flex py-24 justify-center items-center text-center lg:text-left ">
         <div className="flex flex-col gap-7">
-          <h1 className="text-5xl sm:text-5xl lg:text-6xl  font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT'S ALREADY DONE!</h1>
+          <h1 className="text-5xl sm:text-5xl lg:text-6xl  font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT&apos;S ALREADY DONE!</h1>
           <p className="text-gray-500 text-base sm:text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
           <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-full sm:w-60">
             Give Us A Try
