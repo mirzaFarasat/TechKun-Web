@@ -15,29 +15,29 @@ const Services = () => {
             <ServicesBody />
             <div className='bg-primary-700 flex justify-center rounded-5xl py-12 px-8 mb-20'>
                 <div className='mx-auto px-4 py-8 md:py-10 flex flex-col justify-center items-center text-center text-white'>
-                    <h4 className='text-white text-2xl md:text-5xl font-medium pb-3'>Why Us?</h4>
+                    <h4 className='text-white text-2xl md:text-5xl font-medium mb-6'>Why Us?</h4>
                     <div className="flex flex-wrap justify-center gap-4 mb-6 md:mb-10">
 
                         {/* Transparency Box */}
-                        <div className="flex-1 min-w-[180px] max-w-[220px] h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
+                        <div className="flex-1 min-w-[180px] max-w-[220px] min-h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
                             <Image src={transparencyicon} alt="Transparency Icon" className="w-6 h-6 md:w-8 md:h-8 mb-2" />
                             Transparency
                         </div>
 
                         {/* Trust Box */}
-                        <div className="flex-1 min-w-[180px] max-w-[220px] h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
+                        <div className="flex-1 min-w-[180px] max-w-[220px] min-h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
                             <Image src={trusticon} alt="Trust Icon" className="w-6 h-6 md:w-8 md:h-8 mb-2" />
                             Trust
                         </div>
 
                         {/* Agile Box */}
-                        <div className="flex-1 min-w-[180px] max-w-[220px] h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
+                        <div className="flex-1 min-w-[180px] max-w-[220px] min-h-20 flex flex-col items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
                             <Image src={agileicon} alt="Agile Icon" className="w-6 h-6 md:w-8 md:h-8 mb-2" />
                             Agile
                         </div>
 
                         {/* Elite Class Architects & Developers Box */}
-                        <div className="flex-1 min-w-[180px] max-w-[220px] h-20 flex flex-col text-lg items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
+                        <div className="flex-1 min-w-[180px] max-w-[220px] min-h-20 flex flex-col text-lg items-center justify-center text-primary-700 rounded-xl shadow-lg px-6 py-3 md:py-4 text-sm md:text-lg font-semibold bg-white">
                             <Image src={eliteClass} alt="Elite Class Icon" className="w-6 h-6 md:w-8 md:h-8 mb-2" />
                             Elite Class Architects & Developers
                         </div>
