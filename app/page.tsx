@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="case-responsive-container flex py-24 sm:px-6 lg:px-8 justify-center items-center text-center lg:text-left ">
+      <div className="case-responsive-container flex py-24 justify-center items-center text-center lg:text-left ">
         <div className="flex flex-col gap-7">
           <h1 className="text-5xl sm:text-5xl lg:text-6xl  font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT'S ALREADY DONE!</h1>
           <p className="text-gray-500 text-base sm:text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-primary-50 md:">
-        <div className="case-responsive-container flex flex-col justify-center items-center text-center sm:px-6 lg:px-8 py-16 gap-10 pb-24">
+        <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
           <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
           <p className="text-gray-600 text-base  sm:text-lg">Techkun is a pioneerring technology consulting firm, that specializes in catalyzing the success of digital business trasformation for medium to large enterprise. Our goal has been to create simple solutions that can bring agility to any business. We bring digital innovation to business processes by collaborating with our customers (business and technology teams) that provides a competitive edge, scalability, and growth.</p>
           <div className="flex flex-col sm:flex-row justify-center items-center text-lg sm:text-xl text-white font-semibold w-full sm:w-1/2 bg-primary-600 rounded-md">
@@ -71,7 +71,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className='case-responsive-container flex flex-col justify-center items-center lg:px-8 sm:px-6 text-center py-24 gap-10'>
+      <div className='case-responsive-container flex flex-col justify-center items-center text-center py-24 gap-10'>
         <h3 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
         <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
