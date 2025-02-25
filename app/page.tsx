@@ -7,10 +7,25 @@ import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
 import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
-
+import aiimg from '@/public/Images/service-landing-page/ai2.webp';
+import mobimg from '@/public/Images/service-landing-page/mobf.webp';
 
 export default function Home() {
+    const services = [
+        {
+          title: 'AI & Machine Learning Solutions',
+          description:
+            'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
+          image: aiimg,
+        },
+        {
+          title: 'Mobile Application Development',
+          description:
+            "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
+          image: mobimg,
+        },
 
+    ];
     const cardItems: {
         title: string,
         discription: string,
@@ -36,7 +51,10 @@ export default function Home() {
         discription: "Optimizing logistics with intelligent software. Our solutions improve supply chain management, automate processes, and enhance real-time tracking for streamlined operations and better delivery outcomes.",
         image: imageMobileApp4,
         imageAltText: "hhahahah"
-    }];
+    },
+
+
+        ];
 
     return (
         <div>
@@ -51,6 +69,36 @@ export default function Home() {
                     </button>
                 </div>
             </div>
+
+
+            <section className="bg-gray-100 py-16 px-4">
+                <div className="max-w-6xl mx-auto text-center">
+                    <h2 className="text-5xl font-bold text-blue-600">Our Services</h2>
+                    <p className="text-gray-500 mt-2">Your Vision, Our Expertise</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                        {services.map((service, index) => (
+                            <div
+                                key={index}
+                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                            >
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    className="w-full h-56 object-cover"
+                                />
+                                <div className="p-6 text-center">
+                                    <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
+                                    <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+
+
+
             <div className="bg-primary-50 md:">
                 <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
                     <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
@@ -71,7 +119,67 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='case-responsive-container flex flex-col justify-center items-center text-center py-24 gap-10'>
+
+
+
+
+            <div className="case-responsive-container py-16 bg-white font-sans">
+                <h2 className="text-5xl font-extrabold text-center text-blue-600 mb-8">Our Products</h2>
+                <p className="text-center text-xl text-gray-700 mb-12">Crafting Tailored Software for Your Needs</p>
+                <div className="space-y-24">
+                    <div className="flex flex-col md:flex-row items-start md:space-x-8">
+                        <div className="md:w-1/2 ">
+                            <h3 className="text-3xl font-semibold text-blue-600 mb-4">Productiviti.io</h3>
+                            <p className="text-gray-600 mb-4">
+                                Transform your organization's productivity with Productiviti, a sophisticated application designed for real-time workforce tracking and analytics.
+                            </p>
+                            <ul className="list-disc pl-5 text-gray-600">
+                                <li><strong>Dynamic Real-Time Tracking:</strong> Monitor remote teams with automated timekeeping and activity logging, ensuring compliance and proactive issue identification.</li>
+                                <li><strong>In-Depth Data Analytics:</strong> Utilize advanced analytics to derive actionable insights into employee performance, optimizing workflows and resource allocation.</li>
+                                <li><strong>Centralized Workforce Management:</strong> Manage diverse enterprise workforces from a unified platform with role-based access controls for secure oversight.</li>
+                                <li><strong>Automated Attendance and Resource Tracking:</strong> Streamline attendance management and asset tracking, providing a holistic view of employee availability and resource utilization.</li>
+                                <li><strong>Customizable Reporting and Compliance Framework:</strong> Access interactive reporting tools with customizable dashboards to ensure adherence to industry standards and enhance transparency.</li>
+                            </ul>
+                        </div>
+                        <div className="md:w-1/2 flex justify-center">
+                            {/* <Image
+              src={productivitiIo}
+              alt="Productiviti.io"
+              width={350}
+              height={250}
+              className="object-contain"
+            /> */}
+                        </div>
+                    </div>
+                    <div className="flex flex-col md:flex-row-reverse items-start md:space-x-8">
+                        <div className="md:w-1/2 md:pr-12">
+                            <h3 className="text-3xl font-semibold text-blue-600 mb-4">HireTalentt</h3>
+                            <p className="text-gray-600 mb-4">
+                                Discover HireTalent, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
+                            </p>
+                            <ul className="list-disc pl-5 text-gray-600">
+                                <li><strong>Extensive Talent Pool:</strong> Access a diverse and continuously updated database of qualified candidates across various industries to find the perfect fit for your team.</li>
+                                <li><strong>Advanced Search Filters:</strong> Utilize sophisticated filters to pinpoint candidates based on specific criteria, streamlining your selection process for optimal results.</li>
+                                <li><strong>Integrated Applicant Tracking System (ATS):</strong> Manage applications and track candidate progress seamlessly, enhancing collaboration among hiring teams.</li>
+                                <li><strong>AI-Powered Candidate Matching:</strong> Leverage artificial intelligence to match candidates to job openings, improving the quality and relevance of your hires.</li>
+                                <li><strong>Comprehensive Analytics Dashboard:</strong> Gain valuable insights into your recruitment efforts with data-driven analytics, allowing for informed decision-making and strategy optimization.</li>
+                            </ul>
+                        </div>
+                        <div className="md:w-1/2 flex justify-center">
+                            {/* <Image
+              src={hireTalentt}
+              alt="HireTalentt"
+              width={350}
+              height={250}
+              className="object-contain"
+            /> */}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className='case-responsive-container flex flex-col justify- items-center text-center py-24 gap-10'>
                 <h3 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
                 <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
@@ -100,3 +208,5 @@ export default function Home() {
         </div>
     );
 };
+
+
