@@ -151,10 +151,10 @@ export default function Home() {
             <div className="case-responsive-container py-16 bg-white font-sans">
                 <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
                 <p className="text-center text-xl text-gray-700 mb-24">Crafting Tailored Software for Your Needs</p>
-                <div className="space-y-24">
+                <div className="flex flex-col gap-y-36">
                     <div className="flex flex-col md:flex-row items-start md:gap-x-16">
                         <div className="md:w-5/12">
-                            <p className='mb-4'>Partnered with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
                             <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
                                 Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
@@ -180,7 +180,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col md:flex-row-reverse items-start md:gap-x-16">
                         <div className="md:w-5/12 md:pr-12">
-                            <p className='mb-4'>Partnered with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
                             <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
                                 Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
