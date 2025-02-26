@@ -1,31 +1,59 @@
 'use client';
 import Image, { StaticImageData } from 'next/image'
+import { RxExternalLink } from "react-icons/rx";
+import Link from 'next/link';
+import Banner from './components/Banner';
+import AboutUs from './components/AboutUs';
+
 import imageMobileApp from '@/public/Images/landing-page-images/landing-page-image-1.jpg';
 import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
 import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
-import Banner from './components/Banner';
-import AboutUs from './components/AboutUs';
 import aiimg from '@/public/Images/service-landing-page/ai2.webp';
 import mobimg from '@/public/Images/service-landing-page/mobf.webp';
+import imLogo from "@/public/Images/logos/im-logo.webp";
+import productivitiLogo from "@/public/Images/logos/productiviti-logo.png";
+import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
+import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
+import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
 
 export default function Home() {
-    const services = [
+    const services: {
+        title: string;
+        description: string;
+        image: StaticImageData;
+    }[] = [
         {
-          title: 'AI & Machine Learning Solutions',
-          description:
-            'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
-          image: aiimg,
+            title: 'AI & Machine Learning Solutions',
+            description:
+                'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
+            image: aiimg,
         },
         {
-          title: 'Mobile Application Development',
-          description:
-            "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
-          image: mobimg,
+            title: 'Mobile Application Development',
+            description:
+                "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
+            image: mobimg,
         },
-
     ];
+
+    const ourProducts: {
+        productName: string;
+        description: string;
+        features: {
+            featureTitle: string;
+            featureDescription: string;
+        }[];
+    }[] = [{
+        productName: "Productiviti",
+        description: "Transform Workforce Productivity with Real-Time Insights Activity Logging & Productivity Analytics",
+        features: [{
+            featureTitle: "",
+            featureDescription: ""
+        }]
+    }];
+
     const cardItems: {
         title: string,
         discription: string,
@@ -120,59 +148,60 @@ export default function Home() {
                 </div>
             </div>
 
-
-
-
             <div className="case-responsive-container py-16 bg-white font-sans">
-                <h2 className="text-5xl font-extrabold text-center text-blue-600 mb-8">Our Products</h2>
-                <p className="text-center text-xl text-gray-700 mb-12">Crafting Tailored Software for Your Needs</p>
+                <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
+                <p className="text-center text-xl text-gray-700 mb-24">Crafting Tailored Software for Your Needs</p>
                 <div className="space-y-24">
-                    <div className="flex flex-col md:flex-row items-start md:space-x-8">
-                        <div className="md:w-1/2 ">
-                            <h3 className="text-3xl font-semibold text-blue-600 mb-4">Productiviti.io</h3>
+                    <div className="flex flex-col md:flex-row items-start md:gap-x-16">
+                        <div className="md:w-5/12">
+                            <p className='mb-4'>Partnered with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
-                                Transform your organization's productivity with Productiviti, a sophisticated application designed for real-time workforce tracking and analytics.
+                                Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
                             </p>
-                            <ul className="list-disc pl-5 text-gray-600">
+                            <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
                                 <li><strong>Dynamic Real-Time Tracking:</strong> Monitor remote teams with automated timekeeping and activity logging, ensuring compliance and proactive issue identification.</li>
                                 <li><strong>In-Depth Data Analytics:</strong> Utilize advanced analytics to derive actionable insights into employee performance, optimizing workflows and resource allocation.</li>
                                 <li><strong>Centralized Workforce Management:</strong> Manage diverse enterprise workforces from a unified platform with role-based access controls for secure oversight.</li>
                                 <li><strong>Automated Attendance and Resource Tracking:</strong> Streamline attendance management and asset tracking, providing a holistic view of employee availability and resource utilization.</li>
                                 <li><strong>Customizable Reporting and Compliance Framework:</strong> Access interactive reporting tools with customizable dashboards to ensure adherence to industry standards and enhance transparency.</li>
                             </ul>
+                            <Link href={"https://www.productiviti.io"}>
+                                <Image src={productivitiLogo} alt='productiviti-logo' className='w-36' />
+                            </Link>
                         </div>
-                        <div className="md:w-1/2 flex justify-center">
-                            {/* <Image
-              src={productivitiIo}
-              alt="Productiviti.io"
-              width={350}
-              height={250}
-              className="object-contain"
-            /> */}
+                        <div className="md:w-7/12 flex justify-center">
+                            <Image
+                                src={productivitiImage}
+                                alt="Productiviti"
+                                className="w-full h-auto"
+                            />
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row-reverse items-start md:space-x-8">
-                        <div className="md:w-1/2 md:pr-12">
-                            <h3 className="text-3xl font-semibold text-blue-600 mb-4">HireTalentt</h3>
+                    <div className="flex flex-col md:flex-row-reverse items-start md:gap-x-16">
+                        <div className="md:w-5/12 md:pr-12">
+                            <p className='mb-4'>Partnered with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
-                                Discover HireTalent, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
+                                Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
                             </p>
-                            <ul className="list-disc pl-5 text-gray-600">
+                            <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
                                 <li><strong>Extensive Talent Pool:</strong> Access a diverse and continuously updated database of qualified candidates across various industries to find the perfect fit for your team.</li>
                                 <li><strong>Advanced Search Filters:</strong> Utilize sophisticated filters to pinpoint candidates based on specific criteria, streamlining your selection process for optimal results.</li>
                                 <li><strong>Integrated Applicant Tracking System (ATS):</strong> Manage applications and track candidate progress seamlessly, enhancing collaboration among hiring teams.</li>
                                 <li><strong>AI-Powered Candidate Matching:</strong> Leverage artificial intelligence to match candidates to job openings, improving the quality and relevance of your hires.</li>
                                 <li><strong>Comprehensive Analytics Dashboard:</strong> Gain valuable insights into your recruitment efforts with data-driven analytics, allowing for informed decision-making and strategy optimization.</li>
                             </ul>
+                            <Link href={"https://www.hiretalentt.com"}>
+                                <Image src={hiretalenttLogo} alt='hiretalentt-logo' className='w-36' />
+                            </Link>
                         </div>
-                        <div className="md:w-1/2 flex justify-center">
-                            {/* <Image
-              src={hireTalentt}
-              alt="HireTalentt"
-              width={350}
-              height={250}
-              className="object-contain"
-            /> */}
+                        <div className="md:w-7/12 flex justify-center">
+                            <Image
+                                src={hiretalenttImage}
+                                alt="HireTalentt"
+                                className="w-full h-auto"
+                            />
                         </div>
                     </div>
                 </div>

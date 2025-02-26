@@ -38,7 +38,7 @@ const WhyChooseUs = () => {
                     We Build a Software That Your Customers Love
                 </h2>
                 <p className="text-blue-700 max-w-2xl mx-auto">
-                    We don’t just build software—we craft cutting-edge solutions that drive business success.
+                    We don&apos;t just build software—we craft cutting-edge solutions that drive business success.
                 </p>
             </div>
 
