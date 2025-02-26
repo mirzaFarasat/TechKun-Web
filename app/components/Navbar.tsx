@@ -72,13 +72,12 @@ const Navbar = () => {
           </div>
   
          
-          <div className="hidden md:block">
-            <Button size="3" color="blue">
+          <Link href={"/contact-us"} className="hidden md:block">
+            <button className='rounded-md bg-primary-700 hover:bg-primary-800 px-4 py-2 font-medium text-white'>
               Contact Us
-            </Button>
-          </div>
-  
-          
+            </button>
+          </Link>
+
           <button
             className="md:hidden text-primary-600 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -90,7 +89,7 @@ const Navbar = () => {
        
         {isMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-md border-b">
-            <div className="flex flex-col items-center space-y-4 py-4">
+            <div className="flex flex-col items-center space-y-4 px-4 py-4">
               {links.map((link) => (
                 <Link
                   key={link.href}
@@ -105,9 +104,11 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <Button size="3" color="blue" className="w-full text-center">
-                Contact Us
-              </Button>
+              <Link href={"/contact-us"} className='w-full'>
+                <button className="rounded-md w-full bg-primary-700 hover:bg-primary-800 px-4 py-2 font-medium text-white">
+                  Contact Us
+                </button>
+              </Link>
             </div>
           </div>
         )}
