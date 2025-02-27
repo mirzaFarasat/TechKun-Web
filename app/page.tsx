@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
 
-import imageMobileApp from '@/public/Images/landing-page-images/landing-page2.webp';
 import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
@@ -17,6 +16,7 @@ import productivitiLogo from "@/public/Images/logos/productiviti-logo.png";
 import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
+import techkunImg from "@/public/Images/landing-page-images/Techkun-team.jpeg";
 import TechKunLogoSvg from './components/TechKunLogoSvg';
 
 
@@ -134,25 +134,32 @@ export default function Home() {
                     <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold">
                         <span className="text-primary-700"> We Are</span> TechKun
                     </h2>
-                    <p className="text-gray-700 text-base sm:text-lg max-w-3xl px-4">
-                        TechKun is a pioneering technology consulting firm specializing in digital business transformation for medium to large enterprises.
-                        Our goal is to create simple solutions that enhance agility, scalability, and growth.
+                    <p className="text-primary-700 font-bold text-lg sm:text-xl mb-2 max-w-2xl mx-auto">
+                        Empowering Businesses with Cutting-Edge Technology
                     </p>
-                    <div className="flex justify-center mt-6 space-x-4">
-                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                            Authenticity
-                        </div>
-                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                            Adaptability
-                        </div>
-                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                            Independence
-                        </div>
-
+                    <p className="text-gray-600 mt-2 max-w-3xl mx-auto">
+                        At TechKun, we specialize in driving digital transformation for businesses of all sizes. Our innovative solutions enhance agility, scalability, and efficiency, helping enterprises stay ahead in the fast-evolving tech landscape.
+                    </p>
+                    <div className="flex flex-wrap justify-center mt-6 gap-4">
+                        {["Authenticity", "Adaptability", "Independence"].map((feature) => (
+                            <div
+                                key={feature}
+                                className="flex items-center justify-center bg-blue-600 text-white px-8 py-4 text-lg font-semibold
+                                rounded-lg shadow-md transition-all hover:scale-105 hover:bg-blue-700"
+                            >
+                                {feature}
+                            </div>
+                        ))}
                     </div>
-
-                    <div className="shadow-lg border border-gray-300 rounded-lg overflow-hidden">
-                        <Image className="max-h-[34rem] rounded-lg object-cover" src={imageMobileApp} alt={"kerk"} />
+                    {/* Image Section */}
+                    <div className="mt-10 shadow-lg rounded-xl overflow-hidden border border-gray-300 max-w-4xl mx-auto">
+                        <Image
+                            src={techkunImg}
+                            alt="Business Team"
+                            width={1200}
+                            height={600}
+                            className="rounded-xl object-cover w-full"
+                        />
                     </div>
                 </div>
             </div>
