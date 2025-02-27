@@ -17,6 +17,7 @@ import productivitiLogo from "@/public/Images/logos/productiviti-logo.png";
 import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
+import TechKunLogoSvg from './components/TechKunLogoSvg';
 
 
 export default function Home() {
@@ -25,19 +26,19 @@ export default function Home() {
         description: string;
         image: StaticImageData;
     }[] = [
-        {
-            title: 'AI & Machine Learning Solutions',
-            description:
-                'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
-            image: aiimg,
-        },
-        {
-            title: 'Mobile Application Development',
-            description:
-                "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
-            image: mobimg,
-        },
-    ];
+            {
+                title: 'AI & Machine Learning Solutions',
+                description:
+                    'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
+                image: aiimg,
+            },
+            {
+                title: 'Mobile Application Development',
+                description:
+                    "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
+                image: mobimg,
+            },
+        ];
 
     const ourProducts: {
         productName: string;
@@ -127,7 +128,7 @@ export default function Home() {
 
 
 
-           {/* Wee are techkun section */}
+            {/* Wee are techkun section */}
             <div className="bg-gradient-to-r from-blue-50 to-blue-100">
                 <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
                     <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold">
@@ -138,16 +139,16 @@ export default function Home() {
                         Our goal is to create simple solutions that enhance agility, scalability, and growth.
                     </p>
                     <div className="flex justify-center mt-6 space-x-4">
-                    <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                         Authenticity       
-                    </div>
-                    <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                         Adaptability       
-                    </div>
-                     <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
-                         Independence        
-                    </div>
-                            
+                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                            Authenticity
+                        </div>
+                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                            Adaptability
+                        </div>
+                        <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                            Independence
+                        </div>
+
                     </div>
 
                     <div className="shadow-lg border border-gray-300 rounded-lg overflow-hidden">
@@ -156,9 +157,20 @@ export default function Home() {
                 </div>
             </div>
 
-
-
-
+            <div className='case-responsive-container relative'>
+                <div className=''>
+                    <TechKunLogoSvg size={400} length={1175} />
+                </div>
+                <div className='absolute top-[6.6rem] left-[24rem]'>
+                    <h2 className="mb-20 ml-32 text-3xl lg:text-5xl sm:text-4xl font-bold text-gray-800">
+                        We are <span className="text-primary-700">TechKun</span>
+                    </h2>
+                    <p className="text-gray-600 text-base sm:text-lg font-medium max-w-3xl">
+                        TechKun is a pioneering technology consulting firm specializing in digital business transformation for medium to large enterprises.
+                        Our goal is to create simple solutions that enhance agility, scalability, and growth.
+                    </p>
+                </div>
+            </div>
 
             <div className="case-responsive-container py-16 bg-white font-sans">
                 <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
@@ -166,7 +178,7 @@ export default function Home() {
                 <div className="flex flex-col gap-y-36">
                     <div className="flex flex-col md:flex-row items-start md:gap-x-16">
                         <div className="md:w-5/12">
-                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
                             <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
                                 Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
@@ -192,7 +204,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col md:flex-row-reverse items-start md:gap-x-16">
                         <div className="md:w-5/12 md:pr-12">
-                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline'/></Link></p>
+                            <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
                             <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
                             <p className="text-gray-600 mb-4">
                                 Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
