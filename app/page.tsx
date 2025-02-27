@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
 
-import imageMobileApp from '@/public/Images/landing-page-images/landing-page-image-1.jpg';
+import imageMobileApp from '@/public/Images/landing-page-images/landing-page2.webp';
 import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
 import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
@@ -17,6 +17,7 @@ import productivitiLogo from "@/public/Images/logos/productiviti-logo.png";
 import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
+
 
 export default function Home() {
     const services: {
@@ -126,27 +127,38 @@ export default function Home() {
 
 
 
-
-            <div className="bg-primary-50 md:">
+           {/* Wee are techkun section */}
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100">
                 <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
-                    <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold"><span className="text-primary-700"> We Are</span> TechKun</h2>
-                    <p className="text-gray-600 text-base  sm:text-lg">Techkun is a pioneerring technology consulting firm, that specializes in catalyzing the success of digital business trasformation for medium to large enterprise. Our goal has been to create simple solutions that can bring agility to any business. We bring digital innovation to business processes by collaborating with our customers (business and technology teams) that provides a competitive edge, scalability, and growth.</p>
-                    <div className="flex flex-col sm:flex-row justify-center items-center text-lg sm:text-xl text-white font-semibold w-full sm:w-1/2 bg-primary-600 rounded-md">
-                        <div className="w-full sm:w-1/3 p-4 border-b sm:border-b-0 sm:border-r border-white">
-                            Authenticity
-                        </div>
-                        <div className="w-full sm:w-1/3 p-4 border-b sm:border-b-0 sm:border-r border-white">
-                            Adaptability
-                        </div>
-                        <div className="w-full sm:w-1/3 p-4">
-                            Independence
-                        </div>
+                    <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold">
+                        <span className="text-primary-700"> We Are</span> TechKun
+                    </h2>
+                    <p className="text-gray-700 text-base sm:text-lg max-w-3xl px-4">
+                        TechKun is a pioneering technology consulting firm specializing in digital business transformation for medium to large enterprises.
+                        Our goal is to create simple solutions that enhance agility, scalability, and growth.
+                    </p>
+                    <div className="flex justify-center mt-6 space-x-4">
+                    <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                         Authenticity       
                     </div>
-                    <div>
-                        <Image className='max-h-[34rem] rounded-lg' src={imageMobileApp} alt={"kerk"} style={{ objectFit: "cover" }} />
+                    <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                         Adaptability       
+                    </div>
+                     <div className="bg-blue-600 text-white px-10 py-4 text-2xl font-semibold rounded-lg shadow-lg transition-all hover:bg-primary-900">
+                         Independence        
+                    </div>
+                            
+                    </div>
+
+                    <div className="shadow-lg border border-gray-300 rounded-lg overflow-hidden">
+                        <Image className="max-h-[34rem] rounded-lg object-cover" src={imageMobileApp} alt={"kerk"} />
                     </div>
                 </div>
             </div>
+
+
+
+
 
             <div className="case-responsive-container py-16 bg-white font-sans">
                 <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>

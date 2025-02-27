@@ -39,8 +39,10 @@ const GetCustomerDetails = () => {
     }
 
     return (
+        <div className="bg-primary-700">
         <div className='case-responsive-container px-4 sm:px-8 lg:px-16'>
-            <div className='py-20'>
+            <div className='py-36 px-8'>
+            <div className='bg-white shadow-xl rounded-lg p-8 border border-gray-200'>
                 <div className="relative flex flex-col justify-center items-center font-sans text-center">
                     <h1 className='text-3xl md:text-5xl font-bold my-4'>Contact <span className='text-primary-700'>our team</span></h1>
                     <p className='text-gray-500'>Got any questions about scaling the products or growing you on our platform? We&apos;re here to help.</p>
@@ -122,9 +124,11 @@ const GetCustomerDetails = () => {
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
+     </div>
     );
 };
 
