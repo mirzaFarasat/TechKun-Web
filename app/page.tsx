@@ -178,28 +178,30 @@ export default function Home() {
             <div className='case-responsive-container justify-center items-center text-center py-24'>
                 <h2 className='mb-2 text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You?</h2>
                 <p className='mb-16 mx-auto w-10/12 text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-                    {cardItems.map((items, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {cardItems.map((item, index) => (
                         <div
                             key={index}
-                            className="flex flex-col bg-primary-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-t-2xl"
+                            className="relative bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:bg-primary-50 hover:scale-[1.05] hover:shadow-2xl"
                         >
-                            <div className="flex justify-center items-center text-center p-5 bg-primary-700 rounded-t-2xl">
-                                <h2 className="text-lg font-semibold">{items.title}</h2>
+                            <div className="overflow-hidden">
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110"
+                                />
                             </div>
-                            <div className="flex flex-col justify-center items-center p-6 gap-4">
-                                <div className="w-full h-48 overflow-hidden rounded-lg">
-                                    <Image
-                                        className="w-full h-full object-cover"
-                                        src={items.image}
-                                        alt={items.imageAltText}
-                                    />
-                                </div>
-                                <p className="text-sm text-gray-100">{items.discription}</p>
+                            <div className="p-6 text-left">
+                                <h2 className="text-3xl font-semibold text-gray-800 transition-colors duration-300 hover:text-primary-600">
+                                    {item.title}
+                                </h2>
+                                <p className="text-gray-600 mt-4 text-lg">{item.discription}</p>
                             </div>
                         </div>
                     ))}
                 </div>
+
+
             </div>
 
             <WhyChooseUs />
