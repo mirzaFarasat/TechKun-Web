@@ -17,7 +17,7 @@ import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
 import techkunImg from "@/public/Images/landing-page-images/Techkun-team.jpeg";
-import TechKunLogoSvg from './components/TechKunLogoSvg';
+import WhyChooseUs from './components/WhyChooseUs';
 
 
 export default function Home() {
@@ -90,94 +90,6 @@ export default function Home() {
         <div>
             <Banner />
             <AboutUs />
-            <div className="case-responsive-container flex py-24 justify-center items-center text-center lg:text-left ">
-                <div className="flex flex-col gap-7">
-                    <h1 className="text-5xl sm:text-5xl lg:text-6xl  font-semibold"><span className="text-primary-700"> AT TECHKUN </span> <br />WHEN YOU SAY TO DO IT, <br />IT&apos;S ALREADY DONE!</h1>
-                    <p className="text-gray-500 text-base sm:text-lg">Give your business wings that can help you fly beyond the sky. <br />Trust is our principle and privacy is the motto, on the mission to Help revolutionize <br />the world to embrace technology and make the world a better place with Techkun. </p>
-                    <button className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-zinc-700 transition-colors w-full sm:w-60">
-                        Give Us A Try
-                    </button>
-                </div>
-            </div>
-
-
-            <section className="bg-gray-100 py-16 px-4">
-                <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-5xl font-bold text-blue-600">Our Services</h2>
-                    <p className="text-gray-500 mt-2">Your Vision, Our Expertise</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                        {services.map((service, index) => (
-                            <div
-                                key={index}
-                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
-                            >
-                                <Image
-                                    src={service.image}
-                                    alt={service.title}
-                                    className="w-full h-56 object-cover"
-                                />
-                                <div className="p-6 text-center">
-                                    <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-                                    <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-
-
-            {/* Wee are techkun section */}
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100">
-                <div className="case-responsive-container flex flex-col justify-center items-center text-center py-16 gap-10 pb-24">
-                    <h2 className="text-3xl lg:text-5xl sm:text-4xl font-bold">
-                        <span className="text-primary-700"> We Are</span> TechKun
-                    </h2>
-                    <p className="text-primary-700 font-bold text-lg sm:text-xl mb-2 max-w-2xl mx-auto">
-                        Empowering Businesses with Cutting-Edge Technology
-                    </p>
-                    <p className="text-gray-600 mt-2 max-w-3xl mx-auto">
-                        At TechKun, we specialize in driving digital transformation for businesses of all sizes. Our innovative solutions enhance agility, scalability, and efficiency, helping enterprises stay ahead in the fast-evolving tech landscape.
-                    </p>
-                    <div className="flex flex-wrap justify-center mt-6 gap-4">
-                        {["Authenticity", "Adaptability", "Independence"].map((feature) => (
-                            <div
-                                key={feature}
-                                className="flex items-center justify-center bg-blue-600 text-white px-8 py-4 text-lg font-semibold
-                                rounded-lg shadow-md transition-all hover:scale-105 hover:bg-blue-700"
-                            >
-                                {feature}
-                            </div>
-                        ))}
-                    </div>
-                    {/* Image Section */}
-                    <div className="mt-10 shadow-lg rounded-xl overflow-hidden border border-gray-300 max-w-4xl mx-auto">
-                        <Image
-                            src={techkunImg}
-                            alt="Business Team"
-                            width={1200}
-                            height={600}
-                            className="rounded-xl object-cover w-full"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div className='case-responsive-container relative'>
-                <div className=''>
-                    <TechKunLogoSvg size={400} length={1175} />
-                </div>
-                <div className='absolute top-[6.6rem] left-[24rem]'>
-                    <h2 className="mb-20 ml-32 text-3xl lg:text-5xl sm:text-4xl font-bold text-gray-800">
-                        We are <span className="text-primary-700">TechKun</span>
-                    </h2>
-                    <p className="text-gray-600 text-base sm:text-lg font-medium max-w-3xl">
-                        TechKun is a pioneering technology consulting firm specializing in digital business transformation for medium to large enterprises.
-                        Our goal is to create simple solutions that enhance agility, scalability, and growth.
-                    </p>
-                </div>
-            </div>
 
             <div className="case-responsive-container py-16 bg-white font-sans">
                 <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
@@ -238,10 +150,34 @@ export default function Home() {
                 </div>
             </div>
 
+            <section className="bg-primary-50 py-16 px-4">
+                <div className="max-w-6xl mx-auto text-center">
+                    <h2 className="text-5xl font-semibold text-blue-600 mb-2">Our Services</h2>
+                    <p className="text-xl text-gray-700 mb-16">Your Vision, Our Expertise</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {services.map((service, index) => (
+                            <div
+                                key={index}
+                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                            >
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    className="w-full h-56 object-cover"
+                                />
+                                <div className="p-6 text-center">
+                                    <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
+                                    <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-            <div className='case-responsive-container flex flex-col justify- items-center text-center py-24 gap-10'>
-                <h3 className='text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You</h3>
-                <p className='text-gray-700 pb-14'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
+            <div className='case-responsive-container justify-center items-center text-center py-24'>
+                <h2 className='mb-2 text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You?</h2>
+                <p className='mb-16 mx-auto w-10/12 text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                     {cardItems.map((items, index) => (
                         <div
@@ -263,6 +199,28 @@ export default function Home() {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+
+            <WhyChooseUs />
+
+            <div className="bg-gradient-to-r from-primary-500 to-indigo-600 text-white py-20 text-center">
+                <div className='case-responsive-container'>
+                    <h2 className="text-4xl font-extrabold mb-4">
+                        Transform Your Business with Cutting-Edge Digital Solutions
+                    </h2>
+                    <p className="mb-8 w-10/12 text-lg mx-auto">
+                        Our innovative IT solutions are designed to streamline your operations, enhance productivity, and drive growth.
+                        Partner with us to
+                        unlock your business's full potential.
+                    </p>
+                    <div className="flex justify-center">
+                        <button className="bg-white text-blue-900 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition duration-300 transform hover:scale-105 font-semibold">
+                            <a href="/contact-us">
+                                Contact Us Today
+                            </a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

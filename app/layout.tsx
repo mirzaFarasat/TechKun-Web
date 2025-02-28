@@ -33,7 +33,7 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Theme>
                     <Navbar />
-                    <main className=''>{children}</main>
+                    <main className='overflow-hidden'>{children}</main>
                 </Theme>
                 <Footer />
             </body>
