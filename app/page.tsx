@@ -89,11 +89,12 @@ export default function Home() {
     return (
         <div>
             <Banner />
+            <div className='h-16'></div>
             <AboutUs />
 
             <div className="case-responsive-container py-16 bg-white font-sans">
-                <h2 className="text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
-                <p className="text-center text-xl text-gray-700 mb-24">Crafting Tailored Software for Your Needs</p>
+                <h2 className="text-4xl md:text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
+                <p className="text-center text-lg md:text-xl text-gray-700 mb-24">Crafting Tailored Software for Your Needs</p>
                 <div className="flex flex-col gap-y-36">
                     <div className="flex flex-col md:flex-row items-start md:gap-x-16">
                         <div className="md:w-5/12">

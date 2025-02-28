@@ -54,6 +54,10 @@ const TechKunLogoSvg: React.FC<{ size?: number, length: number }> = ({ size = 12
             <g clip-path="url(#689955e9f6)">
                 <path fill="#5692d8" d="M 0 76.105469 L 959.097656 76.105469 L 959.097656 883.894531 L 0 883.894531 Z M 0 76.105469 " fill-opacity="1" fill-rule="nonzero" />
             </g>
+            <text x="560" y="160" fontSize="120" fontWeight="600">We are <tspan fill="#2a6bb7">TechKun</tspan></text>
+            <text x="1040" y="328" font-size="80" font-weight="400">
+                We create brilliance that lasts.
+            </text>
             <g clip-path="url(#b500516018)">
                 <path fill="#5692d8" d={getRectanglePath(959.097656 + expansion)} fill-opacity="1" fill-rule="nonzero" />
             </g>
