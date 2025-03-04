@@ -89,7 +89,6 @@ export default function Home() {
     return (
         <div>
             <Banner />
-            <div className='h-16'></div>
             <AboutUs />
 
             <div className="case-responsive-container py-16 bg-white">
