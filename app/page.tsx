@@ -5,18 +5,17 @@ import Link from 'next/link';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
 
-import imageMobileApp1 from '@/public/Images/landing-page-images/updated.jpg';
-import imageMobileApp2 from '@/public/Images/landing-page-images/updated1.jpg';
-import imageMobileApp3 from '@/public/Images/landing-page-images/food.jpg';
-import imageMobileApp4 from '@/public/Images/landing-page-images/logistics.jpg';
+import imageMobileApp1 from '@/public/Images/landing-page-images/Health Tech.jpeg';
+import imageMobileApp2 from '@/public/Images/landing-page-images/Ed-tech.jpeg';
+import imageMobileApp3 from '@/public/Images/landing-page-images/Food-tech.jpeg';
+import imageMobileApp4 from '@/public/Images/landing-page-images/Logistics.jpeg';
 import aiimg from '@/public/Images/service-landing-page/ai2.webp';
-import mobimg from '@/public/Images/service-landing-page/mobf.webp';
+import mobimg from '@/public/Images/service-landing-page/App Development.jpeg';
 import imLogo from "@/public/Images/logos/im-logo.webp";
 import productivitiLogo from "@/public/Images/logos/productiviti-logo.png";
 import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
-import techkunImg from "@/public/Images/landing-page-images/Techkun-team.jpeg";
 import WhyChooseUs from './components/WhyChooseUs';
 
 
