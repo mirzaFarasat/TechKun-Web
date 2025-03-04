@@ -26,19 +26,19 @@ export default function Home() {
         description: string;
         image: StaticImageData;
     }[] = [
-            {
-                title: 'AI & Machine Learning Solutions',
-                description:
-                    'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
-                image: aiimg,
-            },
-            {
-                title: 'Mobile Application Development',
-                description:
-                    "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
-                image: mobimg,
-            },
-        ];
+        {
+            title: 'AI & Machine Learning Solutions',
+            description:
+                'Leverage the power of artificial intelligence to transform your business operations. Our AI and machine learning solutions help you uncover insights, automate processes, and improve decision-making.',
+            image: aiimg,
+        },
+        {
+            title: 'Mobile Application Development',
+            description:
+                "We deliver mobile applications that provide exceptional user experiences and meet the demands of today's digital landscape. From concept to launch, we guide you through the entire mobile app development process.",
+            image: mobimg,
+        },
+    ];
 
     const ourProducts: {
         productName: string;
