@@ -15,12 +15,12 @@ const Banner = () => {
             style={bannerImg}
         >
             <div className="case-responsive-container py-56 text-left text-white">
-                <h1 className="text-3xl md:text-5xl sm:text-4xl font-bold">
-                    <span className="text-primary-400">EMPOWERING INNOVATIONS,</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold">
+                    <span className="text-primary-700">EMPOWERING INNOVATIONS,</span>
                     <br />
                     DELIVERING EXCELLENCE
                 </h1>
-                <p className="text-white text-lg mt-4">
+                <p className="text-white text-lg md:text-xl mt-4">
                     Partnering with medium to large enterprises, we specialize in<br className='hidden md:block' />
                     catalyzing digital business transformations, delivering agile and<br className='hidden md:block' />
                     innovative solutions for competitive growth.

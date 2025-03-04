@@ -55,7 +55,7 @@ export default function ServicesBody() {
         <div>
             <div className="py-12 md:py-24">
                 <div className="case-responsive-container mx-auto px-4 mb-8 flex flex-col items-center text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-700">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-700">
                         <span className="text-primary-700">Our Area of Expertise </span>Encompasses...
                     </h2>
                 </div>

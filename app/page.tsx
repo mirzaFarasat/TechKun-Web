@@ -92,18 +92,18 @@ export default function Home() {
             <div className='h-16'></div>
             <AboutUs />
 
-            <div className="case-responsive-container py-16 bg-white font-sans">
-                <h2 className="text-4xl md:text-5xl font-semibold text-center text-blue-600 mb-2">Our Products</h2>
-                <p className="text-center text-lg md:text-xl text-gray-700 mb-24">Crafting Tailored Software for Your Needs</p>
+            <div className="case-responsive-container py-16 bg-white">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-primary-700 mb-2">Our Products</h2>
+                <p className="text-center text-lg md:text-xl text-gray-700 mb-16">Crafting Tailored Software for Your Needs</p>
                 <div className="flex flex-col gap-y-36">
                     <div className="flex flex-col md:flex-row items-start md:gap-x-16">
                         <div className="md:w-5/12">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-gray-600 mb-4">
+                            <h3 className="text-4xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="text-gray-700 text-lg mb-4">
                                 Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
                             </p>
-                            <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
+                            <ul className="mb-10 list-disc pl-5 text-gray-700 flex flex-col space-y-2">
                                 <li><strong>Dynamic Real-Time Tracking:</strong> Monitor remote teams with automated timekeeping and activity logging, ensuring compliance and proactive issue identification.</li>
                                 <li><strong>In-Depth Data Analytics:</strong> Utilize advanced analytics to derive actionable insights into employee performance, optimizing workflows and resource allocation.</li>
                                 <li><strong>Centralized Workforce Management:</strong> Manage diverse enterprise workforces from a unified platform with role-based access controls for secure oversight.</li>
@@ -125,8 +125,8 @@ export default function Home() {
                     <div className="flex flex-col md:flex-row-reverse items-start md:gap-x-16">
                         <div className="md:w-5/12 md:pr-12">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-3xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-gray-600 mb-4">
+                            <h3 className="text-4xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="text-gray-700 text-lg mb-4">
                                 Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
                             </p>
                             <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
@@ -151,10 +151,9 @@ export default function Home() {
                 </div>
             </div>
 
-            <section className="bg-primary-50 py-16 px-4">
-                <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-5xl font-semibold text-blue-600 mb-2">Our Services</h2>
-                    <p className="text-xl text-gray-700 mb-16">Your Vision, Our Expertise</p>
+            <div className="case-responsive-container text-center bg-primary-50 py-16 px-4">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700 mb-2">Our Services</h2>
+                    <p className="text-lg md:text-xl text-gray-700 mb-16">Your Vision, Our Expertise</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {services.map((service, index) => (
                             <div
@@ -167,49 +166,46 @@ export default function Home() {
                                     className="w-full h-56 object-cover"
                                 />
                                 <div className="p-6 text-center">
-                                    <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-                                    <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
+                                    <h3 className="text-3xl font-semibold text-gray-700 mb-6">{service.title}</h3>
+                                    <p className="text-gray-700 text-md">{service.description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
+            </div>
 
             <div className='case-responsive-container justify-center items-center text-center py-24'>
-                <h2 className='mb-2 text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-700'>What We Can Do For You?</h2>
-                <p className='mb-16 mx-auto w-10/12 text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
+                <h2 className='mb-2 text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700'>What We Can Do For You?</h2>
+                <p className='mb-16 mx-auto text-md md:text-lg text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {cardItems.map((item, index) => (
                         <div
                             key={index}
                             className="relative bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:bg-primary-50 hover:scale-[1.05] hover:shadow-2xl"
                         >
-                            <div className="overflow-hidden">
+                            <div>
                                 <Image
                                     src={item.image}
                                     alt={item.title}
-                                    className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110"
+                                    className="w-full h-56 transition-transform duration-500 hover:scale-110"
                                 />
                             </div>
                             <div className="p-6 text-left">
-                                <h2 className="text-3xl font-semibold text-gray-800 transition-colors duration-300 hover:text-primary-600">
+                                <h3 className="text-3xl font-semibold text-gray-700 mb-6">
                                     {item.title}
-                                </h2>
-                                <p className="text-gray-600 mt-4 text-lg">{item.discription}</p>
+                                </h3>
+                                <p className="text-gray-700 text-lg">{item.discription}</p>
                             </div>
                         </div>
                     ))}
                 </div>
-
-
             </div>
 
             <WhyChooseUs />
 
             <div className="bg-gradient-to-r from-primary-500 to-indigo-600 text-white py-20 text-center">
                 <div className='case-responsive-container'>
-                    <h2 className="text-4xl font-extrabold mb-4">
+                    <h2 className="text-4xl font-semibold mb-4">
                         Transform Your Business with Cutting-Edge Digital Solutions
                     </h2>
                     <p className="mb-8 w-10/12 text-lg mx-auto">
@@ -218,10 +214,10 @@ export default function Home() {
                         unlock your business's full potential.
                     </p>
                     <div className="flex justify-center">
-                        <button className="bg-white text-blue-900 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition duration-300 transform hover:scale-105 font-semibold">
-                            <a href="/contact-us">
+                        <button className="bg-white text-primary-700 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition duration-300 transform hover:scale-105 font-semibold">
+                            <Link href="/contact-us">
                                 Contact Us Today
-                            </a>
+                            </Link>
                         </button>
                     </div>
                 </div>

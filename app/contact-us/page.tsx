@@ -42,11 +42,11 @@ const GetCustomerDetails = () => {
         <div className="bg-primary-700">
         <div className='case-responsive-container px-4 sm:px-8 lg:px-16'>
             <div className='py-36 px-8'>
-            <div className='bg-white shadow-xl rounded-lg p-8 border border-gray-200'>
-                <div className="relative flex flex-col justify-center items-center font-sans text-center">
-                    <h1 className='text-3xl md:text-5xl font-bold my-4'>Contact <span className='text-primary-700'>our team</span></h1>
-                    <p className='text-gray-500'>Got any questions about scaling the products or growing you on our platform? We&apos;re here to help.</p>
-                    <p className='text-gray-500'>Chat to our friendly team 24/7.</p>
+            <div className='bg-white shadow-xl rounded-lg p-8 sm:p-8 border border-gray-200'>
+                <div className="relative flex flex-col justify-center items-center text-center">
+                    <h1 className='text-3xl sm:text-4xl md:text-5xl font-semibold my-4'>Contact <span className='text-primary-700'>Our Team</span></h1>
+                    <p className='text-gray-700'>Got any questions about scaling the products or growing you on our platform? We&apos;re here to help.</p>
+                    <p className='text-gray-700'>Chat to our friendly team 24/7.</p>
                 </div>
                 <div className='flex flex-col md:flex-row justify-evenly mt-20 gap-10'>
                     <div className='w-full md:w-1/2'>
@@ -92,18 +92,18 @@ const GetCustomerDetails = () => {
                         <div className='flex flex-col gap-6'>
                             <div>
                                 <h2 className='mb-1 text-lg'>Chat with us</h2>
-                                <p className='text-xs text-gray-500'>Speak to our friendly team by chat.</p>
+                                <p className='text-xs text-gray-700'>Speak to our friendly team by chat.</p>
                                 <div className='flex flex-row mt-3'>
                                     <AiOutlineMessage className='mt-1 mr-1' />
-                                    <Link href='/' className='text-sm hover:text-gray-500 transition-colors'>Start a live chat</Link>
+                                    <Link href='/' className='text-sm hover:text-gray-700 transition-colors'>Start a live chat</Link>
                                 </div>
                                 <div className='flex flex-row mt-3'>
                                     <MdOutlineAttachEmail className='mt-1 mr-1' />
-                                    <Link href='/' className='text-sm hover:text-gray-500 transition-colors'>Shoot us an email</Link>
+                                    <Link href='/' className='text-sm hover:text-gray-700 transition-colors'>Shoot us an email</Link>
                                 </div>
                                 <div className='flex flex-row mt-3'>
                                     <BsTwitterX className='mt-1 mr-1' />
-                                    <Link href='/' className='text-sm hover:text-gray-500 transition-colors'>Message us on X</Link>
+                                    <Link href='/' className='text-sm hover:text-gray-700 transition-colors'>Message us on X</Link>
                                 </div>
                             </div>
                             <div>

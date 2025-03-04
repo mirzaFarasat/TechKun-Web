@@ -31,13 +31,13 @@ const features: {
 
 const WhyChooseUs = () => {
     return (
-        <section className="bg-blue-50 text-blue-900 py-16 px-6 md:px-12 lg:px-20">
+        <div className="bg-primary-50 py-16 px-6 md:px-12 lg:px-20">
             <div className="text-center mb-12">
-                <h3 className="text-lg font-semibold uppercase mb-3">Why Choose Us?</h3>
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700 mb-3">Why Choose Us?</h2>
+                <h3 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-3">
                     We Build a Software That Your Customers Love
-                </h2>
-                <p className="text-blue-700 max-w-2xl mx-auto">
+                </h3>
+                <p className="text-primary-700 max-w-2xl mx-auto">
                     We don&apos;t just build software—we craft cutting-edge solutions that drive business success.
                 </p>
             </div>
@@ -46,16 +46,16 @@ const WhyChooseUs = () => {
                 {features.map(({ title, description, Icon }, index) => (
                     <div key={index} className="bg-white shadow-lg rounded-xl p-6 text-center">
                         <div className="flex justify-center mb-4">
-                            <span className="rounded p-2 bg-blue-500 text-white ">
+                            <span className="rounded p-2 bg-primary-700 text-white ">
                                 <Icon size={"28"} />
                             </span>
                         </div>
-                        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                        <p className="text-blue-700">{description}</p>
+                        <h3 className="text-xl font-semibold text-gray-700 mb-2">{title}</h3>
+                        <p className="text-primary-700">{description}</p>
                     </div>
                 ))}
             </div>
-        </section>
+        </div>
     );
 };
 

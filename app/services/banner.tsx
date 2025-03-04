@@ -14,12 +14,12 @@ const Banner = () => {
             style={bannerStyle}
         >
             <div className="case-responsive-container py-56 relative text-white">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold">
                     Your Vision, Our Expertise: <br />
                     Custom Software to <br />
-                    <span className='text-primary-300'>Elevate Your Business</span>
+                    <span className='text-primary-500'>Elevate Your Business</span>
                 </h1>
-                <p className="mt-4 text-lg sm:text-xl text-gray-200">
+                <p className="mt-4 text-lg sm:text-xl text-white">
                     Custom software solutions tailored to elevate your business.
                 </p>
                 <button className="mt-6 px-6 py-2 bg-white text-black rounded-lg font-semibold hover:bg-primary-500 hover:text-white">
