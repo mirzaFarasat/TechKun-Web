@@ -92,14 +92,14 @@ export default function Home() {
             <AboutUs />
 
             <div className="case-responsive-container py-16 bg-white">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-primary-700 mb-2">Our Products</h2>
-                <p className="text-center text-lg md:text-xl text-gray-700 mb-16">Crafting Tailored Software for Your Needs</p>
+                <h2 className="text-3xl md:text-4xl font-medium text-center text-primary-700 mb-1">Our Products</h2>
+                <p className="text-center text-base md:text-lg text-gray-700 mb-16">Crafting Tailored Software for Your Needs</p>
                 <div className="flex flex-col gap-y-36">
-                    <div className="flex flex-col md:flex-row items-start md:gap-x-16">
-                        <div className="md:w-5/12">
+                    <div className="flex flex-col md:flex-row items-start gap-16">
+                        <div className="md:w-5/12 text-sm md:text-base">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-4xl font-semibold text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-gray-700 text-lg mb-4">
+                            <h3 className="text-2xl md:text-3xl font-medium text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="text-mb-4">
                                 Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
                             </p>
                             <ul className="mb-10 list-disc pl-5 text-gray-700 flex flex-col space-y-2">
@@ -121,11 +121,11 @@ export default function Home() {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row-reverse items-start md:gap-x-16">
-                        <div className="md:w-5/12 md:pr-12">
+                    <div className="flex flex-col md:flex-row-reverse items-start gap-16">
+                        <div className="md:w-5/12 md:pr-12 text-sm md:text-base">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-4xl font-semibold text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-gray-700 text-lg mb-4">
+                            <h3 className="text-2xl md:text-3xl font-medium text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="text-gray-700 mb-4">
                                 Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
                             </p>
                             <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
@@ -151,31 +151,33 @@ export default function Home() {
             </div>
 
             <div className="case-responsive-container text-center bg-primary-50 py-16 px-4">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700 mb-2">Our Services</h2>
-                    <p className="text-lg md:text-xl text-gray-700 mb-16">Your Vision, Our Expertise</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {services.map((service, index) => (
-                            <div
-                                key={index}
-                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
-                            >
-                                <Image
-                                    src={service.image}
-                                    alt={service.title}
-                                    className="w-full h-56 object-cover"
-                                />
-                                <div className="p-6 text-center">
-                                    <h3 className="text-3xl font-semibold text-gray-700 mb-6">{service.title}</h3>
-                                    <p className="text-gray-700 text-md">{service.description}</p>
-                                </div>
+                <h2 className="text-3xl md:text-4xl font-medium text-primary-700 mb-1">Our Services</h2>
+                <p className="text-base md:text-lg text-gray-700 mb-16">Your Vision, Our Expertise</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {services.map((service, index) => (
+                        <div
+                            key={index}
+                            className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                        >
+                            <Image
+                                src={service.image}
+                                alt={service.title}
+                                className="w-full h-56 object-cover"
+                            />
+                            <div className="p-8 text-center">
+                                <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">{service.title}</h3>
+                                <p className="text-gray-700 text-sm md:text-base">{service.description}</p>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className='case-responsive-container justify-center items-center text-center py-24'>
-                <h2 className='mb-2 text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700'>What We Can Do For You?</h2>
-                <p className='mb-16 mx-auto text-md md:text-lg text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
+                <div className='mb-16 mx-auto w-full md:w-2/3'>
+                    <h2 className='mb-1 text-3xl md:text-4xl font-medium text-primary-700'>What We Can Do For You?</h2>
+                    <p className='text-base md:text-lg text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {cardItems.map((item, index) => (
                         <div
@@ -190,10 +192,10 @@ export default function Home() {
                                 />
                             </div>
                             <div className="p-6 text-left">
-                                <h3 className="text-3xl font-semibold text-gray-700 mb-6">
+                                <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-700 text-lg">{item.discription}</p>
+                                <p className="text-gray-700 text-sm md:text-base">{item.discription}</p>
                             </div>
                         </div>
                     ))}
@@ -204,10 +206,10 @@ export default function Home() {
 
             <div className="bg-gradient-to-r from-primary-500 to-indigo-600 text-white py-20 text-center">
                 <div className='case-responsive-container'>
-                    <h2 className="text-4xl font-semibold mb-4">
+                    <h2 className="text-3xl md:text-4xl font-medium mb-2">
                         Transform Your Business with Cutting-Edge Digital Solutions
                     </h2>
-                    <p className="mb-8 w-10/12 text-lg mx-auto">
+                    <p className="mb-8 w-10/12 text-base md:text-lg mx-auto">
                         Our innovative IT solutions are designed to streamline your operations, enhance productivity, and drive growth.
                         Partner with us to
                         unlock your business's full potential.
@@ -224,5 +226,4 @@ export default function Home() {
         </div>
     );
 };
-
 

@@ -32,12 +32,12 @@ const features: {
 const WhyChooseUs = () => {
     return (
         <div className="bg-primary-50 py-16 px-6 md:px-12 lg:px-20">
-            <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-primary-700 mb-3">Why Choose Us?</h2>
-                <h3 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-3">
+            <div className="text-center mb-12 mx-auto w-full md:w-10/12">
+                <h2 className="text-base md:text-lg font-medium text-primary-700 mb-2">WHY CHOOSE US?</h2>
+                <h3 className="text-3xl md:text-4xl font-medium text-gray-700 mb-2">
                     We Build a Software That Your Customers Love
                 </h3>
-                <p className="text-primary-700 max-w-2xl mx-auto">
+                <p className="text-base md:text-lg text-primary-700">
                     We don&apos;t just build software—we craft cutting-edge solutions that drive business success.
                 </p>
             </div>
@@ -50,8 +50,8 @@ const WhyChooseUs = () => {
                                 <Icon size={"28"} />
                             </span>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-700 mb-2">{title}</h3>
-                        <p className="text-primary-700">{description}</p>
+                        <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">{title}</h3>
+                        <p className="text-sm md:text-base text-primary-700">{description}</p>
                     </div>
                 ))}
             </div>

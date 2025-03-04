@@ -15,8 +15,10 @@ const Banner = () => {
             style={bannerImg}
         >
             <div className="case-responsive-container py-56 text-left text-white">
-                <div className="w-11/12 md:w-7/12">
-                    <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-semibold">
+                <div className="w-full md:w-7/12">
+                    <h1 className="mb-4 text-4xl md:text-5xl font-semibold" style={{
+                        overflowWrap: "normal"
+                    }}>
                         <span className="text-primary-700">EMPOWERING INNOVATIONS,</span>
                         <br />
                         DELIVERING EXCELLENCE
