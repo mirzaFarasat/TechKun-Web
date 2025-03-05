@@ -66,3 +66,35 @@ body {
         padding-inline: 30px;
     }
 }
+
+// Typography
+
+.banner {
+    &-heading {
+        @apply text-4xl lg:text-5xl font-semibold
+    }
+
+    &-subtext {
+        @apply text-lg lg:text-xl
+    }
+}
+
+.section {
+    &-heading {
+        @apply text-3xl lg:text-4xl font-medium
+    }
+
+    &-subtext {
+        @apply text-base lg:text-lg
+    }
+}
+
+.item {
+    &-title {
+        @apply text-2xl lg:text-3xl font-medium
+    }
+
+    &-subtitle {
+        @apply text-sm lg:text-base
+    }
+}

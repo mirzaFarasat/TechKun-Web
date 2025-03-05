@@ -31,29 +31,31 @@ const features: {
 
 const WhyChooseUs = () => {
     return (
-        <div className="bg-primary-50 py-16 px-6 md:px-12 lg:px-20">
-            <div className="text-center mb-12 mx-auto w-full md:w-10/12">
-                <h2 className="text-base md:text-lg font-medium text-primary-700 mb-2">WHY CHOOSE US?</h2>
-                <h3 className="text-3xl md:text-4xl font-medium text-gray-700 mb-2">
-                    We Build a Software That Your Customers Love
-                </h3>
-                <p className="text-base md:text-lg text-primary-700">
-                    We don&apos;t just build software—we craft cutting-edge solutions that drive business success.
-                </p>
-            </div>
+        <div className="bg-primary-50">
+            <div className="case-responsive-container py-16">
+                <div className="mb-12 mx-auto w-full md:w-10/12 text-center">
+                    <h2 className="mb-2 section-subtext font-medium text-primary-700">WHY CHOOSE US?</h2>
+                    <h2 className="mb-2 section-heading text-gray-700">
+                        We Build a Software That Your Customers Love
+                    </h2>
+                    <p className="section-subtext text-primary-700">
+                        We don&apos;t just build software—we craft cutting-edge solutions that drive business success.
+                    </p>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                {features.map(({ title, description, Icon }, index) => (
-                    <div key={index} className="bg-white shadow-lg rounded-xl p-6 text-center">
-                        <div className="flex justify-center mb-4">
-                            <span className="rounded p-2 bg-primary-700 text-white ">
-                                <Icon size={"28"} />
-                            </span>
+                <div className="mx-auto lg:w-10/12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {features.map(({ title, description, Icon }, index) => (
+                        <div key={index} className="bg-white shadow-lg rounded-xl p-6 text-center">
+                            <div className="mb-4 flex justify-center">
+                                <span className="rounded p-2 bg-primary-700 text-white ">
+                                    <Icon size={"28"} />
+                                </span>
+                            </div>
+                            <h3 className="mb-2 item-title text-gray-700">{title}</h3>
+                            <p className="item-subtitle text-primary-700">{description}</p>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">{title}</h3>
-                        <p className="text-sm md:text-base text-primary-700">{description}</p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

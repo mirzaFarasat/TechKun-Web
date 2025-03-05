@@ -16,22 +16,24 @@ const Banner = () => {
         >
             <div className="case-responsive-container py-56 text-left text-white">
                 <div className="w-full md:w-7/12">
-                    <h1 className="mb-4 text-4xl md:text-5xl font-semibold" style={{
+                    <h1 className="mb-4 banner-heading" style={{
                         overflowWrap: "normal"
                     }}>
                         <span className="text-primary-700">EMPOWERING INNOVATIONS,</span>
                         <br />
                         DELIVERING EXCELLENCE
                     </h1>
-                    <p className="mb-6 text-white text-lg md:text-xl">
-                        Partnering with medium to large enterprises, we specialize in<br className='hidden md:block' />
-                        catalyzing digital business transformations, delivering agile and<br className='hidden md:block' />
+                    <p className="mb-6 banner-subtext text-white">
+                        Partnering with medium to large enterprises, we specialize in
+                        catalyzing digital business transformations, delivering agile and
                         innovative solutions for competitive growth.
                     </p>
                 </div>
-                <button className="px-6 py-2 bg-white text-black rounded-lg font-semibold hover:bg-primary-500 hover:text-white">
-                    <Link href="/contact-us">Connect with us</Link>
-                </button>
+                <Link href={"/contact-us"}>
+                    <button className="px-6 py-2 bg-white text-black rounded-lg font-semibold hover:bg-primary-500 hover:text-white">
+                        Connect with us
+                    </button>
+                </Link>
             </div>
         </div>
 

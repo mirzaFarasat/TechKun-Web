@@ -91,17 +91,17 @@ export default function Home() {
             <AboutUs />
 
             <div className="case-responsive-container py-16 bg-white">
-                <h2 className="text-3xl md:text-4xl font-medium text-center text-primary-700 mb-1">Our Products</h2>
-                <p className="text-center text-base md:text-lg text-gray-700 mb-16">Crafting Tailored Software for Your Needs</p>
+                <h2 className="mb-1 section-heading text-primary-700 text-center">Our Products</h2>
+                <p className="mb-16 section-subtext text-gray-700 text-center">Discover Innovation. Experience Excellence.</p>
                 <div className="flex flex-col gap-y-36">
-                    <div className="flex flex-col md:flex-row items-start gap-16">
-                        <div className="md:w-5/12 text-sm md:text-base">
+                    <div className="flex flex-col md:flex-row items-center gap-16">
+                        <div className="md:w-5/12 item-subtitle text-gray-600">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-2xl md:text-3xl font-medium text-blue-600 mb-4"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-mb-4">
+                            <h3 className="mb-4 item-title text-blue-600"><Link href={"https://www.productiviti.io"}>Productiviti <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="mb-4">
                                 Productiviti is an employee-monitoring software that provides real-time insights into employee productivity, activity logging, and productivity analytics.
                             </p>
-                            <ul className="mb-10 list-disc pl-5 text-gray-700 flex flex-col space-y-2">
+                            <ul className="mb-10 list-disc pl-5 flex flex-col space-y-2">
                                 <li><strong>Dynamic Real-Time Tracking:</strong> Monitor remote teams with automated timekeeping and activity logging, ensuring compliance and proactive issue identification.</li>
                                 <li><strong>In-Depth Data Analytics:</strong> Utilize advanced analytics to derive actionable insights into employee performance, optimizing workflows and resource allocation.</li>
                                 <li><strong>Centralized Workforce Management:</strong> Manage diverse enterprise workforces from a unified platform with role-based access controls for secure oversight.</li>
@@ -120,14 +120,14 @@ export default function Home() {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row-reverse items-start gap-16">
-                        <div className="md:w-5/12 md:pr-12 text-sm md:text-base">
+                    <div className="flex flex-col md:flex-row-reverse items-center gap-16">
+                        <div className="md:w-5/12 md:pr-12 item-subtitle text-gray-600">
                             <p className='mb-4'>In collaboration with <Link href={"https://www.infomover.io"}><Image src={imLogo} alt='infomover-logo' className='w-24 inline' /></Link></p>
-                            <h3 className="text-2xl md:text-3xl font-medium text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
-                            <p className="text-gray-700 mb-4">
+                            <h3 className="item-title text-blue-600 mb-4"><Link href={"https://www.hiretalentt.com"}>HireTalentt <RxExternalLink size={22} className='mb-1 inline' /></Link></h3>
+                            <p className="mb-4">
                                 Discover HireTalentt, the cutting-edge platform designed to transform your hiring experience. Our mission is to connect businesses with exceptional talent efficiently and effectively.
                             </p>
-                            <ul className="mb-10 list-disc pl-5 text-gray-600 flex flex-col space-y-2">
+                            <ul className="mb-10 list-disc pl-5 flex flex-col space-y-2">
                                 <li><strong>Extensive Talent Pool:</strong> Access a diverse and continuously updated database of qualified candidates across various industries to find the perfect fit for your team.</li>
                                 <li><strong>Advanced Search Filters:</strong> Utilize sophisticated filters to pinpoint candidates based on specific criteria, streamlining your selection process for optimal results.</li>
                                 <li><strong>Integrated Applicant Tracking System (ATS):</strong> Manage applications and track candidate progress seamlessly, enhancing collaboration among hiring teams.</li>
@@ -149,33 +149,35 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="case-responsive-container text-center bg-primary-50 py-16 px-4">
-                <h2 className="text-3xl md:text-4xl font-medium text-primary-700 mb-1">Our Services</h2>
-                <p className="text-base md:text-lg text-gray-700 mb-16">Your Vision, Our Expertise</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {services.map((service, index) => (
-                        <div
-                            key={index}
-                            className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
-                        >
-                            <Image
-                                src={service.image}
-                                alt={service.title}
-                                className="w-full h-56 object-cover"
-                            />
-                            <div className="p-8 text-center">
-                                <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">{service.title}</h3>
-                                <p className="text-gray-700 text-sm md:text-base">{service.description}</p>
+            <div className='bg-primary-50'>
+                <div className="case-responsive-container text-center py-16">
+                    <h2 className="mb-1 section-heading text-primary-700">Our Services</h2>
+                    <p className="mb-16 section-subtext text-gray-700">Your Vision, Our Expertise</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {services.map((service, index) => (
+                            <div
+                                key={index}
+                                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                            >
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    className="w-full h-56 object-cover"
+                                />
+                                <div className="p-8 text-center">
+                                    <h3 className="mb-2 item-title text-gray-700">{service.title}</h3>
+                                    <p className="item-subtitle text-gray-700">{service.description}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
 
             <div className='case-responsive-container justify-center items-center text-center py-24'>
                 <div className='mb-16 mx-auto w-full md:w-2/3'>
-                    <h2 className='mb-1 text-3xl md:text-4xl font-medium text-primary-700'>What We Can Do For You?</h2>
-                    <p className='text-base md:text-lg text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
+                    <h2 className='mb-1 section-heading text-primary-700'>What We Can Do For You?</h2>
+                    <p className='section-subtext text-gray-700'>We can provided you services which can help to grow your business. We are open to take new ideas and also worked in a wide range of domains which encompasses...</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {cardItems.map((item, index) => (
@@ -191,10 +193,10 @@ export default function Home() {
                                 />
                             </div>
                             <div className="p-6 text-left">
-                                <h3 className="text-2xl md:text-3xl font-medium text-gray-700 mb-2">
+                                <h3 className="mb-2 item-title text-gray-700">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-700 text-sm md:text-base">{item.discription}</p>
+                                <p className="item-subtitle text-gray-700">{item.discription}</p>
                             </div>
                         </div>
                     ))}
@@ -205,10 +207,10 @@ export default function Home() {
 
             <div className="bg-gradient-to-r from-primary-500 to-indigo-600 text-white py-20 text-center">
                 <div className='case-responsive-container'>
-                    <h2 className="text-3xl md:text-4xl font-medium mb-2">
+                    <h2 className="mb-2 section-heading">
                         Transform Your Business with Cutting-Edge Digital Solutions
                     </h2>
-                    <p className="mb-8 w-10/12 text-base md:text-lg mx-auto">
+                    <p className="mb-8 mx-auto w-10/12 section-subtext">
                         Our innovative IT solutions are designed to streamline your operations, enhance productivity, and drive growth.
                         Partner with us to
                         unlock your business's full potential.

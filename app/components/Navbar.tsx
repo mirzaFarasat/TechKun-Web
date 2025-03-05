@@ -6,12 +6,13 @@ import classNames from 'classnames';
 import { Button } from '@radix-ui/themes';
 import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
-import { Menu, X } from 'lucide-react';
+import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
+import Overlay from './Overlay';
 
 const Navbar = () => {
     const currentPath = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 50);
 
     useEffect(()=>{
         const handleScroll=()=>{
