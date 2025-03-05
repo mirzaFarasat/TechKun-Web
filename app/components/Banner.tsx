@@ -14,7 +14,7 @@ const Banner = () => {
             className="relative w-full flex flex-col justify-center items-left"
             style={bannerImg}
         >
-            <div className="case-responsive-container py-56 text-left text-white">
+            <div className="case-responsive-container py-56 text-white">
                 <div className="w-full md:w-7/12">
                     <h1 className="mb-4 banner-heading" style={{
                         overflowWrap: "normal"
