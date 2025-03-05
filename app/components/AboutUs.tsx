@@ -5,6 +5,7 @@ function AboutUs() {
     const [logoSize, setLogoSize] = useState<number>(() => ((window.innerWidth >= 1024 ? 1024 : window.innerWidth) * (400 / 1024)));
     useEffect(() => {
         window.addEventListener("resize", (ev) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const resizedWidth = (ev.target as any).innerWidth;
             setLogoSize(resizedWidth >= 1024? 400: resizedWidth * (400 / 1024));
         });

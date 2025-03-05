@@ -24,7 +24,7 @@ const Navbar = () => {
             setBelowScrollThreshold(!isBelowScrollThreshold)
     }, [isBelowScrollThreshold]);
 
-    useEffect(checkScrollPosition, []);
+    useEffect(checkScrollPosition, [checkScrollPosition]);
 
     useEffect(() => {
         window.addEventListener("scroll", checkScrollPosition);
@@ -54,7 +54,7 @@ const Navbar = () => {
                 Contact Us
             </button>
         </Link>
-    </div>, []);
+    </div>, [currentPath]);
 
     return (
         <nav

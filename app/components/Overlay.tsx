@@ -27,7 +27,7 @@ const Overlay = memo(forwardRef<OverlayRef, OverlayProps>(({ children, isOpen, o
 
     const toggle = useCallback(() => {
         isOpen ? hide() : show();
-    }, [isOpen]);
+    }, [isOpen, hide, show]);
 
     useImperativeHandle(ref, () => ({
         show,
@@ -40,21 +40,23 @@ const Overlay = memo(forwardRef<OverlayRef, OverlayProps>(({ children, isOpen, o
     }, []);
 
     useEffect(() => {
-        overlayRef.current?.addEventListener("animationend", onAnimationEnd);
-        return () => overlayRef.current?.removeEventListener("animationend", onAnimationEnd);
-    }, [overlayRef.current]);
+        const overlay = overlayRef.current;
+        overlay?.addEventListener("animationend", onAnimationEnd);
+        return () => overlay?.removeEventListener("animationend", onAnimationEnd);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [overlayRef.current, onAnimationEnd]);
 
     useEffect(() => {
         const onClickBelow = (event: MouseEvent) => {
-            let element = overlayRef.current;
-            let rect = element?.getBoundingClientRect();
+            const element = overlayRef.current;
+            const rect = element?.getBoundingClientRect();
             if (rect && (event.clientY > rect.bottom))
                 hide();
         };
 
         document.addEventListener("click", onClickBelow);
         return () => document.removeEventListener("click", onClickBelow);
-    }, []);
+    }, [hide]);
 
     return isMounted ? (
         <div ref={overlayRef}

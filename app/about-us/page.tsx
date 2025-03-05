@@ -2,9 +2,6 @@ import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import missionImage from '@/public/Images/mission-image/Mission-image.webp';
 import profilePlaceholder from "@/public/Images/profile-placeholder.jpg";
-import bus from "@/public/Images/bus.jpg";
-import umbrella from "@/public/Images/umbrella.jpg";
-import star from "@/public/Images/star.jpg";
 
 import emergingTech from "@/public/Images/aboutus-banner/Embracing Emerging Technologies.jpeg";
 import futuristicStrategy from "@/public/Images/aboutus-banner/Futuristic Strategy Meeting.jpeg";

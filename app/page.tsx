@@ -39,22 +39,6 @@ export default function Home() {
         },
     ];
 
-    const ourProducts: {
-        productName: string;
-        description: string;
-        features: {
-            featureTitle: string;
-            featureDescription: string;
-        }[];
-    }[] = [{
-        productName: "Productiviti",
-        description: "Transform Workforce Productivity with Real-Time Insights Activity Logging & Productivity Analytics",
-        features: [{
-            featureTitle: "",
-            featureDescription: ""
-        }]
-    }];
-
     const cardItems: {
         title: string,
         discription: string,
@@ -213,7 +197,7 @@ export default function Home() {
                     <p className="mb-8 mx-auto w-10/12 section-subtext">
                         Our innovative IT solutions are designed to streamline your operations, enhance productivity, and drive growth.
                         Partner with us to
-                        unlock your business's full potential.
+                        unlock your business&apos;s full potential.
                     </p>
                     <div className="flex justify-center">
                         <button className="bg-white text-primary-700 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition duration-300 transform hover:scale-105 font-semibold">

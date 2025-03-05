@@ -55,10 +55,16 @@ const TechKunLogoSvg: React.FC<{ size?: number, length: number }> = ({ size = 12
             <g clipPath="url(#689955e9f6)">
                 <path fill="#5692d8" d="M 0 76.105469 L 959.097656 76.105469 L 959.097656 883.894531 L 0 883.894531 Z M 0 76.105469 " fillOpacity="1" fillRule="nonzero" />
             </g>
-            <text x="560" y="160" fontSize={48 * (range / 360)} fontWeight={(twTheme?.fontWeight as any).medium}>
+            <text x="560" y="160" fontSize={48 * (range / 360)} fontWeight={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (twTheme?.fontWeight as any).medium
+            }>
                 We are <tspan fill="#2a6bb7">TechKun</tspan>
             </text>
-            <text x="1040" y="328" fontSize={36 * (range / 360)} fontWeight={(twTheme?.fontWeight as any).normal}>
+            <text x="1040" y="328" fontSize={36 * (range / 360)} fontWeight={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (twTheme?.fontWeight as any).normal
+            }>
                 We create excellence.
             </text>
             <g clipPath="url(#b500516018)">
