@@ -16,7 +16,7 @@ const links = [
 const Navbar = () => {
     const currentPath = usePathname();
     const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isBelowScrollThreshold, setBelowScrollThreshold] = useState(() => window.scrollY <= scrollThreshold);
+    const [isBelowScrollThreshold, setBelowScrollThreshold] = useState(true);
     const overlayRef = useRef<OverlayRef>(null);
 
     const checkScrollPosition = useCallback(() => {
