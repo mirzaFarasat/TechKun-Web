@@ -55,7 +55,7 @@ export default function ServicesBody() {
         <div>
             <div className="py-12 md:py-24">
                 <div className="case-responsive-container mx-auto px-4 mb-8 flex flex-col items-center text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-700">
+                    <h2 className="section-heading text-gray-700">
                         <span className="text-primary-700">Our Area of Expertise </span>Encompasses...
                     </h2>
                 </div>
@@ -64,11 +64,11 @@ export default function ServicesBody() {
                         <div key={index} className={`py-12 md:py-24 ${index % 2 !== 0 ? "bg-primary-50" : ""}`}>
                             <div className={`case-responsive-container mx-auto px-4 flex flex-col ${index % 2 !== 0 ? "md:flex-row-reverse": "md:flex-row"} items-center justify-center gap-8`}>
                                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-14" : "md:pl-14"}`}>
-                                    <h3 className="text-2xl md:text-4xl font-semibold text-primary-900 pb-5">{item.title}</h3>
-                                    <p className="text-gray-500 pb-5">{item.discription}</p>
-                                    <ul className="list-disc pl-5">
+                                    <h3 className="mb-5 item-title text-primary-900">{item.title}</h3>
+                                    <p className="mb-5 item-subtitle text-gray-500">{item.discription}</p>
+                                    <ul className="list-disc pl-5 item-subtitle font-medium">
                                         {item.subItems.map((subItem, subIndex) => (
-                                            <li key={subIndex} className="font-bold text-primary-800 py-1">{subItem}</li>
+                                            <li key={subIndex} className="text-primary-800 py-1">{subItem}</li>
                                         ))}
                                     </ul>
                                 </div>
