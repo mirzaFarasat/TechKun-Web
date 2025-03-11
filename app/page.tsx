@@ -17,6 +17,8 @@ import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
 import WhyChooseUs from './components/WhyChooseUs';
+import goodFirmsLogo from '@/public/Images/logos/goodFirms-Logo.png';
+import clutchLogo from '@/public/Images/logos/clutchLogox.png';
 
 
 export default function Home() {
@@ -74,6 +76,33 @@ export default function Home() {
             <Banner />
             <AboutUs />
 
+            {/* New Section - Valued by Leading Companies */}
+                     
+            <div className="bg-gray-100 py-20 px-10 text-center">
+                <h2 className="text-3xl font-bold text-gray-700 mb-10">
+                    Valued by the world’s <span className="text-primary-700">leading companies</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="text-primary-700 text-4xl font-bold">400+</div>
+                        <p className="text-gray-700 mt-4">Industry-leading professionals</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="text-primary-700 text-4xl font-bold">10+</div>
+                        <p className="text-gray-700 mt-4">Industries mastered</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="text-primary-700 text-4xl font-bold">20+</div>
+                        <p className="text-gray-700 mt-4">Products launched from Ideation to Go-to-market</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="text-primary-700 text-4xl font-bold">1.2M+</div>
+                        <p className="text-gray-700 mt-4">Hours of dedication</p>
+                    </div>
+                </div>
+            </div>
+            
+           
             <div className="case-responsive-container py-16 bg-white">
                 <h2 className="mb-1 section-heading text-primary-700 text-center">Our Products</h2>
                 <p className="mb-16 section-subtext text-gray-700 text-center">Discover Innovation. Experience Excellence.</p>
@@ -133,6 +162,7 @@ export default function Home() {
                 </div>
             </div>
 
+
             <div className='bg-primary-50'>
                 <div className="case-responsive-container text-center py-16">
                     <h2 className="mb-1 section-heading text-primary-700">Our Services</h2>
@@ -188,6 +218,39 @@ export default function Home() {
             </div>
 
             <WhyChooseUs />
+
+             {/* clients section */}
+             <div className="bg-gray-50 py-20  text-center">
+    <h2 className="text-4xl font-extrabold text-gray-900">
+        Our futuristic IT solutions have <br />
+        <span className="text-primary-700 text-4xl">bagged a few accolades</span>
+    </h2>
+    <div className="flex flex-wrap justify-center gap-10 m-10">
+        {/* GoodFirms Card */}
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center w-60  border border-gray-200">
+            <Image src={goodFirmsLogo} alt="GoodFirms Logo" className="w-60 h-40 mb-4 bg-white object-contain"  />
+            <div className="flex flex-col items-center w-32 h-16">
+                <p className="text-gray-600 text-sm font-medium">REVIEWED ON</p>
+                <p className="text-gray-900 text-base font-bold">EXCELLENT</p>
+                <div className="flex gap-1 text-yellow-500 text-xl mt-1">
+                    ⭐⭐⭐⭐⭐
+                </div>
+            </div>
+        </div>
+
+        {/* Clutch Card */}
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center w-60 border border-gray-200">
+            <Image src={clutchLogo} alt="Clutch Logo" className="w-60 h-40 mb-4 bg-white object-contain " />
+            <div className="flex flex-col items-center w-32 h-16">
+                <p className="text-gray-600 text-sm font-medium">REVIEWED ON</p>
+                <p className="text-gray-900 text-base font-bold">EXCELLENT</p>
+                <div className="flex gap-1 text-red-500 text-xl mt-1">
+                    ⭐⭐⭐⭐⭐
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
             <div className="bg-gradient-to-r from-primary-500 to-indigo-600 text-white py-20 text-center">
                 <div className='case-responsive-container'>
