@@ -14,11 +14,11 @@ export default function Footer() {
             <Link href="/">
               <Image src={techkunLogo} alt="TechKun Logo" className="w-12" />
             </Link>
-            <h1 className="text-3xl font-semibold">TechKun</h1>
+            <h1 className="text-3xl font-medium">TechKun</h1>
           </div>
           {/* Email Section */}
           <div className="mt-6">
-            <h2 className="text-xl font-bold text-gray-100">Email Us:</h2>
+            <h2 className="text-xl font-medium text-gray-100">Email Us:</h2>
             <p className="text-md text-gray-100">info@tech-kun.com</p>
           </div>
         </div>
@@ -26,7 +26,7 @@ export default function Footer() {
         {/* Right Section: Navigation Links & Social Media */}
         <div className="text-right">
           {/* Navigation Links */}
-          <nav className="flex space-x-14 text-lg font-bold  ">
+          <nav className="flex space-x-14 text-lg font-medium ">
             <Link href="/services" className="hover:text-blue-300">Services</Link>
             <Link href="/about" className="hover:text-blue-300">About Us</Link>
             <Link href="/contact" className="hover:text-blue-300">Contact Us</Link>
@@ -34,7 +34,7 @@ export default function Footer() {
 
           {/* Social Media Links */}
           <div className="mt-8">
-            <h2 className="text-xl font-bold text-gray-100 ">Follow Us:</h2>
+            <h2 className="text-xl font-medium text-gray-100 ">Follow Us:</h2>
             <div className="flex space-x-4 mt-1 justify-end ">
               <a href="https://www.linkedin.com/company/techkunex/" target="_blank" rel="noopener noreferrer">
                 <Image src={linkedIn} alt="LinkedIn" className="w-7 h-7" />
