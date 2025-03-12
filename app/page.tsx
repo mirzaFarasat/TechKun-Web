@@ -85,19 +85,19 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
                     <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="text-primary-700 text-4xl font-bold">400+</div>
-                        <p className="text-gray-700 mt-4">Industry-leading professionals</p>
+                        <p className="text-gray-600 mt-4 font-medium">Industry-leading Professionals</p>
                     </div>
                     <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="text-primary-700 text-4xl font-bold">10+</div>
-                        <p className="text-gray-700 mt-4">Industries mastered</p>
+                        <p className="text-gray-600 mt-4 font-medium">Industries Mastered</p>
                     </div>
                     <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="text-primary-700 text-4xl font-bold">20+</div>
-                        <p className="text-gray-700 mt-4">Products launched from Ideation to Go-to-market</p>
+                        <p className="text-gray-600 mt-4 font-medium">Products launched from Ideation to Go-to-market</p>
                     </div>
                     <div className="bg-white p-8 rounded-lg shadow-lg">
-                        <div className="text-primary-700 text-4xl font-bold">1.2M+</div>
-                        <p className="text-gray-700 mt-4">Hours of dedication</p>
+                        <div className="text-primary-700 text-4xl font-bold ">1.2M+</div>
+                        <p className="text-gray-600 mt-4 font-medium">Hours of Dedication</p>
                     </div>
                 </div>
             </div>
