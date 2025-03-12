@@ -67,6 +67,11 @@ const TechKunLogoSvg: React.FC<{ size?: number, length: number }> = ({ size = 12
             }>
                 We create excellence.
             </text>
+            <a href="/about-us">
+                <text x="2020" y="328" fontSize={22 * (range / 360)} fontWeight="medium" fill="#2a6bb7" textDecoration="underline">
+                    Explore More 
+                </text>
+            </a>
             <g clipPath="url(#b500516018)">
                 <path fill="#5692d8" d={getRectanglePath(959.097656 + expansion)} fillOpacity="1" fillRule="nonzero" />
             </g>

@@ -5,10 +5,10 @@ import Link from 'next/link';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
 
-import imageMobileApp1 from '@/public/Images/landing-page-images/Health Tech.jpeg';
-import imageMobileApp2 from '@/public/Images/landing-page-images/Ed-tech.jpeg';
-import imageMobileApp3 from '@/public/Images/landing-page-images/Food-tech.jpeg';
-import imageMobileApp4 from '@/public/Images/landing-page-images/Logistics.jpeg';
+import imageMobileApp1 from '@/public/Images/landing-page-images/health-tech.avif';
+import imageMobileApp2 from '@/public/Images/landing-page-images/Education-TechX.webp';
+import imageMobileApp3 from '@/public/Images/landing-page-images/Food-Techx.jpg';
+import imageMobileApp4 from '@/public/Images/landing-page-images/logisticsX.jpg';
 import aiimg from '@/public/Images/service-landing-page/ai2.webp';
 import mobimg from '@/public/Images/service-landing-page/App Development.jpeg';
 import imLogo from "@/public/Images/logos/im-logo.webp";
@@ -185,6 +185,13 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
+                    <div className="mt-12 flex justify-center">
+                     <Link href="/services">
+                       <button className="bg-white text-primary-700 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition duration-300 transform hover:scale-105 font-semibold">
+                         View All Services
+                       </button>
+                     </Link>
+                   </div>
                 </div>
             </div>
 
