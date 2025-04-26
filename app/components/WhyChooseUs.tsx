@@ -1,18 +1,50 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useAnimation, useInView, UseInViewOptions } from "framer-motion";
 import { 
   Users, 
   Scale, 
   HeartHandshake, 
   Shield, 
   Rocket, 
-  Sparkles 
+  Sparkles,
+  LucideIcon
 } from "lucide-react";
 
-const features = [
+interface Feature {
+  id: number;
+  title: string;
+  description: string;
+  Icon: LucideIcon;
+}
+
+interface AnimatedSectionProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+interface FeatureCardProps {
+  feature: Feature;
+  index: number;
+}
+
+const useViewAnimation = (options: UseInViewOptions = { once: true, amount: 0.2 }) => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const inView = useInView(ref, options);
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  return { ref, controls, inView };
+};
+
+const features: Feature[] = [
   {
-    id: 1, // Added unique id
+    id: 1,
     title: "Expert Team",
     description: "Our team of seasoned developers and designers bring decades of combined experience to every project.",
     Icon: Users
@@ -49,17 +81,9 @@ const features = [
   }
 ];
 
-const AnimatedSection = ({ children, className }) => {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, threshold: 0.2 });
-  
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
-  
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = "" }) => {
+  const { ref, inView } = useViewAnimation();
+
   return (
     <motion.div
       ref={ref}
@@ -68,27 +92,18 @@ const AnimatedSection = ({ children, className }) => {
         visible: { opacity: 1 }
       }}
       initial="hidden"
-      animate={controls}
+      animate={inView ? "visible" : "hidden"}
       transition={{ duration: 0.5 }}
       className={className}
-      style={{ willChange: 'opacity' }} // Added for performance
     >
       {children}
     </motion.div>
   );
 };
 
-const FeatureCard = ({ feature, index }) => {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, threshold: 0.2 });
-  
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
-  
+const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
+  const { ref, inView } = useViewAnimation();
+
   return (
     <motion.div
       ref={ref}
@@ -97,38 +112,36 @@ const FeatureCard = ({ feature, index }) => {
         visible: { opacity: 1, y: 0 }
       }}
       initial="hidden"
-      animate={controls}
+      animate={inView ? "visible" : "hidden"}
       transition={{ 
         duration: 0.5,
         delay: index * 0.1,
         ease: [0.25, 0.1, 0.25, 1.0]
       }}
       className="feature-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden"
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      style={{ willChange: 'transform, opacity' }} // Added for performance
     >
-      <div className="p-8">
+      <div className="p-6">
         <motion.div 
-          className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6"
+          className="h-12 w-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mb-4"
           whileHover={{ 
             scale: 1.1, 
             rotate: 5,
-            backgroundColor: "rgb(165, 180, 252)",
+            backgroundColor: "rgb(147, 197, 253)",
             transition: { duration: 0.3 }
           }}
-          aria-label={feature.title} // Added accessibility
+          aria-label={feature.title}
         >
           <feature.Icon size={24} strokeWidth={2} aria-hidden="true" />
         </motion.div>
-        <h3 className="text-xl font-bold text-gray-900 mb-3">
+        <h3 className="text-lg font-bold text-gray-900 mb-2">
           {feature.title}
         </h3>
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-sm">
           {feature.description}
         </p>
       </div>
       <motion.div 
-        className="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"
+        className="h-1 bg-gradient-to-r from-blue-400 to-blue-600"
         initial={{ width: "0%" }}
         animate={inView ? { width: "100%" } : { width: "0%" }}
         transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
@@ -139,9 +152,9 @@ const FeatureCard = ({ feature, index }) => {
 };
 
 const WhyChooseUs = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
-  
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+
   const titleVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { 
@@ -153,7 +166,7 @@ const WhyChooseUs = () => {
       }
     }
   };
-  
+
   const subtitleVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -166,7 +179,7 @@ const WhyChooseUs = () => {
       }
     }
   };
-  
+
   const badgeVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { 
@@ -184,12 +197,13 @@ const WhyChooseUs = () => {
   return (
     <section 
       ref={ref}
-      className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden"
+      className="py-16 bg-gradient-to-b from-gray-50 to-gray-100"
+      aria-labelledby="why-choose-us-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <motion.span 
-            className="inline-block py-1 px-3 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mb-4"
+            className="inline-block py-1 px-3 rounded-full text-sm font-medium bg-blue-100 text-blue-800 mb-4"
             variants={badgeVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -199,7 +213,8 @@ const WhyChooseUs = () => {
           </motion.span>
           
           <motion.h2 
-            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+            id="why-choose-us-heading"
+            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight"
             variants={titleVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -208,7 +223,7 @@ const WhyChooseUs = () => {
           </motion.h2>
           
           <motion.p 
-            className="text-xl text-gray-600"
+            className="text-lg text-gray-600"
             variants={subtitleVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -217,51 +232,26 @@ const WhyChooseUs = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature) => (
-            <FeatureCard key={feature.id} feature={feature} index={feature.id} /> // Changed to use feature.id
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
+          {features.map((feature, index) => (
+            <FeatureCard key={`feature-${feature.id}`} feature={feature} index={index} />
           ))}
         </div>
 
-        <AnimatedSection className="mt-16 text-center">
+        <AnimatedSection className="mt-12 flex justify-center py-8 px-4">
           <motion.button 
-            className="px-8 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-lg transition-all duration-300"
+            type="button"
+            className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             whileHover={{ 
               scale: 1.05, 
-              backgroundColor: "rgb(79, 70, 229)",
-              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-              y: -5
+              backgroundColor: "rgb(37, 99, 235)",
+              boxShadow: "0 20px 30px -3px rgba(0, 0, 0, 0.1)"
             }}
             whileTap={{ scale: 0.98 }}
             aria-label="Schedule a Consultation"
           >
             Schedule a Consultation
           </motion.button>
-        </AnimatedSection>
-
-        <AnimatedSection className="mt-20 flex justify-center">
-          <motion.div 
-            className="w-1 h-16 bg-indigo-200 rounded-full relative overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.5 }}
-            aria-hidden="true"
-          >
-            <motion.div 
-              className="absolute top-0 w-full bg-indigo-600 rounded-full"
-              initial={{ height: "0%", top: "0%" }}
-              animate={{ 
-                height: "30%", 
-                top: ["0%", "70%", "0%"] 
-              }}
-              transition={{ 
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 2.5,
-                ease: "easeInOut" 
-              }}
-            />
-          </motion.div>
         </AnimatedSection>
       </div>
     </section>
