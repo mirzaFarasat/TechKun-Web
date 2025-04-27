@@ -23,21 +23,21 @@ export default function Services() {
       title: 'AI & Machine Learning Solutions',
       description:
         'Leverage the power of artificial intelligence to transform your business operations.',
-      image: aiimg,
+      image: '/images/landing-page-images/AI .jpeg',
       icon: RxExternalLink,
     },
     {
       title: 'Mobile Application Development',
       description:
         'We deliver mobile applications that provide exceptional user experiences.',
-      image: mobimg,
+      image: '/images/landing-page-images/App development.jpeg',
       icon: RxExternalLink,
     },
     {
       title: 'Web Development',
       description:
         'Build modern, responsive websites with cutting-edge technologies.',
-      image: '/images/web-dev.jpg',
+      image: '/images/landing-page-images/Web development.jpeg',
       icon: RxExternalLink,
     },
   ];
