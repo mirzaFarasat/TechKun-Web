@@ -33,8 +33,8 @@ export default function Home() {
       <Services />
       <WhatWeDo />
       <WhyChooseUs />
-      <Stats/>
       <CTASection />
+      <Stats/> 
     </div>
   );
 }

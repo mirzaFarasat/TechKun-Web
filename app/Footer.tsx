@@ -300,16 +300,107 @@ export default function Footer() {
             </ul>
           </motion.div>
           
-          {/* Newsletter section with advanced animations */}
+          {/* Office Locations with Flags */}
           <motion.div className="md:col-span-4" variants={fadeInRight}>
             <motion.h3 
               className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4"
               whileHover={{ color: "#ffffff" }}
             >
+              Our Offices
+            </motion.h3>
+            
+            {/* Turkey Office */}
+            <motion.div 
+              className="mb-4 p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -3, 
+                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
+              }}
+            >
+              <div className="flex items-center mb-2">
+                <div className="mr-2 flex-shrink-0">
+                  <div className="w-6 h-4 rounded overflow-hidden relative">
+                    <div className="absolute inset-0 bg-red-600"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <div className="absolute w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+                      <div className="absolute ml-3 w-1 h-2 bg-white"></div>
+                    </div>
+                  </div>
+                </div>
+                <span className="font-medium text-sm text-white">Turkey</span>
+              </div>
+              <address className="text-xs text-gray-300 not-italic leading-relaxed">
+                TechKun Turkey<br />
+                Levent Mah., Büyükdere Cad. No:201<br />
+                İstanbul, 34394<br />
+                +90 212 555 6789
+              </address>
+            </motion.div>
+            
+            {/* India Office */}
+            <motion.div 
+              className="mb-4 p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -3, 
+                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
+              }}
+            >
+              <div className="flex items-center mb-2">
+                <div className="mr-2 flex-shrink-0">
+                  <div className="w-6 h-4 rounded overflow-hidden relative">
+                    <div className="absolute inset-0 flex flex-col">
+                      <div className="flex-1 bg-orange-500"></div>
+                      <div className="flex-1 bg-white"></div>
+                      <div className="flex-1 bg-green-600"></div>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-1 h-1 bg-blue-800 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+                <span className="font-medium text-sm text-white">India</span>
+              </div>
+              <address className="text-xs text-gray-300 not-italic leading-relaxed">
+                TechKun India<br />
+                Cyber City, DLF Phase 2<br />
+                Gurgaon, Haryana 122002<br />
+                +91 124 456 7890
+              </address>
+            </motion.div>
+            
+            <Link href="/contact">
+              <motion.button
+                className="text-xs flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 group"
+                variants={itemVariants}
+                whileHover={{ x: 3 }}
+              >
+                <span>View all locations</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-3 w-3 ml-1 group-hover:translate-x-1 transition-transform duration-200" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.button>
+            </Link>
+          </motion.div>
+          
+          {/* Newsletter section now below the offices */}
+          <motion.div className="md:col-span-12 lg:col-span-8 lg:col-start-3 mt-8 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg p-6" variants={fadeInRight}>
+            <motion.h3 
+              className="text-center text-lg font-semibold text-white mb-4"
+              whileHover={{ color: "#ffffff" }}
+            >
               Stay Connected
             </motion.h3>
             <motion.p 
-              className="text-sm text-gray-300 mb-4"
+              className="text-sm text-gray-300 mb-4 text-center"
               variants={itemVariants}
             >
               Subscribe to our newsletter for the latest updates and insights.
@@ -317,7 +408,7 @@ export default function Footer() {
             
             <motion.form 
               onSubmit={handleSubmit} 
-              className="space-y-2"
+              className="max-w-md mx-auto"
               variants={itemVariants}
             >
               <AnimatePresence mode="wait">
@@ -384,7 +475,7 @@ export default function Footer() {
                 )}
               </AnimatePresence>
               <motion.p 
-                className="text-xs text-gray-400"
+                className="text-xs text-gray-400 text-center mt-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}

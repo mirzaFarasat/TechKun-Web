@@ -1,6 +1,19 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Poppins, Roboto } from 'next/font/google';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-poppins',
+});
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-roboto',
+});
 
 const Banner = () => {
   const [scrollY, setScrollY] = useState(0);
