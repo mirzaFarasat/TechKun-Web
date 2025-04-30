@@ -1,83 +1,135 @@
-import { useState } from 'react';
-import Image from 'next/image';
-
-// Client data
-const clients = [
-  { name: 'Seismic', logo: '/Images/Logo/Seismic_id8l_4d2M-_1.png' },
-  { name: 'Akeneo', logo: '/Images/Logo/Akeneo_idwhtOJT_w_1.png' },
-  { name: '1', logo: '/Images/Logo/idx_vBAoYh_1745577090705.jpeg' },
-  { name: 'Innovaccer', logo: '/Images/Logo/Innovaccer_id6-tvzgdK_1.png' },
-  { name: 'Prowly', logo: '/Images/Logo/Prowly_idQNl-mIbF_1.png' },
-  { name: '2', logo: '/Images/Logo/Symbol.png' },
-  { name: 'MobileAction', logo: '/Images/Logo/idObx92Zq7_1745577734176.jpeg' },
-];
-
-// B2B trust badges data
-const trustBadges = [
-  { 
-    name: 'Clutch', 
-    logo: '/api/placeholder/150/75', 
-    url: 'https://clutch.co/profile/your-company'
-  },
-  { 
-    name: 'GoodFirms', 
-    logo: '/api/placeholder/150/75', 
-    url: 'https://www.goodfirms.co/company/your-company'
-  },
-  { 
-    name: 'DesignRush', 
-    logo: '/api/placeholder/150/75', 
-    url: 'https://www.designrush.com/agency/profile/your-company'
-  },
-  { 
-    name: 'UpCity', 
-    logo: '/api/placeholder/150/75', 
-    url: 'https://upcity.com/profiles/your-company'
-  },
-];
+import { useState, useRef, useEffect } from 'react';
 
 const ClientSliderSection = () => {
   const [isPaused, setIsPaused] = useState(false);
-  const allClients = [...clients, ...clients];
+  const [sliderPosition, setSliderPosition] = useState(0);
+  const animationRef = useRef(null);
+  const sliderContainerRef = useRef(null);
+  
+  // Client data
+  const clients = [
+    { name: 'Seismic', logo: '/Images/Logo/Seismic_id8l_4d2M-_1.png' },
+    { name: 'Akeneo', logo: '/Images/Logo/Akeneo_idwhtOJT_w_1.png' },
+    { name: '1', logo: '/Images/Logo/idx_vBAoYh_1745577090705.jpeg' },
+    { name: 'Innovaccer', logo: '/Images/Logo/Innovaccer_id6-tvzgdK_1.png' },
+    { name: 'Prowly', logo: '/Images/Logo/Prowly_idQNl-mIbF_1.png' },
+    { name: '2', logo: '/Images/Logo/Symbol.png' },
+    { name: 'MobileAction', logo: '/Images/Logo/idObx92Zq7_1745577734176.jpeg' },
+  ];
+
+  // B2B trust badges data
+  const trustBadges = [
+    { 
+      name: 'Clutch', 
+      logo: '/api/placeholder/150/75', 
+      url: 'https://clutch.co/profile/your-company'
+    },
+    { 
+      name: 'GoodFirms', 
+      logo: '/api/placeholder/150/75', 
+      url: 'https://www.goodfirms.co/company/your-company'
+    },
+    { 
+      name: 'DesignRush', 
+      logo: '/api/placeholder/150/75', 
+      url: 'https://www.designrush.com/agency/profile/your-company'
+    },
+    { 
+      name: 'UpCity', 
+      logo: '/api/placeholder/150/75', 
+      url: 'https://upcity.com/profiles/your-company'
+    },
+  ];
+
+  // Duplicate clients for infinite scroll appearance
+  const allClients = [...clients, ...clients, ...clients];
+  
+  // Animation speed in pixels per second
+  const speed = 40;
+  let lastTime = 0;
+  
+  // Handle client logo click
+  const handleClientClick = (clientName) => {
+    console.log(`Clicked on ${clientName}`);
+    // Add your click handler logic here
+  };
+
+  // Animation using requestAnimationFrame for smoother performance
+  const animate = (timestamp) => {
+    if (!lastTime) lastTime = timestamp;
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+    
+    if (!isPaused && sliderContainerRef.current) {
+      const containerWidth = sliderContainerRef.current.offsetWidth;
+      const clientGroupWidth = containerWidth / 3;
+      
+      // Calculate new position
+      let newPosition = sliderPosition - (speed * deltaTime / 1000);
+      
+      // Reset position when first set of logos is out of view
+      if (Math.abs(newPosition) >= clientGroupWidth) {
+        newPosition = 0;
+      }
+      
+      setSliderPosition(newPosition);
+    }
+    
+    animationRef.current = requestAnimationFrame(animate);
+  };
+  
+  // Start animation
+  useEffect(() => {
+    animationRef.current = requestAnimationFrame(animate);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused, sliderPosition]);
+  
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      // Reset position on resize to avoid glitches
+      setSliderPosition(0);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <section
-      className="w-full min-h-screen flex flex-col items-center justify-center py-16 bg-gradient-to-r from-gray-50 to-blue-50 snap-start"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
+    <section className="w-full min-h-screen flex flex-col items-center justify-center py-16 bg-gradient-to-r from-gray-50 to-blue-50 snap-start">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-24 text-gray-800">
           Trusted by Leading Clients
         </h2>
         
-        {/* Client Logo Slider */}
-        <div
-          className="relative overflow-hidden w-full h-24 mb-20"
+        {/* Client Logo Slider - Fixed version */}
+        <div 
+          className="relative w-full overflow-hidden mb-20" 
+          style={{ height: '120px' }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div
-            className={`flex space-x-20 absolute whitespace-nowrap ${
-              isPaused ? 'animate-pause' : 'animate-scroll'
-            }`}
-            style={{
-              animationDuration: '30s',
-              animationIterationCount: 'infinite',
-            }}
+          <div 
+            ref={sliderContainerRef}
+            className="absolute flex items-center"
+            style={{ transform: `translateX(${sliderPosition}px)`, width: 'max-content' }}
           >
             {allClients.map((client, index) => (
               <div
                 key={`${client.name}-${index}`}
-                className="flex items-center justify-center h-20 w-32 md:w-40 transition-all duration-300 grayscale hover:grayscale-0 hover:scale-110"
+                className="h-20 w-40 mx-10 flex items-center justify-center transition-transform duration-300 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
+                onClick={() => handleClientClick(client.name)}
               >
-                <div className="relative h-full w-full">
-                  <Image
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img
                     src={client.logo}
                     alt={`${client.name} logo`}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    priority={index < 8}
+                    className="max-w-full max-h-full object-contain"
                   />
                 </div>
               </div>
@@ -102,11 +154,10 @@ const ClientSliderSection = () => {
                   className="group"
                 >
                   <div className="h-12 w-24 md:h-14 md:w-32 relative transition-all duration-300 grayscale hover:grayscale-0">
-                    <Image
+                    <img
                       src={badge.logo}
                       alt={`${badge.name} badge`}
-                      fill
-                      style={{ objectFit: 'contain' }}
+                      className="object-contain w-full h-full"
                     />
                     <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-md"></div>
                   </div>
@@ -116,23 +167,6 @@ const ClientSliderSection = () => {
           </div>
         </div>
       </div>
-      
-      <style jsx global>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-scroll {
-          animation-name: scroll;
-        }
-        .animate-pause {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 };

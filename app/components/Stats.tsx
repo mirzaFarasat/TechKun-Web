@@ -3,15 +3,17 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import CountUp from 'react-countup'
+import { CheckCircle, Users, Award, Clock, ArrowUpRight } from 'lucide-react'
 
 interface StatProps {
   number: number
   label: string
   suffix?: string
   prefix?: string
+  icon: React.ReactNode
 }
 
-function StatCounter({ number, label, suffix = '', prefix = '' }: StatProps) {
+function StatCounter({ number, label, suffix = '', prefix = '', icon }: StatProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const [startCounter, setStartCounter] = useState(false)
@@ -29,103 +31,109 @@ function StatCounter({ number, label, suffix = '', prefix = '' }: StatProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center bg-blue-50/40 backdrop-blur-sm rounded-lg p-6 border border-blue-100/50 shadow-sm hover:shadow-md transition-shadow duration-300"
+      className="group relative flex flex-col items-center p-6 bg-white/80 backdrop-blur-xl rounded-2xl border border-blue-100/50 hover:border-blue-200/50 shadow-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.02] overflow-hidden"
     >
+      {/* Decorative gradient blur */}
+      <div className="absolute -inset-[200%] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-full blur-3xl group-hover:blur-2xl transition-all duration-1000 opacity-0 group-hover:opacity-100 animate-gradient" />
+      
+      {/* Icon with floating animation */}
       <motion.div
-        className="text-5xl md:text-6xl font-bold text-blue-600"
+        className="relative mb-4 p-3 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100/50 text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        {icon}
+      </motion.div>
+
+      {/* Counter with gradient text */}
+      <motion.div
+        className="relative text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent"
         style={{ fontFamily: 'Inter, sans-serif' }}
       >
         {startCounter && (
-          <CountUp
-            start={0}
-            end={number}
-            duration={2.5}
-            suffix={suffix}
-            prefix={prefix}
-            separator=","
-          />
+          <div className="flex items-center gap-1">
+            <CountUp
+              start={0}
+              end={number}
+              duration={2}
+              separator=","
+            />
+            <span className="text-blue-600">{suffix}</span>
+          </div>
         )}
       </motion.div>
+
+      {/* Label with hover effect */}
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mt-4 text-lg text-blue-800 font-medium"
-        style={{ fontFamily: 'Inter, sans-serif' }}
+        className="relative mt-3 text-sm font-medium text-gray-600 text-center group-hover:text-gray-800 transition-colors duration-300"
       >
         {label}
       </motion.p>
+
+      {/* Hover indicator */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 transition-all duration-300"
+        initial={{ width: '0%' }}
+        whileInView={{ width: '0%' }}
+        whileHover={{ width: '100%' }}
+      />
     </motion.div>
   )
 }
 
 export default function Stats() {
   const stats = [
-    { number: 150, label: 'Projects Completed', suffix: '+' },
-    { number: 95, label: 'Happy Clients', suffix: '%' },
-    { number: 10, label: 'Years Experience', suffix: '+' },
-    { number: 24, label: 'Support Hours', suffix: '/7' },
+    { number: 150, label: 'Projects Completed', suffix: '+', icon: <CheckCircle size={24} strokeWidth={2} /> },
+    { number: 95, label: 'Happy Clients', suffix: '%', icon: <Users size={24} strokeWidth={2} /> },
+    { number: 10, label: 'Years Experience', suffix: '+', icon: <Award size={24} strokeWidth={2} /> },
+    { number: 24, label: 'Support Hours', suffix: '/7', icon: <Clock size={24} strokeWidth={2} /> },
   ]
   
   return (
-    <section className="relative py-16 md:py-24 px-4 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
+    <section className="relative py-16 md:py-24 px-4 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Enhanced Background Elements */}
-      <div className="absolute inset-0">
-        {/* Light shade gradients */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-200/30 to-transparent"
-          initial={{ opacity: 0.6 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_50%)] pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         />
         <motion.div
-          className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-blue-300/20 blur-3xl"
-          animate={{
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(147,51,234,0.1),transparent_50%)] pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
         />
-        <motion.div
-          className="absolute -bottom-1/4 -left-1/4 h-96 w-96 rounded-full bg-indigo-200/20 blur-3xl"
-          animate={{
-            scale: [1.05, 1, 1.05],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        
-        {/* Decorative elements */}
-        <div className="absolute top-1/4 left-10 w-6 h-6 rounded-full bg-blue-200/50"></div>
-        <div className="absolute top-3/4 right-16 w-4 h-4 rounded-full bg-indigo-300/40"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-8 h-8 rounded-full bg-blue-100/60"></div>
       </div>
       
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto bg-white/80 backdrop-blur-md rounded-xl p-8 md:p-12 border border-blue-100/50 shadow-lg">
-        <motion.h2
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-700"
+          className="text-center mb-12"
         >
-          Our Achievements
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 bg-clip-text text-transparent">
+            Our Achievements
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Delivering excellence through innovation and dedication
+          </p>
+        </motion.div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
         >
           {stats.map((stat, index) => (
             <StatCounter
@@ -133,6 +141,7 @@ export default function Stats() {
               number={stat.number}
               label={stat.label}
               suffix={stat.suffix}
+              icon={stat.icon}
             />
           ))}
         </motion.div>

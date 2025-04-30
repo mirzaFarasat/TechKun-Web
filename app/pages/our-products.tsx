@@ -97,11 +97,12 @@ export default function OurProducts() {
               />
             </Link>
           </div>
-          <div className="md:w-7/12 flex justify-center mt-4 md:mt-0">
+          <div className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0">
             <Image
               src={productivitiImage}
               alt="Productiviti"
-              className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-contain"
+              className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+              priority
             />
           </div>
         </div>
@@ -166,11 +167,12 @@ export default function OurProducts() {
               />
             </Link>
           </div>
-          <div className="md:w-7/12 flex justify-center mt-4 md:mt-0">
+          <div className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0">
             <Image
               src={hiretalenttImage}
               alt="HireTalentt"
-              className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-contain"
+              className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+              priority
             />
           </div>
         </div>
