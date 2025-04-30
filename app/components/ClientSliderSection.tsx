@@ -21,13 +21,13 @@ const ClientSliderSection = () => {
   const trustBadges = [
     { 
       name: 'Clutch', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://clutch.co/profile/your-company'
+      logo: '/Images/Logo/Clutch.png', 
+      url: 'https://clutch.co/profile/techkun'
     },
     { 
       name: 'GoodFirms', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://www.goodfirms.co/company/your-company'
+      logo: '/Images/Logo/GoodFirms.jpeg', 
+      url: 'https://www.goodfirms.co/company/techkun'
     },
     { 
       name: 'DesignRush', 
@@ -35,7 +35,7 @@ const ClientSliderSection = () => {
       url: 'https://www.designrush.com/agency/profile/your-company'
     },
     { 
-      name: 'UpCity', 
+      name: 'Bhamos', 
       logo: '/api/placeholder/150/75', 
       url: 'https://upcity.com/profiles/your-company'
     },
@@ -45,7 +45,7 @@ const ClientSliderSection = () => {
   const allClients = [...clients, ...clients, ...clients];
   
   // Animation speed in pixels per second
-  const speed = 40;
+  const speed = 85; // Increased from 40 to 80 for faster movement
   let lastTime = 0;
   
   // Handle client logo click
@@ -64,7 +64,7 @@ const ClientSliderSection = () => {
       const containerWidth = sliderContainerRef.current.offsetWidth;
       const clientGroupWidth = containerWidth / 3;
       
-      // Calculate new position
+      // Calculate new position with increased speed
       let newPosition = sliderPosition - (speed * deltaTime / 1000);
       
       // Reset position when first set of logos is out of view

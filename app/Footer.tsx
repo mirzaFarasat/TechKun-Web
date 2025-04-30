@@ -270,7 +270,7 @@ export default function Footer() {
             </motion.h3>
             
             <div className="flex space-x-3">
-              {/* Turkey Flag */}
+              {/* Turkey Flag - Corrected version with smaller elements */}
               <motion.div 
                 className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
                 variants={itemVariants}
@@ -278,15 +278,41 @@ export default function Footer() {
                 title="Istanbul, Turkey"
               >
                 <div className="w-10 h-6 rounded overflow-hidden relative">
-                  <div className="absolute inset-0 bg-red-600"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <div className="absolute w-2.5 h-2.5 bg-red-600 rounded-full"></div>
-                    <div className="absolute ml-4 w-1.5 h-3 bg-white"></div>
+                  {/* Red background - Official Turkish flag red */}
+                  <div className="absolute inset-0" style={{ backgroundColor: '#E30A17' }}></div>
+                  <div className="absolute inset-0 flex items-center">
+                    {/* Crescent and star container - positioned according to official specs */}
+                    <div className="relative ml-[45%]">
+                      {/* Outer white circle of crescent */}
+                      <div 
+                        className="absolute bg-white rounded-full" 
+                        style={{ width: '1.5rem', height: '1.5rem', transform: 'translate(-50%, -50%)' }}
+                      ></div>
+                      {/* Inner red circle of crescent */}
+                      <div 
+                        className="absolute rounded-full" 
+                        style={{ 
+                          width: '1.25rem', 
+                          height: '1.25rem', 
+                          backgroundColor: '#E30A17',
+                          transform: 'translate(-35%, -50%)'
+                        }}
+                      ></div>
+                      {/* Five-pointed star */}
+                      <div 
+                        className="absolute bg-white" 
+                        style={{
+                          width: '0.75rem',
+                          height: '0.75rem',
+                          transform: 'translate(15%, -50%) rotate(25deg)',
+                          clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)'
+                        }}
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
-              
+
               {/* India Flag */}
               <motion.div 
                 className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
@@ -321,7 +347,7 @@ export default function Footer() {
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </motion.button>
             </Link>
