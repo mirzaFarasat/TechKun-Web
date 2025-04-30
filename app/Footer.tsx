@@ -63,7 +63,7 @@ export default function Footer() {
       y: 0,
       transition: { 
         duration: 0.6, 
-        ease: [0.22, 1, 0.36, 1]  // Custom easing for smoother animation
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   };
@@ -86,19 +86,10 @@ export default function Footer() {
     }
   };
 
-  const pulseAnimation = {
-    scale: [1, 1.05, 1],
-    transition: { 
-      duration: 2, 
-      repeat: Infinity,
-      repeatType: "reverse" 
-    }
-  };
-
   return (
     <footer 
       id="premium-footer"
-      className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white pt-16 pb-8 overflow-hidden"
+      className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white pt-12 pb-6 overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -128,47 +119,23 @@ export default function Footer() {
             ease: "easeInOut"
           }}
         ></motion.div>
-        <motion.div 
-          className="absolute top-1/2 right-1/4 w-56 h-56 bg-purple-500 rounded-full opacity-5 blur-3xl"
-          animate={{
-            x: [0, 25, 0],
-            y: [0, -15, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        ></motion.div>
       </div>
       
       <div className="container mx-auto px-6">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-12 gap-12"
+          className="grid grid-cols-1 md:grid-cols-12 gap-8"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={containerVariants}
         >
           {/* Brand Column */}
-          <motion.div className="md:col-span-4" variants={fadeInLeft}>
+          <motion.div className="md:col-span-3" variants={fadeInLeft}>
             <motion.div 
-              className="flex items-center mb-6 group"
+              className="flex items-center mb-4 group"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <Link href="/" className="relative w-12 h-12 flex items-center justify-center mr-3 rounded-lg bg-white bg-opacity-10 backdrop-blur-sm overflow-hidden group-hover:bg-opacity-20 transition duration-300">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  animate={{
-                    background: [
-                      "radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(0,0,0,0) 70%)",
-                      "radial-gradient(circle, rgba(139,92,246,0.2) 0%, rgba(0,0,0,0) 70%)",
-                      "radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(0,0,0,0) 70%)"
-                    ]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                ></motion.div>
+              <Link href="/" className="relative w-10 h-10 flex items-center justify-center mr-3 rounded-lg bg-white bg-opacity-10 backdrop-blur-sm overflow-hidden group-hover:bg-opacity-20 transition duration-300">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.8 }}
@@ -176,14 +143,14 @@ export default function Footer() {
                   <Image 
                     src={techkunLogo} 
                     alt="TechKun Logo" 
-                    className="w-8 h-8" 
-                    width={32}
-                    height={32}
+                    className="w-6 h-6" 
+                    width={24}
+                    height={24}
                   />
                 </motion.div>
               </Link>
               <motion.h1 
-                className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200"
+                className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200"
                 animate={{
                   backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
                 }}
@@ -194,11 +161,10 @@ export default function Footer() {
             </motion.div>
             
             <motion.p 
-              className="text-gray-300 text-sm leading-relaxed max-w-xs mb-6"
+              className="text-gray-300 text-xs leading-relaxed max-w-xs mb-4"
               variants={itemVariants}
             >
-              Pioneering digital solutions that transform businesses. 
-              We bridge innovation with practical technology for tomorrow's challenges.
+              Pioneering digital solutions that transform businesses.
             </motion.p>
             
             {/* Social Media Icons with hover animations */}
@@ -207,27 +173,21 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/techkunex/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 backdrop-blur-sm hover:bg-blue-600 transition-all duration-300"
-                whileHover={{ 
-                  y: -5, 
-                  boxShadow: "0 8px 16px -4px rgba(59, 130, 246, 0.3)" 
-                }}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 backdrop-blur-sm hover:bg-blue-600 transition-all duration-300"
+                whileHover={{ y: -3 }}
                 aria-label="LinkedIn"
               >
-                <Image src={linkedIn} alt="LinkedIn" width={20} height={20} />
+                <Image src={linkedIn} alt="LinkedIn" width={16} height={16} />
               </motion.a>
               <motion.a 
                 href="https://x.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 backdrop-blur-sm hover:bg-gray-700 transition-all duration-300"
-                whileHover={{ 
-                  y: -5, 
-                  boxShadow: "0 8px 16px -4px rgba(75, 85, 99, 0.3)" 
-                }}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 backdrop-blur-sm hover:bg-gray-700 transition-all duration-300"
+                whileHover={{ y: -3 }}
                 aria-label="X (Twitter)"
               >
-                <Image src={Xtwitter} alt="X (Twitter)" width={20} height={20} />
+                <Image src={Xtwitter} alt="X (Twitter)" width={16} height={16} />
               </motion.a>
             </motion.div>
           </motion.div>
@@ -235,12 +195,12 @@ export default function Footer() {
           {/* Links Columns with staggered animations */}
           <motion.div className="md:col-span-2" variants={itemVariants}>
             <motion.h3 
-              className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4"
+              className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3"
               whileHover={{ color: "#ffffff" }}
             >
               Company
             </motion.h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {["About", "Careers", "Blog", "Press"].map((item, index) => (
                 <motion.li key={item}
                   custom={index}
@@ -253,9 +213,9 @@ export default function Footer() {
                     })
                   }}
                 >
-                  <Link href={`/${item.toLowerCase()}`} className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200">
+                  <Link href={`/${item.toLowerCase()}`} className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200 text-xs">
                     <motion.span 
-                      className="w-0 h-px bg-blue-400 mr-0 opacity-0 group-hover:w-2 group-hover:mr-2 group-hover:opacity-100 transition-all duration-300"
+                      className="w-0 h-px bg-blue-400 mr-0 opacity-0 group-hover:w-2 group-hover:mr-1 group-hover:opacity-100 transition-all duration-300"
                     ></motion.span>
                     {item}
                   </Link>
@@ -266,12 +226,12 @@ export default function Footer() {
           
           <motion.div className="md:col-span-2" variants={itemVariants}>
             <motion.h3 
-              className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4"
+              className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3"
               whileHover={{ color: "#ffffff" }}
             >
               Services
             </motion.h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {[
                 { title: "Web Development", path: "/services/web-development" },
                 { title: "App Development", path: "/services/app-development" },
@@ -289,9 +249,9 @@ export default function Footer() {
                     })
                   }}
                 >
-                  <Link href={item.path} className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200">
+                  <Link href={item.path} className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200 text-xs">
                     <motion.span 
-                      className="w-0 h-px bg-blue-400 mr-0 opacity-0 group-hover:w-2 group-hover:mr-2 group-hover:opacity-100 transition-all duration-300"
+                      className="w-0 h-px bg-blue-400 mr-0 opacity-0 group-hover:w-2 group-hover:mr-1 group-hover:opacity-100 transition-all duration-300"
                     ></motion.span>
                     {item.title}
                   </Link>
@@ -300,80 +260,56 @@ export default function Footer() {
             </ul>
           </motion.div>
           
-          {/* Office Locations with Flags */}
-          <motion.div className="md:col-span-4" variants={fadeInRight}>
+          {/* Our Offices - Simplified with just flags */}
+          <motion.div className="md:col-span-2" variants={fadeInRight}>
             <motion.h3 
-              className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4"
+              className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3"
               whileHover={{ color: "#ffffff" }}
             >
               Our Offices
             </motion.h3>
             
-            {/* Turkey Office */}
-            <motion.div 
-              className="mb-4 p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ 
-                y: -3, 
-                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
-              }}
-            >
-              <div className="flex items-center mb-2">
-                <div className="mr-2 flex-shrink-0">
-                  <div className="w-6 h-4 rounded overflow-hidden relative">
-                    <div className="absolute inset-0 bg-red-600"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                      <div className="absolute w-1.5 h-1.5 bg-red-600 rounded-full"></div>
-                      <div className="absolute ml-3 w-1 h-2 bg-white"></div>
-                    </div>
+            <div className="flex space-x-3">
+              {/* Turkey Flag */}
+              <motion.div 
+                className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+                variants={itemVariants}
+                whileHover={{ y: -3 }}
+                title="Istanbul, Turkey"
+              >
+                <div className="w-10 h-6 rounded overflow-hidden relative">
+                  <div className="absolute inset-0 bg-red-600"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <div className="absolute w-2.5 h-2.5 bg-red-600 rounded-full"></div>
+                    <div className="absolute ml-4 w-1.5 h-3 bg-white"></div>
                   </div>
                 </div>
-                <span className="font-medium text-sm text-white">Turkey</span>
-              </div>
-              <address className="text-xs text-gray-300 not-italic leading-relaxed">
-                TechKun Turkey<br />
-                Levent Mah., Büyükdere Cad. No:201<br />
-                İstanbul, 34394<br />
-                +90 212 555 6789
-              </address>
-            </motion.div>
-            
-            {/* India Office */}
-            <motion.div 
-              className="mb-4 p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ 
-                y: -3, 
-                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
-              }}
-            >
-              <div className="flex items-center mb-2">
-                <div className="mr-2 flex-shrink-0">
-                  <div className="w-6 h-4 rounded overflow-hidden relative">
-                    <div className="absolute inset-0 flex flex-col">
-                      <div className="flex-1 bg-orange-500"></div>
-                      <div className="flex-1 bg-white"></div>
-                      <div className="flex-1 bg-green-600"></div>
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-1 h-1 bg-blue-800 rounded-full"></div>
-                    </div>
+              </motion.div>
+              
+              {/* India Flag */}
+              <motion.div 
+                className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+                variants={itemVariants}
+                whileHover={{ y: -3 }}
+                title="Gurgaon, India"
+              >
+                <div className="w-10 h-6 rounded overflow-hidden relative">
+                  <div className="absolute inset-0 flex flex-col">
+                    <div className="flex-1 bg-orange-500"></div>
+                    <div className="flex-1 bg-white"></div>
+                    <div className="flex-1 bg-green-600"></div>
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-blue-800 rounded-full"></div>
                   </div>
                 </div>
-                <span className="font-medium text-sm text-white">India</span>
-              </div>
-              <address className="text-xs text-gray-300 not-italic leading-relaxed">
-                TechKun India<br />
-                Cyber City, DLF Phase 2<br />
-                Gurgaon, Haryana 122002<br />
-                +91 124 456 7890
-              </address>
-            </motion.div>
+              </motion.div>
+            </div>
             
             <Link href="/contact">
               <motion.button
-                className="text-xs flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 group"
+                className="text-xs flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 group mt-2"
                 variants={itemVariants}
                 whileHover={{ x: 3 }}
               >
@@ -391,31 +327,25 @@ export default function Footer() {
             </Link>
           </motion.div>
           
-          {/* Newsletter section now below the offices */}
-          <motion.div className="md:col-span-12 lg:col-span-8 lg:col-start-3 mt-8 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg p-6" variants={fadeInRight}>
+          {/* Newsletter - Moved to the right column */}
+          <motion.div className="md:col-span-3" variants={fadeInRight}>
             <motion.h3 
-              className="text-center text-lg font-semibold text-white mb-4"
+              className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3"
               whileHover={{ color: "#ffffff" }}
             >
               Stay Connected
             </motion.h3>
-            <motion.p 
-              className="text-sm text-gray-300 mb-4 text-center"
-              variants={itemVariants}
-            >
-              Subscribe to our newsletter for the latest updates and insights.
-            </motion.p>
             
             <motion.form 
               onSubmit={handleSubmit} 
-              className="max-w-md mx-auto"
+              className="mb-2"
               variants={itemVariants}
             >
               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
                   <motion.div 
                     key="input"
-                    className={`relative overflow-hidden rounded-lg transition-all duration-300 ${isEmailFocused ? 'ring-2 ring-blue-500/50' : 'ring-1 ring-white/20'}`}
+                    className={`relative overflow-hidden rounded-lg transition-all duration-300 ${isEmailFocused ? 'ring-1 ring-blue-500/50' : 'ring-1 ring-white/20'}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -427,24 +357,22 @@ export default function Footer() {
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setIsEmailFocused(true)}
                       onBlur={() => setIsEmailFocused(false)}
-                      className="w-full bg-white bg-opacity-10 backdrop-blur-sm py-3 pl-4 pr-12 text-sm text-white placeholder-gray-400 focus:outline-none"
+                      className="w-full bg-white bg-opacity-10 backdrop-blur-sm py-2 pl-3 pr-10 text-xs text-white placeholder-gray-400 focus:outline-none"
                       required
                     />
                     <motion.button
                       type="submit"
-                      className="absolute right-0 top-0 h-full px-4 flex items-center justify-center bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
-                      whileHover={{ 
-                        backgroundColor: "rgba(37, 99, 235, 1)" 
-                      }}
+                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
+                      whileHover={{ backgroundColor: "rgba(37, 99, 235, 1)" }}
                     >
                       <motion.svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        className="h-4 w-4" 
+                        className="h-3 w-3" 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"
                         initial={{ x: 0 }}
-                        whileHover={{ x: 3 }}
+                        whileHover={{ x: 2 }}
                         transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -454,14 +382,14 @@ export default function Footer() {
                 ) : (
                   <motion.div
                     key="success"
-                    className="bg-green-500 bg-opacity-20 border border-green-500 border-opacity-30 rounded-lg p-3 flex items-center justify-center"
+                    className="bg-green-500 bg-opacity-20 border border-green-500 border-opacity-30 rounded-lg p-2 flex items-center justify-center"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                   >
                     <motion.svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      className="h-5 w-5 text-green-400 mr-2"
+                      className="h-4 w-4 text-green-400 mr-2"
                       viewBox="0 0 20 20" 
                       fill="currentColor"
                       initial={{ scale: 0 }}
@@ -470,17 +398,17 @@ export default function Footer() {
                     >
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </motion.svg>
-                    <span className="text-sm text-green-400">Thank you for subscribing!</span>
+                    <span className="text-xs text-green-400">Thank you for subscribing!</span>
                   </motion.div>
                 )}
               </AnimatePresence>
               <motion.p 
-                className="text-xs text-gray-400 text-center mt-2"
+                className="text-xs text-gray-400 mt-1"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                We respect your privacy. Unsubscribe at any time.
+                We respect your privacy.
               </motion.p>
             </motion.form>
           </motion.div>
@@ -488,29 +416,29 @@ export default function Footer() {
         
         {/* Bottom bar with reveal animation */}
         <motion.div 
-          className="mt-16 pt-6 border-t border-white border-opacity-10 flex flex-col md:flex-row justify-between items-center"
+          className="mt-8 pt-4 border-t border-white border-opacity-10 flex flex-col md:flex-row justify-between items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
         >
           <motion.p 
-            className="text-sm text-gray-400 mb-4 md:mb-0"
+            className="text-xs text-gray-400 mb-2 md:mb-0"
             whileHover={{ color: "rgba(255, 255, 255, 0.8)" }}
           >
             © {currentYear} TechKun. All rights reserved.
           </motion.p>
           
           <motion.div 
-            className="flex flex-wrap justify-center space-x-6 text-xs text-gray-400"
+            className="flex flex-wrap justify-center space-x-4 text-xs text-gray-400"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((item, i) => (
+            {["Terms", "Privacy", "Cookies"].map((item, i) => (
               <motion.div key={item} custom={i} variants={itemVariants}>
                 <Link 
-                  href={`/${item.toLowerCase().replace(/\s+/g, '-')}`} 
-                  className="hover:text-white transition-colors duration-200"
+                  href={`/${item.toLowerCase()}`} 
+                  className="hover:text-white transition-colors duration-200 text-xs"
                 >
                   {item}
                 </Link>
