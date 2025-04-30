@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { RxExternalLink } from 'react-icons/rx';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import imLogo from '@/public/Images/logos/im-logo.webp';
@@ -12,21 +12,87 @@ import productivitiImage from '@/public/Images/productiviti-images/productiviti.
 import hiretalenttImage from '@/public/Images/hiretalentt-images/hiretalentt.png';
 
 export default function OurProducts() {
+  // State to track if component is mounted
+  const [mounted, setMounted] = useState(false);
+  
+  // Ref for observing animation elements
+  const animatedElementsRef = useRef([]);
+  
   useEffect(() => {
+    // Configure AOS with optimized settings
     AOS.init({
-      duration: 600,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 50,
+      duration: 800, // Slightly longer for smoother animations
+      easing: 'ease-in-out', // More natural easing
+      once: false, // Allow animations to replay when scrolling back up
+      offset: 120, // Increased offset for more reliable triggering
+      delay: 0, // No initial delay
+      throttleDelay: 99, // Optimized throttle delay
+      anchorPlacement: 'top-bottom', // Trigger when top of element reaches bottom of viewport
     });
+
+    // Refresh AOS on window resize to ensure animations work at different screen sizes
+    window.addEventListener('resize', () => {
+      AOS.refresh();
+    });
+
+    // Set mounted state to true
+    setMounted(true);
+
+    // Clean up event listeners
+    return () => {
+      window.removeEventListener('resize', () => {
+        AOS.refresh();
+      });
+    };
   }, []);
 
+  // Add IntersectionObserver as a fallback for more reliable animation triggering
+  useEffect(() => {
+    if (!mounted) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // If element is visible, ensure AOS animation gets triggered
+          if (entry.isIntersecting) {
+            // Force AOS refresh for this element
+            const element = entry.target;
+            
+            // Add a small timeout to ensure the browser has time to process
+            setTimeout(() => {
+              AOS.refresh();
+            }, 50);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1, // Trigger when at least 10% of the element is visible
+      }
+    );
+
+    // Target all elements with data-aos attributes
+    const animatedElements = document.querySelectorAll('[data-aos]');
+    animatedElementsRef.current = animatedElements;
+    
+    animatedElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      if (animatedElementsRef.current.length > 0) {
+        animatedElementsRef.current.forEach((el) => observer.unobserve(el));
+      }
+    };
+  }, [mounted]);
+
+  // Force AOS refresh after images load to prevent animation timing issues
+  const handleImageLoad = () => {
+    AOS.refresh();
+  };
+
   return (
-    <div
-      className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 bg-white"
-      data-aos="fade-up"
-    >
-      {/* Sticky header */}
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 bg-white">
+      {/* Sticky header - No animation on this to keep it clean */}
       <div className="sticky top-0 z-10 bg-white pt-4 pb-2">
         <h2 className="mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-700 text-center">
           Our Products
@@ -35,13 +101,16 @@ export default function OurProducts() {
           Discover Innovation. Experience Excellence.
         </p>
       </div>
-      <div className="flex flex-col gap-y-8 sm:gap-y-12">
-        <div
-          className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 min-h-[50vh] sm:min-h-[60vh] py-4"
-          data-aos="fade-right"
-          data-aos-delay="50"
-        >
-          <div className="md:w-5/12 text-gray-600 text-sm sm:text-base">
+      <div className="flex flex-col gap-y-12 sm:gap-y-16">
+        {/* First product section */}
+        <div className="flex flex-col md:flex-row items-center gap-6 min-h-[50vh] sm:min-h-[60vh] py-4">
+          {/* Text content with its own animation */}
+          <div 
+            className="md:w-5/12 text-gray-600 text-sm sm:text-base"
+            data-aos="fade-right"
+            data-aos-duration="700"
+            data-aos-anchor-placement="center-bottom"
+          >
             <p className="mb-3">
               In collaboration with{' '}
               <Link href={'https://www.infomover.io'}>
@@ -49,6 +118,7 @@ export default function OurProducts() {
                   src={imLogo}
                   alt="infomover-logo"
                   className="w-16 sm:w-20 inline"
+                  onLoad={handleImageLoad}
                 />
               </Link>
             </p>
@@ -94,24 +164,37 @@ export default function OurProducts() {
                 src={productivitiLogo}
                 alt="productiviti-logo"
                 className="w-24 sm:w-32"
+                onLoad={handleImageLoad}
               />
             </Link>
           </div>
-          <div className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0">
+          {/* Image with its own animation */}
+          <div 
+            className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0"
+            data-aos="fade-left"
+            data-aos-duration="700"
+            data-aos-delay="100"
+            data-aos-anchor-placement="center-bottom"
+          >
             <Image
               src={productivitiImage}
               alt="Productiviti"
               className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
               priority
+              onLoad={handleImageLoad}
             />
           </div>
         </div>
-        <div
-          className="flex flex-col md:flex-row-reverse items-center gap-4 sm:gap-6 min-h-[50vh] sm:min-h-[60vh] py-4"
-          data-aos="fade-left"
-          data-aos-delay="50"
-        >
-          <div className="md:w-5/12 md:pr-6 lg:pr-10 text-gray-600 text-sm sm:text-base">
+        
+        {/* Second product section */}
+        <div className="flex flex-col md:flex-row-reverse items-center gap-6 min-h-[50vh] sm:min-h-[60vh] py-4">
+          {/* Text content with its own animation */}
+          <div 
+            className="md:w-5/12 md:pr-6 lg:pr-10 text-gray-600 text-sm sm:text-base"
+            data-aos="fade-left"
+            data-aos-duration="700"
+            data-aos-anchor-placement="center-bottom"
+          >
             <p className="mb-3">
               In collaboration with{' '}
               <Link href={'https://www.infomover.io'}>
@@ -119,6 +202,7 @@ export default function OurProducts() {
                   src={imLogo}
                   alt="infomover-logo"
                   className="w-16 sm:w-20 inline"
+                  onLoad={handleImageLoad}
                 />
               </Link>
             </p>
@@ -164,15 +248,24 @@ export default function OurProducts() {
                 src={hiretalenttLogo}
                 alt="hiretalentt-logo"
                 className="w-24 sm:w-32"
+                onLoad={handleImageLoad}
               />
             </Link>
           </div>
-          <div className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0">
+          {/* Image with its own animation */}
+          <div 
+            className="md:w-7/12 flex justify-center items-center h-[400px] md:h-[500px] lg:h-[600px] mt-4 md:mt-0"
+            data-aos="fade-right"
+            data-aos-duration="700"
+            data-aos-delay="100"
+            data-aos-anchor-placement="center-bottom"
+          >
             <Image
               src={hiretalenttImage}
               alt="HireTalentt"
               className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
               priority
+              onLoad={handleImageLoad}
             />
           </div>
         </div>
