@@ -268,16 +268,16 @@ export default function Footer() {
             >
               Our Offices
             </motion.h3>
-            
-            <div className="flex space-x-3">
-              {/* Turkey Flag - Corrected version with smaller elements */}
+             
+            <div className="flex space-x-4">
+              {/* Turkey Flag - Larger version */}
               <motion.div 
-                className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+                className="p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
                 variants={itemVariants}
                 whileHover={{ y: -3 }}
                 title="Istanbul, Turkey"
               >
-                <div className="w-10 h-6 rounded overflow-hidden relative">
+                <div className="w-14 h-8 rounded overflow-hidden relative">
                   {/* Red background - Official Turkish flag red */}
                   <div className="absolute inset-0" style={{ backgroundColor: '#E30A17' }}></div>
                   <div className="absolute inset-0 flex items-center">
@@ -286,14 +286,14 @@ export default function Footer() {
                       {/* Outer white circle of crescent */}
                       <div 
                         className="absolute bg-white rounded-full" 
-                        style={{ width: '1.5rem', height: '1.5rem', transform: 'translate(-50%, -50%)' }}
+                        style={{ width: '2rem', height: '2rem', transform: 'translate(-50%, -50%)' }}
                       ></div>
                       {/* Inner red circle of crescent */}
                       <div 
                         className="absolute rounded-full" 
                         style={{ 
-                          width: '1.25rem', 
-                          height: '1.25rem', 
+                          width: '1.75rem', 
+                          height: '1.75rem', 
                           backgroundColor: '#E30A17',
                           transform: 'translate(-35%, -50%)'
                         }}
@@ -302,8 +302,8 @@ export default function Footer() {
                       <div 
                         className="absolute bg-white" 
                         style={{
-                          width: '0.75rem',
-                          height: '0.75rem',
+                          width: '1rem',
+                          height: '1rem',
                           transform: 'translate(15%, -50%) rotate(25deg)',
                           clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)'
                         }}
@@ -313,21 +313,21 @@ export default function Footer() {
                 </div>
               </motion.div>
 
-              {/* India Flag */}
+              {/* India Flag - Larger version */}
               <motion.div 
-                className="p-2 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
+                className="p-3 bg-white bg-opacity-5 backdrop-blur-sm rounded-lg hover:bg-opacity-10 transition-all duration-300"
                 variants={itemVariants}
                 whileHover={{ y: -3 }}
                 title="Gurgaon, India"
               >
-                <div className="w-10 h-6 rounded overflow-hidden relative">
+                <div className="w-14 h-8 rounded overflow-hidden relative">
                   <div className="absolute inset-0 flex flex-col">
                     <div className="flex-1 bg-orange-500"></div>
                     <div className="flex-1 bg-white"></div>
                     <div className="flex-1 bg-green-600"></div>
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-blue-800 rounded-full"></div>
+                    <div className="w-2 h-2 bg-blue-800 rounded-full"></div>
                   </div>
                 </div>
               </motion.div>
