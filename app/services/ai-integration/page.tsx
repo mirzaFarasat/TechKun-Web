@@ -75,7 +75,7 @@ export default function AIIntegration() {
             className="relative h-[400px] rounded-2xl overflow-hidden"
           >
             <Image
-              src="/Images/services-images/ai-integration.jpg"
+              src="/Images/Services/Servoices-AI.jpeg"
               alt="AI Integration"
               fill
               className="object-cover"

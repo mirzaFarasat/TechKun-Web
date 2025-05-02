@@ -75,7 +75,7 @@ export default function AppDevelopment() {
             className="relative h-[400px] rounded-2xl overflow-hidden"
           >
             <Image
-              src="/Images/services-images/app-development.jpg"
+              src="/Images/Services/services-APP.jpeg"
               alt="App Development"
               fill
               className="object-cover"

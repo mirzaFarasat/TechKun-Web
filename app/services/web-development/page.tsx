@@ -76,8 +76,8 @@ export default function WebDevelopment() {
             className="relative h-[400px] rounded-2xl overflow-hidden"
           >
             <Image
-              src="/Images/services-images/web-development.jpg"
-              alt="Web Development"
+              src="/Images/Services/Services-WEB.jpeg"
+              alt="Web Development Services"
               fill
               className="object-cover"
             />

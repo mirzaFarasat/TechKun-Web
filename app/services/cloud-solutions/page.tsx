@@ -75,7 +75,7 @@ export default function CloudSolutions() {
             className="relative h-[400px] rounded-2xl overflow-hidden"
           >
             <Image
-              src="/Images/services-images/cloud-solutions.jpg"
+              src="/Images/Services/Services-CLOUD.jpeg"
               alt="Cloud Solutions"
               fill
               className="object-cover"
