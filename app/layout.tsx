@@ -26,14 +26,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
         <html lang="en">
-            <body>
-                {children}
-                <CookieConsent />
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <Theme>
+                    <Navbar />
+                    <NextTopLoader />
+                    <main className='overflow-hidden'>{children}</main>
+                    <CookieConsent />
+                </Theme>
                 <Footer />
             </body>
         </html>
