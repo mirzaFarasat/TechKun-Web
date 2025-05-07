@@ -12,33 +12,31 @@ import productivitiImage from '@/public/Images/productiviti-images/productiviti.
 import hiretalenttImage from '@/public/Images/hiretalentt-images/hiretalentt.png';
 
 export default function OurProducts() {
-  // State to track if component is mounted
-  const [mounted, setMounted] = useState(false);
+  // Changed to use _mounted prefix since it's only used in useEffect
+  const [_mounted, setMounted] = useState(false);
   
   // Ref for observing animation elements
-  const animatedElementsRef = useRef([]);
+  const animatedElementsRef = useRef<NodeListOf<Element> | null>(null);
   
   useEffect(() => {
     // Configure AOS with optimized settings
     AOS.init({
-      duration: 800, // Slightly longer for smoother animations
-      easing: 'ease-in-out', // More natural easing
-      once: false, // Allow animations to replay when scrolling back up
-      offset: 120, // Increased offset for more reliable triggering
-      delay: 0, // No initial delay
-      throttleDelay: 99, // Optimized throttle delay
-      anchorPlacement: 'top-bottom', // Trigger when top of element reaches bottom of viewport
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      offset: 120,
+      delay: 0,
+      throttleDelay: 99,
+      anchorPlacement: 'top-bottom',
     });
 
-    // Refresh AOS on window resize to ensure animations work at different screen sizes
+    // Refresh AOS on window resize
     window.addEventListener('resize', () => {
       AOS.refresh();
     });
 
-    // Set mounted state to true
     setMounted(true);
 
-    // Clean up event listeners
     return () => {
       window.removeEventListener('resize', () => {
         AOS.refresh();
@@ -46,19 +44,13 @@ export default function OurProducts() {
     };
   }, []);
 
-  // Add IntersectionObserver as a fallback for more reliable animation triggering
   useEffect(() => {
-    if (!mounted) return;
+    if (!_mounted) return;
     
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // If element is visible, ensure AOS animation gets triggered
           if (entry.isIntersecting) {
-            // Force AOS refresh for this element
-            const element = entry.target;
-            
-            // Add a small timeout to ensure the browser has time to process
             setTimeout(() => {
               AOS.refresh();
             }, 50);
@@ -68,22 +60,22 @@ export default function OurProducts() {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1, // Trigger when at least 10% of the element is visible
+        threshold: 0.1,
       }
     );
-
+  
     // Target all elements with data-aos attributes
     const animatedElements = document.querySelectorAll('[data-aos]');
     animatedElementsRef.current = animatedElements;
     
     animatedElements.forEach((el) => observer.observe(el));
-
+  
     return () => {
-      if (animatedElementsRef.current.length > 0) {
+      if (animatedElementsRef.current) {
         animatedElementsRef.current.forEach((el) => observer.unobserve(el));
       }
     };
-  }, [mounted]);
+  }, [_mounted]); // Fixed: Changed 'mounted' to '_mounted'
 
   // Force AOS refresh after images load to prevent animation timing issues
   const handleImageLoad = () => {

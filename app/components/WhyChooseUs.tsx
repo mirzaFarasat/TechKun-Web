@@ -222,14 +222,15 @@ const WhyChooseUs = () => {
             Technology That Transforms Your Business
           </motion.h2>
           
-          <motion.p 
-            className="text-base text-gray-600"
-            variants={subtitleVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            We don't just build software—we deliver strategic solutions that drive growth and innovation.
-          </motion.p>
+          <motion.div 
+  className="text-base text-gray-600"
+  variants={subtitleVariants}
+  initial="hidden"
+  animate={isInView ? "visible" : "hidden"}
+>
+  <p>We&apos;re committed to excellence</p>
+</motion.div>
+
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

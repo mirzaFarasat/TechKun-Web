@@ -3,16 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Poppins, Roboto } from 'next/font/google';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-poppins',
+const _poppins = Poppins({ 
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'] 
 });
 
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-roboto',
+const _roboto = Roboto({ 
+  weight: ['400', '500', '700'],
+  subsets: ['latin'] 
 });
 
 const Banner = () => {

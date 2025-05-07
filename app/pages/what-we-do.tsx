@@ -1,6 +1,7 @@
 'use client';
 
-import Image from 'next/image';
+// Remove unused Image import if not being used
+// import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -82,131 +83,131 @@ export default function WhatWeDo() {
   ];
 
   return (
-    <div className="bg-gray-50 py-12 sm:py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
-        <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-sm font-semibold tracking-wide text-primary-600 uppercase">
-            Our Services
-          </h2>
-          <h3 className="mt-2 text-2xl leading-8 font-bold tracking-tight text-gray-900 sm:text-3xl">
-            What We Can Do For You
-          </h3>
-          <p className="mt-3 max-w-2xl text-lg text-gray-500 mx-auto">
-            We provide innovative solutions to help grow your business. Our expertise spans across multiple domains, delivering tailored services that meet your unique needs.
-          </p>
-        </div>
+    <>
+      <div className="bg-gray-50 py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-sm font-semibold tracking-wide text-primary-600 uppercase">
+              Our Services
+            </h2>
+            <h3 className="mt-2 text-2xl leading-8 font-bold tracking-tight text-gray-900 sm:text-3xl">
+              What We Can Do For You
+            </h3>
+            <p className="mt-3 max-w-2xl text-lg text-gray-500 mx-auto">
+              We provide innovative solutions to help grow your business. Our expertise spans across multiple domains, delivering tailored services that meet your unique needs.
+            </p>
+          </div>
 
-        <Swiper
-          modules={[Autoplay, Navigation, Pagination]}
-          spaceBetween={20}
-          slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView:3, spaceBetween: 24 },
-            1280: { slidesPerView: 3, spaceBetween: 30 },
-          }}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
-          navigation
-          pagination={{ clickable: true }}
-          className="mySwiper"
-        >
-          {cardItems.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div
-                className="relative bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl h-[280px]"
-                data-aos="fade-up"
-                data-aos-delay={item.delay}
-                onMouseEnter={() => setActiveCard(index)}
-                onMouseLeave={() => setActiveCard(null)}
-              >
-                <div className={`h-1 ${item.color} w-full`}></div>
-                <div className="p-4 sm:p-5 flex flex-col h-full">
-                  <div className="flex items-center mb-3">
-                    <div className={`${item.color} p-2 rounded-lg`}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={24}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 32 },
+              1280: { slidesPerView: 3, spaceBetween: 40 },
+            }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            navigation
+            pagination={{ clickable: true }}
+            className="mySwiper pb-[50px] mx-[-8px] pl-2 pr-2"
+          >
+            {cardItems.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:translate-y-[-4px] h-[320px]"
+                  data-aos="fade-up"
+                  data-aos-delay={item.delay}
+                  onMouseEnter={() => setActiveCard(index)}
+                  onMouseLeave={() => setActiveCard(null)}
+                >
+                  <div className={`h-2 ${item.color} w-full`}></div>
+                  <div className="p-6 flex flex-col h-full">
+                    <div className="flex items-center mb-4">
+                      <div className={`${item.color} p-3 rounded-xl`}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                        </svg>
+                      </div>
+                      <h3 className="ml-4 text-xl font-semibold text-gray-900">{item.title}</h3>
+                    </div>
+                    <p className="text-base text-gray-600 mb-4 flex-grow line-clamp-4">{item.description}</p>
+                    <div
+                      className={`flex items-center text-sm font-medium ${item.color.replace('bg-', 'text-')} transition-all duration-300 ${
+                        activeCard === index ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-2'
+                      }`}
+                    >
+                      <span>Learn more</span>
+                      <svg className="ml-2 w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                          fillRule="evenodd"
+                          d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
-                    <h3 className="ml-3 text-lg font-medium text-gray-900">{item.title}</h3>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-3 flex-grow line-clamp-4">{item.description}</p>
-                  <div
-                    className={`flex items-center text-sm font-medium text-primary-600 transition-all duration-300 ${
-                      activeCard === index ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <span>Learn more</span>
-                    <svg className="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fillRule="evenodd"
-                        d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
 
-      <style jsx>{`
-        .swiper {
-          padding-bottom: 40px;
-          margin: 0 -4px;
-          padding-left: 4px;
-          padding-right: 4px;
-        }
-        .swiper-slide {
-          display: flex;
-          height: auto;
-        }
+      <style jsx global>{`
         .swiper-button-next,
         .swiper-button-prev {
-          color: #2563eb;
-          background: rgba(255, 255, バス255, 0.9);
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-          transition: background 0.3s, transform 0.3s;
+          color: #2563eb !important;
+          background: rgba(255, 255, 255, 0.95) !important;
+          border-radius: 50% !important;
+          width: 44px !important;
+          height: 44px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+          transition: all 0.3s ease !important;
         }
+
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
-          background: rgba(255, 255, 255, 1);
-          transform: scale(1.05);
+          background: #ffffff !important;
+          transform: scale(1.1) !important;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
         }
+
         .swiper-button-next:after,
         .swiper-button-prev:after {
-          font-size: 16px;
-          font-weight: bold;
+          font-size: 18px !important;
+          font-weight: bold !important;
         }
+
         .swiper-pagination {
-          position: relative;
-          bottom: 0;
-          margin-top: 10px;
+          position: relative !important;
+          bottom: 0 !important;
+          margin-top: 20px !important;
         }
+
         .swiper-pagination-bullet {
-          background: #d1d5db;
-          opacity: 1;
-          width: 8px;
-          height: 8px;
+          background: #d1d5db !important;
+          opacity: 1 !important;
+          width: 10px !important;
+          height: 10px !important;
+          transition: all 0.3s ease !important;
         }
+
         .swiper-pagination-bullet-active {
-          background: #2563eb;
+          background: #2563eb !important;
+          transform: scale(1.2) !important;
         }
       `}</style>
-    </div>
+    </>
   );
 }
