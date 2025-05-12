@@ -39,14 +39,14 @@ const ClientSliderSection = () => {
       url: 'https://www.goodfirms.co/company/techkun'
     },
     { 
-      name: 'DesignRush', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://www.designrush.com/agency/profile/your-company'
+      name: 'Bhethmos', 
+      logo: '/Images/Logo/Bhethmos.png', 
+      url: 'https://techbehemoths.com/techkun'
     },
     { 
-      name: 'Bhamos', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://upcity.com/profiles/your-company'
+      name: 'DesignRush', 
+      logo: '/Images/Logo/DesignRush_idP3ab4Xlb_0.png', 
+      url: 'https://www.designrush.com/techkun'
     },
   ];
 
