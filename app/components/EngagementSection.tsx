@@ -46,7 +46,7 @@ export default function EngagementSection() {
           {cards.map((card, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg overflow-hidden"
+              className="bg-white rounded-lg overflow-hidden flex flex-col h-full"
               data-aos="fade-up"
               data-aos-delay={index * 100}
               data-aos-duration="800"
@@ -66,12 +66,12 @@ export default function EngagementSection() {
                 </span>
               </div>
               
-              <div className="p-5">
+              <div className="p-5 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">{card.description}</p>
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed flex-grow">{card.description}</p>
                 <Link 
                   href="#" 
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-xs"
+                  className="inline-flex items-center text-green-600 hover:text-green-700 font-medium text-xs mt-auto"
                 >
                   Learn more
                   <svg className="w-3.5 h-3.5 ml-1" viewBox="0 0 20 20" fill="currentColor">
