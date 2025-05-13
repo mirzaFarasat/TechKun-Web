@@ -149,13 +149,13 @@ const ClientSliderSection = () => {
                   rel="noopener noreferrer"
                   className="group"
                 >
-                  <div className="h-12 w-24 md:h-14 md:w-32 relative transition-all duration-300 grayscale hover:grayscale-0">
+                  <div className={`h-12 w-24 md:h-14 md:w-32 relative transition-all duration-300 grayscale hover:grayscale-0 ${badge.name === 'DesignRush' ? 'bg-gray-900 p-2 rounded-lg' : ''}`}>
                     <Image
                       src={badge.logo}
                       alt={`${badge.name} badge`}
                       width={150}
                       height={50}
-                      className="object-contain w-full h-full"
+                      className={`object-contain w-full h-full ${badge.name === 'DesignRush' ? 'brightness-200' : ''}`}
                     />
                     <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-md"></div>
                   </div>
