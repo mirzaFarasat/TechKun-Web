@@ -1,11 +1,20 @@
-import { useState, useRef, useEffect } from 'react';
+'use client';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 
 const ClientSliderSection = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [sliderPosition, setSliderPosition] = useState(0);
-  const animationRef = useRef(null);
-  const sliderContainerRef = useRef(null);
-  
+  const animationRef = useRef<number | null>(null);
+  const sliderContainerRef = useRef<HTMLDivElement | null>(null);
+  const lastTimeRef = useRef(0);
+
+  // Add the missing handleClientClick function
+  const handleClientClick = (clientName: string) => {
+    console.log(`Clicked on client: ${clientName}`);
+    // Add your click handling logic here
+  };
+
   // Client data
   const clients = [
     { name: 'Seismic', logo: '/Images/Logo/Seismic_id8l_4d2M-_1.png' },
@@ -30,14 +39,14 @@ const ClientSliderSection = () => {
       url: 'https://www.goodfirms.co/company/techkun'
     },
     { 
-      name: 'DesignRush', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://www.designrush.com/agency/profile/your-company'
+      name: 'Bhethmos', 
+      logo: '/Images/Logo/Bhethmos.png', 
+      url: 'https://techbehemoths.com/techkun'
     },
     { 
-      name: 'Bhamos', 
-      logo: '/api/placeholder/150/75', 
-      url: 'https://upcity.com/profiles/your-company'
+      name: 'DesignRush', 
+      logo: '/Images/Logo/DesignRush_idP3ab4Xlb_0.png', 
+      url: 'https://www.designrush.com/techkun'
     },
   ];
 
@@ -45,60 +54,44 @@ const ClientSliderSection = () => {
   const allClients = [...clients, ...clients, ...clients];
   
   // Animation speed in pixels per second
-  const speed = 85; // Increased from 40 to 80 for faster movement
-  let lastTime = 0;
-  
-  // Handle client logo click
-  const handleClientClick = (clientName) => {
-    console.log(`Clicked on ${clientName}`);
-    // Add your click handler logic here
-  };
-
-  // Animation using requestAnimationFrame for smoother performance
-  const animate = (timestamp) => {
-    if (!lastTime) lastTime = timestamp;
-    const deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-    
-    if (!isPaused && sliderContainerRef.current) {
-      const containerWidth = sliderContainerRef.current.offsetWidth;
-      const clientGroupWidth = containerWidth / 3;
-      
-      // Calculate new position with increased speed
-      let newPosition = sliderPosition - (speed * deltaTime / 1000);
-      
-      // Reset position when first set of logos is out of view
-      if (Math.abs(newPosition) >= clientGroupWidth) {
-        newPosition = 0;
-      }
-      
-      setSliderPosition(newPosition);
-    }
-    
-    animationRef.current = requestAnimationFrame(animate);
-  };
-  
-  // Start animation
-  useEffect(() => {
-    animationRef.current = requestAnimationFrame(animate);
-    
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [isPaused, sliderPosition]);
-  
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      // Reset position on resize to avoid glitches
-      setSliderPosition(0);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+  // Optimized animation speed based on viewport
+  // Change the speed from a callback to a memoized value
+  const speed = useCallback(() => {
+    return window.innerWidth < 768 ? 60 : 85;
   }, []);
+
+  const animate = useCallback((timestamp: number) => {
+      if (!lastTimeRef.current) {
+          lastTimeRef.current = timestamp;
+      }
+      const deltaTime = timestamp - lastTimeRef.current;
+      lastTimeRef.current = timestamp;
+      
+      if (!isPaused && sliderContainerRef.current) {
+          const containerWidth = sliderContainerRef.current.offsetWidth;
+          const clientGroupWidth = containerWidth / 3;
+          
+          let newPosition = sliderPosition - (speed() * deltaTime / 1000);
+          
+          if (Math.abs(newPosition) >= clientGroupWidth) {
+              newPosition = 0;
+          }
+          
+          setSliderPosition(newPosition);
+      }
+      
+      animationRef.current = requestAnimationFrame(animate);
+  }, [isPaused, sliderPosition, speed]);
+  
+  // Add animate to dependencies
+  useEffect(() => {
+      animationRef.current = requestAnimationFrame(animate);
+      return () => {
+          if (animationRef.current) {
+              cancelAnimationFrame(animationRef.current);
+          }
+      };
+  }, [animate]);
 
   return (
     <section className="w-full min-h-screen flex flex-col items-center justify-center py-16 bg-gradient-to-r from-gray-50 to-blue-50 snap-start">
@@ -126,10 +119,13 @@ const ClientSliderSection = () => {
                 onClick={() => handleClientClick(client.name)}
               >
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <img
+                  {/* Replace img tags with Image component */}
+                  <Image
                     src={client.logo}
-                    alt={`${client.name} logo`}
-                    className="max-w-full max-h-full object-contain"
+                    alt={client.name}
+                    width={150}
+                    height={50}
+                    className="max-h-12 w-auto"
                   />
                 </div>
               </div>
@@ -153,11 +149,13 @@ const ClientSliderSection = () => {
                   rel="noopener noreferrer"
                   className="group"
                 >
-                  <div className="h-12 w-24 md:h-14 md:w-32 relative transition-all duration-300 grayscale hover:grayscale-0">
-                    <img
+                  <div className={`h-12 w-24 md:h-14 md:w-32 relative transition-all duration-300 grayscale hover:grayscale-0 ${badge.name === 'DesignRush' ? 'bg-gray-900 p-2 rounded-lg' : ''}`}>
+                    <Image
                       src={badge.logo}
                       alt={`${badge.name} badge`}
-                      className="object-contain w-full h-full"
+                      width={150}
+                      height={50}
+                      className={`object-contain w-full h-full ${badge.name === 'DesignRush' ? 'brightness-200' : ''}`}
                     />
                     <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-md"></div>
                   </div>

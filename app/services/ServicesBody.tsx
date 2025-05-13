@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import { StaticImageData } from 'next/image';
 
 // Note: Image imports would remain the same in your actual implementation
 // This is just a reference to what was in the original code
@@ -12,9 +13,9 @@ import imageServices1 from '@/public/Images/services-images/services-layout4.jpg
 import imageAiML from '@/public/Images/services-images/services-layout7.jpg';
 
 export default function ServicesBody() {
-    const [expandedService, setExpandedService] = useState(null);
+    const [expandedService, setExpandedService] = useState<number | null>(null);
 
-    const toggleService = (index) => {
+    const toggleService = (index: number): void => {
         setExpandedService(expandedService === index ? null : index);
     };
 
@@ -66,7 +67,22 @@ export default function ServicesBody() {
         },
     ];
 
-    const ServiceCard = ({ item, index }) => {
+    interface ServiceItem {
+        title: string;
+        description: string;
+        subItems: string[];
+        image: StaticImageData;
+        imageAltText: string;
+        icon: string;
+        color: string;
+    }
+
+    interface ServiceCardProps {
+        item: ServiceItem;
+        index: number;
+    }
+
+    const ServiceCard = ({ item, index }: ServiceCardProps) => {
         const isExpanded = expandedService === index;
         const isEven = index % 2 === 0;
 
@@ -92,7 +108,8 @@ export default function ServicesBody() {
                         <div className="w-full md:w-1/2">
                             <div className="space-y-6">
                                 <div className="flex items-center gap-3">
-                                    <span className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br shadow-md ${item.color} text-white text-2xl">
+                                    {/* Remove the problematic span and keep only the correct one */}
+                                    <span className={`inline-flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br shadow-md ${item.color} text-white text-2xl`}>
                                         {item.icon}
                                     </span>
                                     <h3 className="text-2xl md:text-3xl font-bold text-gray-800">{item.title}</h3>

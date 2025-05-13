@@ -34,7 +34,7 @@ export default function Footer() {
     };
   }, []);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(true);
     // Reset after 3 seconds
