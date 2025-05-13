@@ -1,246 +1,236 @@
 'use client';
+
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
-import Overlay, { OverlayRef } from './Overlay';
+import { FaGlobe, FaCloud, FaMobile, FaRobot } from 'react-icons/fa';
 
-const scrollThreshold = 50;
 const links = [
-    { label: 'Services', href: '/services', hasDropdown: true },
+    { label: 'Services', href: '/services' },
     { label: 'About Us', href: '/about-us' }
 ];
 
-const serviceLinks = [
-    { label: 'Web Development', href: '/services/web-development', description: 'Modern web solutions for your business' },
-    { label: 'App Development', href: '/services/app-development', description: 'Native and cross-platform mobile apps' },
-    { label: 'Cloud Solutions', href: '/services/cloud-solutions', description: 'Scalable cloud infrastructure services' },
-    { label: 'AI Integration', href: '/services/ai-integration', description: 'Smart AI solutions for your needs' },
+const services = [
+    {
+        title: 'Web App Development',
+        description: 'Custom web applications built with modern technologies',
+        href: '/services/web-development',
+        icon: FaGlobe
+    },
+    {
+        title: 'Cloud AI Solutions',
+        description: 'Intelligent cloud-based solutions for your business',
+        href: '/services/cloud-solutions',
+        icon: FaCloud
+    },
+    {
+        title: 'Mobile Development',
+        description: 'Native and cross-platform mobile applications',
+        href: '/services/app-development',
+        icon: FaMobile
+    },
+    {
+        title: 'AI Integration',
+        description: 'Integrate AI capabilities into your existing systems',
+        href: '/services/ai-integration',
+        icon: FaRobot
+    }
 ];
 
 const testimonial = {
-    quote: "TechKun transformed our business with their innovative solutions. The team's expertise and dedication were exceptional.",
+    text: "TechKun transformed our business with their innovative solutions. The team's expertise and dedication were exceptional.",
     author: "John Smith",
-    role: "CTO, InnovateX"
+    role: "CTO, Tech Innovations"
 };
 
 const Navbar = () => {
-    const currentPath = usePathname();
-    const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isBelowScrollThreshold, setBelowScrollThreshold] = useState(true);
-    const overlayRef = useRef<OverlayRef>(null);
-    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
-    const checkScrollPosition = useCallback(() => {
-        if (typeof window !== 'undefined') {
-            const isBelow = window.scrollY <= scrollThreshold;
-            if (isBelow !== isBelowScrollThreshold) {
-                setBelowScrollThreshold(isBelow);
-            }
-        }
-    }, [isBelowScrollThreshold]);
+    const router = useRouter();
+    const pathname = usePathname();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
-        checkScrollPosition();
-        window.addEventListener("scroll", checkScrollPosition);
-        return () => window.removeEventListener("scroll", checkScrollPosition);
-    }, [checkScrollPosition]);
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
 
-    const MegaDropdown = () => (
-        <div
-            className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-white shadow-lg transform transition-all duration-300 ease-in-out border-t border-gray-100"
-            onMouseEnter={() => setActiveDropdown('services')}
-            onMouseLeave={() => setActiveDropdown(null)}
-        >
-            <div className="p-8">
-                <div className="flex items-start gap-12">
-                    {/* Services Grid - Left Section */}
-                    <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
-                        {serviceLinks.map((service) => (
-                            <Link
-                                key={service.href}
-                                href={service.href}
-                                className="group block p-3 rounded-lg hover:bg-gray-50 transition-all duration-200"
-                            >
-                                <h3 className="text-base font-semibold text-gray-900 group-hover:text-primary-600 transition-colors flex items-center gap-2">
-                                    {service.label}
-                                    <span className="inline-block opacity-0 transform -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
-                                        →
-                                    </span>
-                                </h3>
-                                <p className="mt-1 text-sm text-gray-500 group-hover:text-gray-700 transition-colors line-clamp-2">
-                                    {service.description}
-                                </p>
-                            </Link>
-                        ))}
-                    </div>
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-                    {/* Testimonial Card - Right Section */}
-                    <div className="w-64 bg-gradient-to-br from-gray-50 to-white rounded-lg p-5 border border-gray-100 shadow-sm">
-                        <div className="flex items-center gap-2 mb-3">
-                            <svg className="w-5 h-5 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                            </svg>
-                            <div className="h-px flex-grow bg-gray-200"></div>
-                        </div>
-                        <blockquote className="text-sm text-gray-600 leading-relaxed mb-4">
-                            {testimonial.quote}
-                        </blockquote>
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="font-medium text-gray-900">{testimonial.author}</p>
-                                <p className="text-xs text-gray-500">{testimonial.role}</p>
-                            </div>
-                            <div className="w-8 h-8 bg-primary-50 rounded-full flex items-center justify-center">
-                                <span className="text-xs font-bold text-primary-700">IX</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-
-    // Mobile menu content
-    const menuContent = (
-        <div className="shadow-md border-t-2 w-full p-2 bg-white flex flex-col items-stretch">
-            {links.map((link) => (
-                <div key={link.href} className="w-full">
-                    <Link
-                        className={`
-                            w-full py-4 px-4 font-medium transition-colors block rounded-lg
-                            ${link.href === currentPath ? "bg-primary-50 text-primary-900" : "text-primary-600 hover:text-primary-900 hover:bg-gray-50"}
-                        `}
-                        href={link.href}
-                        onClick={(e) => {
-                            e.preventDefault(); // Prevent immediate navigation
-                            overlayRef.current?.hide();
-                            setMenuOpen(false);
-                            // Navigate after menu closes
-                            setTimeout(() => {
-                                window.location.href = link.href;
-                            }, 300);
-                        }}
-                    >
-                        {link.label}
-                    </Link>
-                    {link.hasDropdown && isMenuOpen && (
-                        <div className="mt-2 space-y-1 px-4">
-                            {serviceLinks.map((service) => (
-                                <Link
-                                    key={service.href}
-                                    href={service.href}
-                                    className="block py-3 px-4 text-sm text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-lg transition-colors"
-                                    onClick={(e) => {
-                                        e.preventDefault(); // Prevent immediate navigation
-                                        overlayRef.current?.hide();
-                                        setMenuOpen(false);
-                                        // Navigate after menu closes
-                                        setTimeout(() => {
-                                            window.location.href = service.href;
-                                        }, 300);
-                                    }}
-                                >
-                                    <div className="font-medium">{service.label}</div>
-                                    <p className="text-xs text-gray-500 mt-1">{service.description}</p>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            ))}
-            <Link href="/contact-us" className='w-full mt-4 px-4'>
-                <button 
-                    className="w-full bg-primary-700 hover:bg-primary-800 px-4 py-4 font-medium text-white rounded-lg transition-colors"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        overlayRef.current?.hide();
-                        setMenuOpen(false);
-                        setTimeout(() => {
-                            window.location.href = '/contact-us';
-                        }, 300);
-                    }}
-                >
-                    Contact Us
-                </button>
-            </Link>
-        </div>
-    );
+    const handleNavigation = (href: string) => {
+        setIsMenuOpen(false);
+        router.push(href);
+    };
 
     return (
-        <nav
-            className={`
-                fixed top-0 w-full h-16 z-50 transition-all duration-300
-                ${isBelowScrollThreshold && !isMenuOpen ?
-                    "bg-transparent text-white" :
-                    "bg-white shadow-md border-b text-primary-900"
-                }
-            `}
-        >
-            <div className="case-responsive-container h-full flex justify-between items-center gap-8">
-                {/* Logo */}
-                <div className="flex items-center space-x-4">
-                    <Link href="/" className="w-10 md:w-12">
-                        <Image src={techkunLogo} alt="techkun-logo" className="w-full" />
-                    </Link>
-                    <h1 className={`text-lg md:text-xl font-medium ${isBelowScrollThreshold && !isMenuOpen ? "text-white": "text-primary-900"}`}>
-                        TechKun
-                    </h1>
-                </div>
+        <nav className={`
+            fixed top-0 w-full z-50 transition-all duration-300
+            ${isScrolled || isMenuOpen ? 'shadow-md' : ''}
+        `}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    {/* Logo */}
+                    <div className="flex items-center">
+                        <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center space-x-3">
+                            <Image 
+                                src={techkunLogo} 
+                                alt="Logo" 
+                                className="h-10 w-auto md:h-12" // Increased size
+                                width={48}
+                                height={48}
+                            />
+                            <span className={`text-xl font-Poppins md:text-2xl transition-colors ${isScrolled ? 'text-[#2196f3]' : 'text-white'}`}>
+                                TechKun
+                            </span>
+                        </Link>
+                    </div>
 
-                <div className="hidden md:flex gap-4 ml-auto">
-                    {links.map((link) => (
-                        <div
-                            key={link.href}
-                            className="relative"
-                            onMouseEnter={() => link.hasDropdown && setActiveDropdown('services')}
-                            onMouseLeave={() => setActiveDropdown(null)}
-                        >
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex md:items-center md:space-x-8">
+                        {/* Services Dropdown */}
+                        <div className="relative group">
                             <Link
+                                href="/services"
                                 className={`
-                                    rounded-md px-3 py-2 font-medium transition-colors inline-block
-                                    ${currentPath === link.href ? "bg-primary-50 text-primary-900" :
-                                    (isBelowScrollThreshold ? "text-white hover:text-gray-300" : "text-primary-600 hover:text-gray-600")}
+                                    text-base font-medium transition-colors
+                                    ${pathname === '/services'
+                                        ? (isScrolled ? 'text-[#2196f3]' : 'text-white')
+                                        : (isScrolled ? 'text-gray-700 hover:text-[#2196f3]' : 'text-white/90 hover:text-white')
+                                    }
                                 `}
-                                href={link.href}
                             >
-                                {link.label}
+                                Services
                             </Link>
-                            {link.hasDropdown && activeDropdown === 'services' && <MegaDropdown />}
+                            {/* Mega Menu Dropdown */}
+                            <div className="
+                                absolute left-1/2 -translate-x-1/2 mt-2 w-[700px] opacity-0 invisible
+                                group-hover:opacity-100 group-hover:visible transition-all duration-300
+                                bg-white/50 backdrop-blur-md rounded-xl shadow-2xl p-8 grid grid-cols-3 gap-8
+                                border border-white/20
+                            ">
+                                {/* Services Grid */}
+                                <div className="col-span-2 grid grid-cols-2 gap-8">
+                                    {services.map((service) => {
+                                        const Icon = service.icon;
+                                        return (
+                                            <Link
+                                                key={service.href}
+                                                href={service.href}
+                                                className="group/item p-4 rounded-lg hover:bg-blue-50 transition-all duration-300
+                                                    transform hover:-translate-y-1 hover:shadow-lg"
+                                            >
+                                                <div className="flex items-center space-x-3 mb-2">
+                                                    <Icon className="h-5 w-5 text-[#2196f3] group-hover/item:text-blue-600 transition-colors" />
+                                                    <h3 className="text-gray-900 font-semibold text-base group-hover/item:text-[#2196f3]">
+                                                        {service.title}
+                                                    </h3>
+                                                </div>
+                                                <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                                {/* Testimonial Card */}
+                                <div className="col-span-1 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6
+                                    transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                    <div className="mb-4">
+                                        <svg className="h-8 w-8 text-[#2196f3] opacity-50" fill="currentColor" viewBox="0 0 32 32">
+                                            <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                                        </svg>
+                                    </div>
+                                    <blockquote className="text-gray-700 text-sm italic leading-relaxed mb-4">"{testimonial.text}"</blockquote>
+                                    <div className="mt-3">
+                                        <p className="text-sm font-medium text-gray-900">{testimonial.author}</p>
+                                        <p className="text-sm text-gray-500">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    ))}
-                </div>
 
-                <Link href="/contact-us" className="hidden md:block">
-                    <button className='rounded-md bg-primary-700 hover:bg-primary-800 px-4 py-2 font-medium text-white'>
-                        Contact Us
-                    </button>
-                </Link>
+                        {/* About Us Link */}
+                        <Link
+                            href="/about-us"
+                            className={`
+                                text-base font-medium transition-colors
+                                ${pathname === '/about-us'
+                                    ? (isScrolled ? 'text-[#2196f3]' : 'text-white')
+                                    : (isScrolled ? 'text-gray-700 hover:text-[#2196f3]' : 'text-white/90 hover:text-white')
+                                }
+                            `}
+                        >
+                            About Us
+                        </Link>
 
-                {/* Mobile Menu Button */}
-                <div className="md:hidden">
-                    <button
-                        className={`focus:outline-none ${isBelowScrollThreshold && !isMenuOpen ? "text-white" : "text-primary-600"}`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (isMenuOpen) {
-                                overlayRef.current?.hide();
-                            } else {
-                                overlayRef.current?.show();
-                            }
-                            setMenuOpen(!isMenuOpen);
-                        }}
-                    >
-                        {isMenuOpen ? <RiCloseFill size={28} /> : <RiMenu3Fill size={28} />}
-                    </button>
+                        {/* Contact Us Button */}
+                        <button 
+                            onClick={() => handleNavigation('/contact-us')}
+                            className="bg-[#2196f3] text-white px-6 py-2 rounded-md text-base font-medium hover:bg-[#1e88e5] transition-colors"
+                        >
+                            Contact Us
+                        </button>
+                    </div>
+
+                    {/* Mobile menu button and menu */}
+                    <div className="md:hidden">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className={`p-2 rounded-md inline-flex items-center justify-center ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                            aria-expanded="false"
+                        >
+                            <span className="sr-only">
+                                {isMenuOpen ? 'Close menu' : 'Open menu'}
+                            </span>
+                            {isMenuOpen ? (
+                                <RiCloseFill className="h-6 w-6" />
+                            ) : (
+                                <RiMenu3Fill className="h-6 w-6" />
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <Overlay ref={overlayRef} isOpen={isMenuOpen} onToggle={setMenuOpen}>
-                {menuContent}
-            </Overlay>
+            {/* Mobile menu */}
+            <div
+                className={`
+                    md:hidden transition-all duration-300 ease-in-out
+                    ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}
+                `}
+            >
+                <div className="px-2 pt-2 pb-3 space-y-1 border-t border-white/10">
+                    {links.map((link) => (
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleNavigation(link.href);
+                            }}
+                            className={`
+                                block px-3 py-2 rounded-md text-base font-medium
+                                ${pathname === link.href
+                                    ? 'bg-[#2196f3] text-white'
+                                    : isScrolled
+                                        ? 'text-gray-800 hover:text-[#2196f3]'
+                                        : 'text-white hover:text-white/80'
+                                }
+                            `}
+                        >
+                            {link.label}
+                        </a>
+                    ))}
+                    <button
+                        onClick={() => handleNavigation('/contact-us')}
+                        className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#2196f3] rounded-md hover:bg-[#1e88e5] transition-colors"
+                    >
+                        Contact Us
+                    </button>
+                </div>
+            </div>
         </nav>
     );
 };
