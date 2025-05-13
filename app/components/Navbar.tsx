@@ -114,7 +114,15 @@ const Navbar = () => {
                             ${link.href === currentPath ? "bg-primary-50 text-primary-900" : "text-primary-600 hover:text-primary-900 hover:bg-gray-50"}
                         `}
                         href={link.href}
-                        onClick={() => overlayRef.current?.hide()}
+                        onClick={(e) => {
+                            e.preventDefault(); // Prevent immediate navigation
+                            overlayRef.current?.hide();
+                            setMenuOpen(false);
+                            // Navigate after menu closes
+                            setTimeout(() => {
+                                window.location.href = link.href;
+                            }, 300);
+                        }}
                     >
                         {link.label}
                     </Link>
@@ -125,7 +133,15 @@ const Navbar = () => {
                                     key={service.href}
                                     href={service.href}
                                     className="block py-3 px-4 text-sm text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-lg transition-colors"
-                                    onClick={() => overlayRef.current?.hide()}
+                                    onClick={(e) => {
+                                        e.preventDefault(); // Prevent immediate navigation
+                                        overlayRef.current?.hide();
+                                        setMenuOpen(false);
+                                        // Navigate after menu closes
+                                        setTimeout(() => {
+                                            window.location.href = service.href;
+                                        }, 300);
+                                    }}
                                 >
                                     <div className="font-medium">{service.label}</div>
                                     <p className="text-xs text-gray-500 mt-1">{service.description}</p>
@@ -136,7 +152,17 @@ const Navbar = () => {
                 </div>
             ))}
             <Link href="/contact-us" className='w-full mt-4 px-4'>
-                <button className="w-full bg-primary-700 hover:bg-primary-800 px-4 py-4 font-medium text-white rounded-lg transition-colors">
+                <button 
+                    className="w-full bg-primary-700 hover:bg-primary-800 px-4 py-4 font-medium text-white rounded-lg transition-colors"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        overlayRef.current?.hide();
+                        setMenuOpen(false);
+                        setTimeout(() => {
+                            window.location.href = '/contact-us';
+                        }, 300);
+                    }}
+                >
                     Contact Us
                 </button>
             </Link>
@@ -159,9 +185,7 @@ const Navbar = () => {
                     <Link href="/" className="w-10 md:w-12">
                         <Image src={techkunLogo} alt="techkun-logo" className="w-full" />
                     </Link>
-                    <h1 className={`text-lg md:text-xl font-medium ${
-                        isBelowScrollThreshold && !isMenuOpen ? "text-white": "text-primary-900"
-                    }`}>
+                    <h1 className={`text-lg md:text-xl font-medium ${isBelowScrollThreshold && !isMenuOpen ? "text-white": "text-primary-900"}`}>
                         TechKun
                     </h1>
                 </div>
@@ -195,12 +219,23 @@ const Navbar = () => {
                     </button>
                 </Link>
 
-                <button
-                    className={`md:hidden focus:outline-none ${isBelowScrollThreshold && !isMenuOpen ? "text-white" : "text-primary-600"}`}
-                    onClick={() => overlayRef.current?.toggle()}
-                >
-                    {isMenuOpen ? <RiCloseFill size={28} /> : <RiMenu3Fill size={28} />}
-                </button>
+                {/* Mobile Menu Button */}
+                <div className="md:hidden">
+                    <button
+                        className={`focus:outline-none ${isBelowScrollThreshold && !isMenuOpen ? "text-white" : "text-primary-600"}`}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (isMenuOpen) {
+                                overlayRef.current?.hide();
+                            } else {
+                                overlayRef.current?.show();
+                            }
+                            setMenuOpen(!isMenuOpen);
+                        }}
+                    >
+                        {isMenuOpen ? <RiCloseFill size={28} /> : <RiMenu3Fill size={28} />}
+                    </button>
+                </div>
             </div>
 
             <Overlay ref={overlayRef} isOpen={isMenuOpen} onToggle={setMenuOpen}>
