@@ -65,12 +65,12 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-[26rem] border border-gray-100 hover:border-primary-100"
+              className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-[28rem] border border-gray-100 hover:border-primary-100"
               data-aos="fade-up"
               data-aos-delay={index * 50}
               data-aos-anchor-placement="top-bottom"
             >
-              <div className="relative overflow-hidden h-[12rem]">
+              <div className="relative overflow-hidden h-[14rem]">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -82,18 +82,20 @@ export default function Services() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
                 <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
               </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary-500 group-hover:text-white transition-colors duration-300">
-                  <service.icon className="w-5 h-5 text-primary-600 group-hover:text-white" />
+              <div className="p-6 flex flex-col justify-between flex-grow">
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="bg-primary-100 p-3 rounded-lg flex items-center justify-center group-hover:bg-primary-500">
+                      <service.icon className="w-5 h-5 text-primary-600 group-hover:text-white" />
+                    </div>
+                    <h3 className="ml-4 text-xl font-bold text-gray-800 group-hover:text-primary-600 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <p className="text-base text-gray-600 leading-relaxed">{service.description}</p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary-600 transition-colors duration-300 h-[3rem] line-clamp-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed h-[3.5rem] line-clamp-2">
-                  {service.description}
-                </p>
-                <div className="mt-auto">
-                  <button className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-800 transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary-700 text-sm">
+                <div className="mt-6">
+                  <button className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-800 transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary-700">
                     Discover more
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +114,6 @@ export default function Services() {
                   </button>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-primary-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           ))}
         </div>

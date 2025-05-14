@@ -16,6 +16,11 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onReject }) => 
     setIsVisible(!hasConsent);
   }, []);
 
+  useEffect(() => {
+    // For testing, force the banner to show
+    setIsVisible(true);
+  }, []);
+
   const handleAccept = async () => {
     // Store simple boolean value
     localStorage.setItem('cookieConsent', 'true');
