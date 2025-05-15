@@ -46,11 +46,18 @@ const testimonial = {
     role: "CTO, Tech Innovations"
 };
 
+const toggleScrollLock = (lock: boolean) => {
+    if (typeof document !== 'undefined') {
+        document.body.style.overflow = lock ? 'hidden' : '';
+    }
+};
+
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,27 +70,57 @@ const Navbar = () => {
 
     const handleNavigation = (href: string) => {
         setIsMenuOpen(false);
+        setIsServiceMenuOpen(false);
+        toggleScrollLock(false);
         router.push(href);
     };
+
+    // Toggle menu and handle scroll lock
+    const toggleMenu = () => {
+        const newState = !isMenuOpen;
+        setIsMenuOpen(newState);
+        if (!newState) {
+            setIsServiceMenuOpen(false); // Close service menu when closing main menu
+        }
+        toggleScrollLock(newState);
+    };
+
+    // Toggle service submenu
+    const toggleServiceMenu = (e: { preventDefault: () => void; stopPropagation: () => void; }) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsServiceMenuOpen(!isServiceMenuOpen);
+    };
+
+    // Cleanup scroll lock on unmount
+    useEffect(() => {
+        return () => toggleScrollLock(false);
+    }, []);
 
     return (
         <nav className={`
             fixed top-0 w-full z-50 transition-all duration-300
-            ${isScrolled || isMenuOpen ? 'shadow-md' : ''}
+            ${isScrolled 
+                ? 'bg-white shadow-md' 
+                : 'bg-transparent'
+            }
         `}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex items-center">
-                        <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center space-x-3">
+                        <Link href="/" onClick={() => {
+                            setIsMenuOpen(false);
+                            toggleScrollLock(false);
+                        }} className="flex items-center space-x-3">
                             <Image 
                                 src={techkunLogo} 
                                 alt="Logo" 
-                                className="h-10 w-auto md:h-12" // Increased size
+                                className="h-10 w-auto md:h-12"
                                 width={48}
                                 height={48}
                             />
-                            <span className={`text-xl font-Poppins md:text-2xl transition-colors ${isScrolled ? 'text-[#2196f3]' : 'text-white'}`}>
+                            <span className={`text-xl font-bold md:text-2xl transition-colors ${isScrolled ? 'text-blue-600' : 'text-white'}`}>
                                 TechKun
                             </span>
                         </Link>
@@ -93,23 +130,42 @@ const Navbar = () => {
                     <div className="hidden md:flex md:items-center md:space-x-8">
                         {/* Services Dropdown */}
                         <div className="relative group">
-                            <Link
-                                href="/services"
-                                className={`
-                                    text-base font-medium transition-colors
-                                    ${pathname === '/services'
-                                        ? (isScrolled ? 'text-[#2196f3]' : 'text-white')
-                                        : (isScrolled ? 'text-gray-700 hover:text-[#2196f3]' : 'text-white/90 hover:text-white')
-                                    }
-                                `}
-                            >
-                                Services
-                            </Link>
+                            <div className="flex items-center space-x-1">
+                                {/* Services text link */}
+                                <Link
+                                    href="/services"
+                                    className={`
+                                        text-base font-medium transition-colors
+                                        ${pathname === '/services'
+                                            ? (isScrolled ? 'text-blue-600' : 'text-white')
+                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-200 hover:text-white')
+                                        }
+                                    `}
+                                >
+                                    Services
+                                </Link>
+                                
+                                {/* Dropdown toggle button - always visible */}
+                                <button 
+                                    className={`inline-flex items-center p-1 focus:outline-none transition-colors ${
+                                        isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-300 hover:text-white'
+                                    }`}
+                                    aria-label="Toggle services dropdown"
+                                >
+                                    <svg 
+                                        className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" 
+                                        fill="currentColor" 
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
                             {/* Mega Menu Dropdown */}
                             <div className="
                                 absolute left-1/2 -translate-x-1/2 mt-2 w-[700px] opacity-0 invisible
                                 group-hover:opacity-100 group-hover:visible transition-all duration-300
-                                bg-white/50 backdrop-blur-md rounded-xl shadow-2xl p-8 grid grid-cols-3 gap-8
+                                bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-8 grid grid-cols-3 gap-8
                                 border border-white/20
                             ">
                                 {/* Services Grid */}
@@ -124,8 +180,8 @@ const Navbar = () => {
                                                     transform hover:-translate-y-1 hover:shadow-lg"
                                             >
                                                 <div className="flex items-center space-x-3 mb-2">
-                                                    <Icon className="h-5 w-5 text-[#2196f3] group-hover/item:text-blue-600 transition-colors" />
-                                                    <h3 className="text-gray-900 font-semibold text-base group-hover/item:text-[#2196f3]">
+                                                    <Icon className="h-5 w-5 text-blue-600 group-hover/item:text-blue-700 transition-colors" />
+                                                    <h3 className="text-gray-900 font-semibold text-base group-hover/item:text-blue-600">
                                                         {service.title}
                                                     </h3>
                                                 </div>
@@ -138,7 +194,7 @@ const Navbar = () => {
                                 <div className="col-span-1 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6
                                     transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                                     <div className="mb-4">
-                                        <svg className="h-8 w-8 text-[#2196f3] opacity-50" fill="currentColor" viewBox="0 0 32 32">
+                                        <svg className="h-8 w-8 text-blue-500 opacity-50" fill="currentColor" viewBox="0 0 32 32">
                                             <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                                         </svg>
                                     </div>
@@ -151,35 +207,39 @@ const Navbar = () => {
                             </div>
                         </div>
 
-                        {/* About Us Link */}
-                        <Link
-                            href="/about-us"
-                            className={`
-                                text-base font-medium transition-colors
-                                ${pathname === '/about-us'
-                                    ? (isScrolled ? 'text-[#2196f3]' : 'text-white')
-                                    : (isScrolled ? 'text-gray-700 hover:text-[#2196f3]' : 'text-white/90 hover:text-white')
-                                }
-                            `}
-                        >
-                            About Us
-                        </Link>
+                        {/* Other Links */}
+                        {links.slice(1).map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`
+                                    text-base font-medium transition-colors
+                                    ${pathname === link.href
+                                        ? (isScrolled ? 'text-blue-600' : 'text-white')
+                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-200 hover:text-white')
+                                    }
+                                `}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
 
                         {/* Contact Us Button */}
                         <button 
                             onClick={() => handleNavigation('/contact-us')}
-                            className="bg-[#2196f3] text-white px-6 py-2 rounded-md text-base font-medium hover:bg-[#1e88e5] transition-colors"
+                            className="bg-blue-600 text-white px-6 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors shadow-md"
                         >
                             Contact Us
                         </button>
                     </div>
 
-                    {/* Mobile menu button and menu */}
+                    {/* Mobile menu button */}
                     <div className="md:hidden">
                         <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            onClick={toggleMenu}
                             className={`p-2 rounded-md inline-flex items-center justify-center ${isScrolled ? 'text-gray-700' : 'text-white'}`}
-                            aria-expanded="false"
+                            aria-expanded={isMenuOpen}
+                            aria-label="Toggle menu"
                         >
                             <span className="sr-only">
                                 {isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -194,38 +254,109 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile menu */}
+            {/* Mobile menu - Full screen dark overlay */}
             <div
                 className={`
-                    md:hidden transition-all duration-300 ease-in-out
-                    ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}
+                    md:hidden fixed inset-0 bg-gray-900 z-40
+                    transition-all duration-300 ease-in-out flex flex-col items-center justify-center
+                    ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
                 `}
             >
-                <div className="px-2 pt-2 pb-3 space-y-1 border-t border-white/10">
-                    {links.map((link) => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavigation(link.href);
-                            }}
+                {/* Close button positioned at the top right */}
+                <button
+                    onClick={toggleMenu}
+                    className="absolute top-4 right-4 p-2 text-gray-100 hover:text-white"
+                    aria-label="Close menu"
+                >
+                    <RiCloseFill className="h-8 w-8" />
+                </button>
+                
+                {/* Navigation Links */}
+                <div className="flex flex-col items-center space-y-6 w-full px-8 py-8">
+                    {/* Services Link with Dropdown */}
+                    <div className="w-full max-w-xs flex flex-col items-center">
+                        <div className="flex items-center justify-center w-full">
+                            {/* Services link - clickable text */}
+                            <a
+                                href="/services"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavigation('/services');
+                                }}
+                                className="text-2xl font-medium text-gray-100 hover:text-white 
+                                    transition-all duration-300 tracking-wide mr-2"
+                            >
+                                Services
+                            </a>
+                            
+                            {/* Dropdown toggle button - separate from the link */}
+                            <button
+                                onClick={toggleServiceMenu}
+                                className="p-1 text-gray-300 hover:text-white transition-colors duration-200"
+                                aria-label="Toggle services menu"
+                            >
+                                <svg 
+                                    className={`w-5 h-5 transition-transform duration-300 ${isServiceMenuOpen ? 'rotate-180' : ''}`} 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 20 20" 
+                                    fill="currentColor"
+                                >
+                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        {/* Services Submenu */}
+                        <div 
                             className={`
-                                block px-3 py-2 rounded-md text-base font-medium
-                                ${pathname === link.href
-                                    ? 'bg-[#2196f3] text-white'
-                                    : isScrolled
-                                        ? 'text-gray-800 hover:text-[#2196f3]'
-                                        : 'text-white hover:text-white/80'
-                                }
+                                w-full mt-4 flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
+                                ${isServiceMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
                             `}
                         >
-                            {link.label}
-                        </a>
-                    ))}
+                            <div className="w-full bg-gray-800 rounded-lg p-4 shadow-lg">
+                                {services.map((service) => {
+                                    const Icon = service.icon;
+                                    return (
+                                        <a
+                                            key={service.href}
+                                            href={service.href}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleNavigation(service.href);
+                                            }}
+                                            className="flex items-center space-x-3 p-3 text-gray-200 hover:text-white hover:bg-gray-700 
+                                                rounded-md transition-all duration-300 mb-2 last:mb-0 group"
+                                        >
+                                            <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300" />
+                                            <div>
+                                                <p className="text-base font-medium">{service.title}</p>
+                                                <p className="text-xs text-gray-400 group-hover:text-gray-300">{service.description}</p>
+                                            </div>
+                                        </a>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* About Us Link */}
+                    <a
+                        href="/about-us"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleNavigation('/about-us');
+                        }}
+                        className="text-2xl font-medium text-gray-100 hover:text-white hover:scale-105
+                            transition-all duration-300 tracking-wide"
+                    >
+                        About Us
+                    </a>
+                    
+                    {/* Contact Button */}
                     <button
                         onClick={() => handleNavigation('/contact-us')}
-                        className="w-full text-left px-3 py-2 text-base font-medium text-white bg-[#2196f3] rounded-md hover:bg-[#1e88e5] transition-colors"
+                        className="mt-8 px-8 py-3 bg-blue-600 text-white text-lg font-medium rounded-lg 
+                            hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                     >
                         Contact Us
                     </button>
@@ -234,5 +365,4 @@ const Navbar = () => {
         </nav>
     );
 };
-
 export default Navbar;
