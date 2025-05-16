@@ -102,8 +102,7 @@ const Navbar = () => {
             fixed top-0 w-full z-50 transition-all duration-300
             ${isScrolled 
                 ? 'bg-white shadow-md' 
-                : 'bg-transparent'
-            }
+                : 'bg-transparent'}
         `}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
@@ -120,7 +119,7 @@ const Navbar = () => {
                                 width={48}
                                 height={48}
                             />
-                            <span className={`text-xl font-bold md:text-2xl transition-colors ${isScrolled ? 'text-blue-600' : 'text-white'}`}>
+                            <span className={`text-xl font-bold md:text-2xl transition-colors ${isScrolled ? 'text-blue-600' : 'text-blue-600'}`}>
                                 TechKun
                             </span>
                         </Link>
@@ -137,9 +136,8 @@ const Navbar = () => {
                                     className={`
                                         text-base font-medium transition-colors
                                         ${pathname === '/services'
-                                            ? (isScrolled ? 'text-blue-600' : 'text-white')
-                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-200 hover:text-white')
-                                        }
+                                            ? 'text-blue-600'
+                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600')}
                                     `}
                                 >
                                     Services
@@ -147,9 +145,8 @@ const Navbar = () => {
                                 
                                 {/* Dropdown toggle button - always visible */}
                                 <button 
-                                    className={`inline-flex items-center p-1 focus:outline-none transition-colors ${
-                                        isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-300 hover:text-white'
-                                    }`}
+                                    className={`inline-flex items-center p-1 focus:outline-none transition-colors
+                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
                                     aria-label="Toggle services dropdown"
                                 >
                                     <svg 
@@ -215,9 +212,8 @@ const Navbar = () => {
                                 className={`
                                     text-base font-medium transition-colors
                                     ${pathname === link.href
-                                        ? (isScrolled ? 'text-blue-600' : 'text-white')
-                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-200 hover:text-white')
-                                    }
+                                        ? 'text-blue-600'
+                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600')}
                                 `}
                             >
                                 {link.label}
@@ -237,7 +233,7 @@ const Navbar = () => {
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
-                            className={`p-2 rounded-md inline-flex items-center justify-center ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                            className={`p-2 rounded-md inline-flex items-center justify-center ${isScrolled ? 'text-gray-700' : 'text-gray-700'}`}
                             aria-expanded={isMenuOpen}
                             aria-label="Toggle menu"
                         >
