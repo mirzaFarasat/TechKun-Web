@@ -7,6 +7,14 @@ import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
 import { FaGlobe, FaCloud, FaMobile, FaRobot } from 'react-icons/fa';
+import { Poppins } from 'next/font/google';
+
+// Load Poppins font
+const poppins = Poppins({
+    weight: ['500', '600', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+});
 
 const links = [
     { label: 'Services', href: '/services' },
@@ -119,7 +127,12 @@ const Navbar = () => {
                                 width={48}
                                 height={48}
                             />
-                            <span className={`text-xl font-bold md:text-2xl transition-colors ${isScrolled ? 'text-blue-600' : 'text-blue-600'}`}>
+                            <span className={`
+                                ${poppins.className} 
+                                text-xl font-poppins md:text-2xl 
+                                transition-colors duration-300
+                                ${isScrolled ? 'text-[#1E3A8A]' : 'text-white'}
+                            `}>
                                 TechKun
                             </span>
                         </Link>
@@ -137,7 +150,7 @@ const Navbar = () => {
                                         text-base font-medium transition-colors
                                         ${pathname === '/services'
                                             ? 'text-blue-600'
-                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600')}
+                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
                                     `}
                                 >
                                     Services
@@ -146,7 +159,7 @@ const Navbar = () => {
                                 {/* Dropdown toggle button - always visible */}
                                 <button 
                                     className={`inline-flex items-center p-1 focus:outline-none transition-colors
-                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'}`}
                                     aria-label="Toggle services dropdown"
                                 >
                                     <svg 
@@ -213,7 +226,7 @@ const Navbar = () => {
                                     text-base font-medium transition-colors
                                     ${pathname === link.href
                                         ? 'text-blue-600'
-                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-gray-700 hover:text-blue-600')}
+                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
                                 `}
                             >
                                 {link.label}
@@ -233,7 +246,8 @@ const Navbar = () => {
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
-                            className={`p-2 rounded-md inline-flex items-center justify-center ${isScrolled ? 'text-gray-700' : 'text-gray-700'}`}
+                            className={`p-2 rounded-md inline-flex items-center justify-center 
+                                ${isScrolled ? 'text-gray-700' : 'text-white'}`}
                             aria-expanded={isMenuOpen}
                             aria-label="Toggle menu"
                         >
@@ -270,8 +284,8 @@ const Navbar = () => {
                 {/* Navigation Links */}
                 <div className="flex flex-col items-center space-y-6 w-full px-8 py-8">
                     {/* Services Link with Dropdown */}
-                    <div className="w-full max-w-xs flex flex-col items-center">
-                        <div className="flex items-center justify-center w-full">
+                    <div className="w-full max-w-xs flex flex-col items-center ">
+                        <div className="flex items-center justify-center w-full pl-4">
                             {/* Services link - clickable text */}
                             <a
                                 href="/services"
@@ -303,12 +317,13 @@ const Navbar = () => {
                         </div>
                         
                         {/* Services Submenu */}
-                        <div 
-                            className={`
-                                w-full mt-4 flex flex-col items-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
-                                ${isServiceMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-                            `}
-                        >
+                      <div 
+    className={`
+        w-full mt-4 flex flex-col items-center justify-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
+        ${isServiceMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+    `}
+>
+
                             <div className="w-full bg-gray-800 rounded-lg p-4 shadow-lg">
                                 {services.map((service) => {
                                     const Icon = service.icon;
