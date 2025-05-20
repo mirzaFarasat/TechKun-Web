@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
-import { FaGlobe, FaCloud, FaMobile, FaRobot } from 'react-icons/fa';
+import { FaGlobe, FaCloud, FaMobile, FaRobot, FaNewspaper, FaBlog, FaBriefcase } from 'react-icons/fa';
 import { Poppins } from 'next/font/google';
 
 // Load Poppins font
@@ -48,6 +48,28 @@ const services = [
     }
 ];
 
+// New About Us links with icons
+const aboutUsLinks = [
+    {
+        title: 'Press',
+        description: 'Latest news and media coverage about TechKun',
+        href: '/press',
+        icon: FaNewspaper
+    },
+    {
+        title: 'Blog',
+        description: 'Insights, tutorials, and tech news from our team',
+        href: '/blog',
+        icon: FaBlog
+    },
+    {
+        title: 'Careers',
+        description: 'Join our team and build the future of technology',
+        href: '/careers',
+        icon: FaBriefcase
+    }
+];
+
 const testimonial = {
     text: "TechKun transformed our business with their innovative solutions. The team's expertise and dedication were exceptional.",
     author: "John Smith",
@@ -66,6 +88,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
+    const [isAboutUsMenuOpen, setIsAboutUsMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -79,6 +102,7 @@ const Navbar = () => {
     const handleNavigation = (href: string) => {
         setIsMenuOpen(false);
         setIsServiceMenuOpen(false);
+        setIsAboutUsMenuOpen(false);
         toggleScrollLock(false);
         router.push(href);
     };
@@ -89,6 +113,7 @@ const Navbar = () => {
         setIsMenuOpen(newState);
         if (!newState) {
             setIsServiceMenuOpen(false); // Close service menu when closing main menu
+            setIsAboutUsMenuOpen(false); // Close about us menu when closing main menu
         }
         toggleScrollLock(newState);
     };
@@ -98,6 +123,15 @@ const Navbar = () => {
         e.preventDefault();
         e.stopPropagation();
         setIsServiceMenuOpen(!isServiceMenuOpen);
+        if (isAboutUsMenuOpen) setIsAboutUsMenuOpen(false); // Close about us menu when opening service menu
+    };
+
+    // Toggle about us submenu
+    const toggleAboutUsMenu = (e: { preventDefault: () => void; stopPropagation: () => void; }) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsAboutUsMenuOpen(!isAboutUsMenuOpen);
+        if (isServiceMenuOpen) setIsServiceMenuOpen(false); // Close service menu when opening about us menu
     };
 
     // Cleanup scroll lock on unmount
@@ -217,21 +251,67 @@ const Navbar = () => {
                             </div>
                         </div>
 
-                        {/* Other Links */}
-                        {links.slice(1).map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`
-                                    text-base font-medium transition-colors
-                                    ${pathname === link.href
-                                        ? 'text-blue-600'
-                                        : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
-                                `}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {/* About Us Dropdown */}
+                        <div className="relative group">
+                            <div className="flex items-center space-x-1">
+                                {/* About Us text link */}
+                                <Link
+                                    href="/about-us"
+                                    className={`
+                                        text-base font-medium transition-colors
+                                        ${pathname === '/about-us'
+                                            ? 'text-blue-600'
+                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
+                                    `}
+                                >
+                                    About Us
+                                </Link>
+                                
+                                {/* Dropdown toggle button - always visible */}
+                                <button 
+                                    className={`inline-flex items-center p-1 focus:outline-none transition-colors
+                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'}`}
+                                    aria-label="Toggle about us dropdown"
+                                >
+                                    <svg 
+                                        className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" 
+                                        fill="currentColor" 
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            {/* About Us Dropdown Menu */}
+                            <div className="
+                                absolute left-1/2 -translate-x-1/2 mt-2 w-[500px] opacity-0 invisible
+                                group-hover:opacity-100 group-hover:visible transition-all duration-300
+                                bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-8
+                                border border-white/20
+                            ">
+                                <div className="grid grid-cols-1 gap-4">
+                                    {aboutUsLinks.map((link) => {
+                                        const Icon = link.icon;
+                                        return (
+                                            <Link
+                                                key={link.href}
+                                                href={link.href}
+                                                className="group/item p-4 rounded-lg hover:bg-blue-50 transition-all duration-300
+                                                    transform hover:-translate-y-1 hover:shadow-lg"
+                                            >
+                                                <div className="flex items-center space-x-3 mb-2">
+                                                    <Icon className="h-5 w-5 text-blue-600 group-hover/item:text-blue-700 transition-colors" />
+                                                    <h3 className="text-gray-900 font-semibold text-base group-hover/item:text-blue-600">
+                                                        {link.title}
+                                                    </h3>
+                                                </div>
+                                                <p className="text-gray-600 text-sm leading-relaxed">{link.description}</p>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Contact Us Button */}
                         <button 
@@ -317,13 +397,12 @@ const Navbar = () => {
                         </div>
                         
                         {/* Services Submenu */}
-                      <div 
-    className={`
-        w-full mt-4 flex flex-col items-center justify-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
-        ${isServiceMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-    `}
->
-
+                        <div 
+                            className={`
+                                w-full mt-4 flex flex-col items-center justify-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
+                                ${isServiceMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                            `}
+                        >
                             <div className="w-full bg-gray-800 rounded-lg p-4 shadow-lg">
                                 {services.map((service) => {
                                     const Icon = service.icon;
@@ -350,18 +429,71 @@ const Navbar = () => {
                         </div>
                     </div>
                     
-                    {/* About Us Link */}
-                    <a
-                        href="/about-us"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleNavigation('/about-us');
-                        }}
-                        className="text-2xl font-medium text-gray-100 hover:text-white hover:scale-105
-                            transition-all duration-300 tracking-wide"
-                    >
-                        About Us
-                    </a>
+                    {/* About Us Link with Dropdown */}
+                    <div className="w-full max-w-xs flex flex-col items-center ">
+                        <div className="flex items-center justify-center w-full pl-4">
+                            {/* About Us link - clickable text */}
+                            <a
+                                href="/about-us"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavigation('/about-us');
+                                }}
+                                className="text-2xl font-medium text-gray-100 hover:text-white 
+                                    transition-all duration-300 tracking-wide mr-2"
+                            >
+                                About Us
+                            </a>
+                            
+                            {/* Dropdown toggle button - separate from the link */}
+                            <button
+                                onClick={toggleAboutUsMenu}
+                                className="p-1 text-gray-300 hover:text-white transition-colors duration-200"
+                                aria-label="Toggle about us menu"
+                            >
+                                <svg 
+                                    className={`w-5 h-5 transition-transform duration-300 ${isAboutUsMenuOpen ? 'rotate-180' : ''}`} 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 20 20" 
+                                    fill="currentColor"
+                                >
+                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        {/* About Us Submenu */}
+                        <div 
+                            className={`
+                                w-full mt-4 flex flex-col items-center justify-center space-y-4 overflow-hidden transition-all duration-300 ease-in-out
+                                ${isAboutUsMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                            `}
+                        >
+                            <div className="w-full bg-gray-800 rounded-lg p-4 shadow-lg">
+                                {aboutUsLinks.map((link) => {
+                                    const Icon = link.icon;
+                                    return (
+                                        <a
+                                            key={link.href}
+                                            href={link.href}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleNavigation(link.href);
+                                            }}
+                                            className="flex items-center space-x-3 p-3 text-gray-200 hover:text-white hover:bg-gray-700 
+                                                rounded-md transition-all duration-300 mb-2 last:mb-0 group"
+                                        >
+                                            <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300" />
+                                            <div>
+                                                <p className="text-base font-medium">{link.title}</p>
+                                                <p className="text-xs text-gray-400 group-hover:text-gray-300">{link.description}</p>
+                                            </div>
+                                        </a>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
                     
                     {/* Contact Button */}
                     <button
