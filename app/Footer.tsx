@@ -201,7 +201,7 @@ export default function Footer() {
               Company
             </motion.h3>
             <ul className="space-y-2">
-              {["About", "Careers", "Blog", "Press"].map((item, index) => (
+              {["About", "Careers", "Blog"].map((item, index) => (
                 <motion.li key={item}
                   custom={index}
                   variants={{

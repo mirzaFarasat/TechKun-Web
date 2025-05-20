@@ -51,12 +51,6 @@ const services = [
 // New About Us links with icons
 const aboutUsLinks = [
     {
-        title: 'Press',
-        description: 'Latest news and media coverage about TechKun',
-        href: '/press',
-        icon: FaNewspaper
-    },
-    {
         title: 'Blog',
         description: 'Insights, tutorials, and tech news from our team',
         href: '/blog',
@@ -140,12 +134,12 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`
-            fixed top-0 w-full z-50 transition-all duration-300
-            ${isScrolled 
-                ? 'bg-white shadow-md' 
-                : 'bg-transparent'}
-        `}>
+        <nav 
+            className={`
+                fixed top-0 w-full z-50 transition-all duration-300
+                ${isScrolled ? 'bg-white shadow-md py-1' : 'bg-transparent py-3'}
+            `}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -153,7 +147,7 @@ const Navbar = () => {
                         <Link href="/" onClick={() => {
                             setIsMenuOpen(false);
                             toggleScrollLock(false);
-                        }} className="flex items-center space-x-3">
+                        }} className="flex items-center space-x-3"> {/* Removed mt-2 pt-3 */}
                             <Image 
                                 src={techkunLogo} 
                                 alt="Logo" 
@@ -327,7 +321,7 @@ const Navbar = () => {
                         <button
                             onClick={toggleMenu}
                             className={`p-2 rounded-md inline-flex items-center justify-center 
-                                ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                                ${isScrolled ? 'text-gray-700' : 'text-white'}`} 
                             aria-expanded={isMenuOpen}
                             aria-label="Toggle menu"
                         >
