@@ -83,6 +83,21 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
     const [isAboutUsMenuOpen, setIsAboutUsMenuOpen] = useState(false);
+    
+    // On the home page, we want to always use white text initially (transparent background)
+    const isHomePage = pathname === '/';
+    
+    // Determine if we should use dark text (for light backgrounds)
+    // For homepage, we use white text until scrolled
+    const shouldUseDarkText = (isScrolled && isHomePage) || (!isHomePage && (isScrolled || pathname.includes('/blog') || isWhiteBgPage(pathname)));
+    
+    // Function to identify pages with white backgrounds where we need dark text
+    function isWhiteBgPage(path: string) {
+        // Add any routes that have white backgrounds here
+        const whiteBgRoutes = ['/about-us', '/services', '/contact-us', '/careers'];
+        // Check if the current path is in our whiteBgRoutes list or is a child of any route in the list
+        return whiteBgRoutes.some(route => path === route || path.startsWith(`${route}/`));
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -137,7 +152,11 @@ const Navbar = () => {
         <nav 
             className={`
                 fixed top-0 w-full z-50 transition-all duration-300
-                ${isScrolled ? 'bg-white shadow-md py-1' : 'bg-transparent py-3'}
+                ${isScrolled 
+                    ? 'bg-white shadow-md py-1' 
+                    : isHomePage 
+                        ? 'bg-transparent py-3' 
+                        : 'bg-white/75 backdrop-blur-sm py-3'}
             `}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,7 +166,7 @@ const Navbar = () => {
                         <Link href="/" onClick={() => {
                             setIsMenuOpen(false);
                             toggleScrollLock(false);
-                        }} className="flex items-center space-x-3"> {/* Removed mt-2 pt-3 */}
+                        }} className="flex items-center space-x-3">
                             <Image 
                                 src={techkunLogo} 
                                 alt="Logo" 
@@ -159,7 +178,7 @@ const Navbar = () => {
                                 ${poppins.className} 
                                 text-xl font-poppins md:text-2xl 
                                 transition-colors duration-300
-                                ${isScrolled ? 'text-[#1E3A8A]' : 'text-white'}
+                                ${isHomePage && !isScrolled ? 'text-white' : 'text-[#1E3A8A]'}
                             `}>
                                 TechKun
                             </span>
@@ -178,7 +197,9 @@ const Navbar = () => {
                                         text-base font-medium transition-colors
                                         ${pathname === '/services'
                                             ? 'text-blue-600'
-                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
+                                            : (isHomePage && !isScrolled
+                                                ? 'text-white hover:text-blue-200' 
+                                                : 'text-gray-700 hover:text-blue-600')}
                                     `}
                                 >
                                     Services
@@ -187,7 +208,9 @@ const Navbar = () => {
                                 {/* Dropdown toggle button - always visible */}
                                 <button 
                                     className={`inline-flex items-center p-1 focus:outline-none transition-colors
-                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'}`}
+                                        ${isHomePage && !isScrolled
+                                            ? 'text-white hover:text-blue-200' 
+                                            : 'text-gray-700 hover:text-blue-600'}`}
                                     aria-label="Toggle services dropdown"
                                 >
                                     <svg 
@@ -255,7 +278,9 @@ const Navbar = () => {
                                         text-base font-medium transition-colors
                                         ${pathname === '/about-us'
                                             ? 'text-blue-600'
-                                            : (isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200')}
+                                            : (isHomePage && !isScrolled
+                                                ? 'text-white hover:text-blue-200' 
+                                                : 'text-gray-700 hover:text-blue-600')}
                                     `}
                                 >
                                     About Us
@@ -264,7 +289,9 @@ const Navbar = () => {
                                 {/* Dropdown toggle button - always visible */}
                                 <button 
                                     className={`inline-flex items-center p-1 focus:outline-none transition-colors
-                                        ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'}`}
+                                        ${isHomePage && !isScrolled
+                                            ? 'text-white hover:text-blue-200' 
+                                            : 'text-gray-700 hover:text-blue-600'}`}
                                     aria-label="Toggle about us dropdown"
                                 >
                                     <svg 
@@ -310,7 +337,10 @@ const Navbar = () => {
                         {/* Contact Us Button */}
                         <button 
                             onClick={() => handleNavigation('/contact-us')}
-                            className="bg-blue-600 text-white px-6 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors shadow-md"
+                            className={`
+                                text-white px-6 py-2 rounded-md text-base font-medium shadow-md transition-colors
+                                ${isHomePage && !isScrolled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'}
+                            `}
                         >
                             Contact Us
                         </button>
@@ -321,7 +351,7 @@ const Navbar = () => {
                         <button
                             onClick={toggleMenu}
                             className={`p-2 rounded-md inline-flex items-center justify-center 
-                                ${isScrolled ? 'text-gray-700' : 'text-white'}`} 
+                                ${isHomePage && !isScrolled ? 'text-white' : 'text-gray-700'}`} 
                             aria-expanded={isMenuOpen}
                             aria-label="Toggle menu"
                         >
