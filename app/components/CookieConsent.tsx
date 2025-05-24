@@ -11,26 +11,21 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onReject }) => 
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Show banner if cookieConsent is not "true"
-    const hasConsent = localStorage.getItem('cookieConsent') === 'true';
-    setIsVisible(!hasConsent);
-  }, []);
+    const consentValue = localStorage.getItem('cookieConsent');
 
-  useEffect(() => {
-    // For testing, force the banner to show
-    setIsVisible(true);
+    // Show banner only if no valid value is set
+    if (consentValue !== 'accepted' && consentValue !== 'rejected') {
+      setIsVisible(true);
+    }
   }, []);
 
   const handleAccept = async () => {
-    // Store simple boolean value
-    localStorage.setItem('cookieConsent', 'true');
+    localStorage.setItem('cookieConsent', 'accepted');
 
     try {
       await fetch('/api/cookie-consent', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ consent: true }),
       });
     } catch (error) {
@@ -42,16 +37,12 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onReject }) => 
   };
 
   const handleReject = async () => {
-    // Don't store anything in localStorage for reject
-    // This way banner will show again on refresh
-    localStorage.removeItem('cookieConsent');
+    localStorage.setItem('cookieConsent', 'rejected');
 
     try {
       await fetch('/api/cookie-consent', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ consent: false }),
       });
     } catch (error) {

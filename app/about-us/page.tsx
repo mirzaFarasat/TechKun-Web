@@ -1,5 +1,6 @@
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
+import DarkPatternBanner from '../components/DarkPatternBanner';
 import missionImage from '@/public/Images/mission-image/Mission-image.webp';
 import profilePlaceholder from "@/public/Images/profile-placeholder.jpg";
 

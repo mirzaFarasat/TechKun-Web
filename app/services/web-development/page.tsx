@@ -2,46 +2,15 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import ServiceBanner from '../ServiceBanner';
 
 export default function WebDevelopment() {
   return (
     <div className="min-h-screen flex flex-col relative">
       <main className="flex-1 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-950 dark:to-gray-900 overflow-hidden pb-16">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-        </div>
-
         {/* Hero Section */}
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="text-center max-w-4xl mx-auto"
-            >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-blue-800 to-blue-900 dark:from-white dark:to-blue-400 mb-8 leading-tight tracking-tight">
-                Web Development
-                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">That Delivers Results</span>
-              </h1>
-              <p className="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 mb-10 font-light leading-relaxed">
-                Create powerful, scalable, and beautiful web applications that drive your business forward
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.03, boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-10 py-4 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-              >
-                Start Your Project
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
-
+        <ServiceBanner />
+        
         {/* Main Content Section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32">
@@ -52,7 +21,7 @@ export default function WebDevelopment() {
               transition={{ duration: 0.7 }}
               className="space-y-8"
             >
-              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-blue-800 dark:from-white dark:to-blue-400 leading-tight">
+              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-blue-800 dark:from-white dark:to-blue-400 leading-tight ">
                 Modern Web Solutions for Modern Businesses
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import DarkPatternBanner from "../components/DarkPatternBanner";
 
 // Category icons mapping
 const categoryIcons: Record<string, string> = {
@@ -89,31 +90,13 @@ export default function Blog() {
   
   return (
     <div className="min-h-screen bg-gray-50 font-['Inter',sans-serif]">
-      {/* Header Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              Our Latest Articles
-            </motion.h1>
-            <motion.p 
-              className="text-lg text-gray-600 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Stay updated with the newest design and development stories, case studies, 
-              and insights shared by the TechKun team.
-            </motion.p>
-          </div>
-        </div>
-      </section>
-
+      {/* Hero Banner with SVG Pattern */}
+      <DarkPatternBanner
+        title="Our Latest Articles"
+        description="Insights, tutorials, and updates from our team of experts"
+        height="h-[40vh] min-h-[350px]" // Adjusted height for better balance without the buttons
+      />
+      
       {/* Blog Grid Section */}
       <section className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-6">
@@ -180,32 +163,8 @@ export default function Blog() {
           </div>
         </div>
       </section>
-
-      {/* Cookie Consent Banner */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-6 md:p-8 z-50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div className="text-[15px] text-gray-700 text-center sm:text-left">
-            We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-            <a href="/privacy" className="text-blue-600 hover:text-blue-800 underline ml-2 font-medium">
-              Learn more
-            </a>
-          </div>
-          <div className="flex gap-4">
-            <button
-              onClick={() => console.log('Rejected cookies')}
-              className="px-5 py-3 text-sm font-medium text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            >
-              Reject
-            </button>
-            <button
-              onClick={() => console.log('Accepted cookies')}
-              className="px-5 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Accept
-            </button>
-          </div>
-        </div>
-      </div>
+      
+      {/* Remove the duplicate Cookie Consent Banner section */}
     </div>
   );
 }

@@ -333,7 +333,7 @@ export default function Footer() {
               </motion.div>
             </div>
             
-            <Link href="/contact">
+            {/* <Link href="/contact">
               <motion.button
                 className="text-xs flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 group mt-2"
                 variants={itemVariants}
@@ -350,7 +350,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </motion.button>
-            </Link>
+            </Link> */}
           </motion.div>
           
           {/* Newsletter - Moved to the right column */}
