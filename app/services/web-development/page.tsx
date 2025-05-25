@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import ServiceBanner from '../ServiceBanner';
 
 export default function WebDevelopment() {
@@ -145,13 +146,15 @@ export default function WebDevelopment() {
                 Let's build something amazing together. Our team of experts is ready to help you create
                 a web solution that drives results.
               </p>
-              <motion.button 
-                whileHover={{ scale: 1.03, boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white text-blue-600 text-lg px-10 py-4 rounded-xl font-medium hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-              >
-                Get Started
-              </motion.button>
+              <Link href="/contact-us">
+                <motion.button 
+                  whileHover={{ scale: 1.03, boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white text-blue-600 text-lg px-10 py-4 rounded-xl font-medium hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  Start Your Project
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>

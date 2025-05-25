@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import ServiceBanner from '../banner';
 
 export default function AIIntegration() {
@@ -124,9 +125,15 @@ export default function AIIntegration() {
           <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
             Let's explore how AI can transform your business operations and drive innovation.
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200">
-            Schedule a Demo
-          </button>
+          <Link href="/contact-us">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200"
+            >
+              Start Your Project
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>

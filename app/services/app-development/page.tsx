@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import ServiceBanner from '../ServiceBanner';
 
 export default function AppDevelopment() {
@@ -125,9 +126,15 @@ export default function AppDevelopment() {
             Let's turn your app idea into reality. Our team of expert developers is ready to help
             you create an exceptional mobile experience.
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200">
-            Get Started
-          </button>
+          <Link href="/contact-us">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200"
+            >
+              Start Your Project
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>

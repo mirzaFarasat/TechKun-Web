@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import ServiceBanner from '../ServiceBanner';
 
 export default function CloudSolutions() {
@@ -124,9 +125,15 @@ export default function CloudSolutions() {
           <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
             Let's help you modernize your infrastructure and unlock the full potential of cloud computing.
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200">
-            Contact Us
-          </button>
+          <Link href="/contact-us">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-200"
+            >
+              Start Your Project
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>
