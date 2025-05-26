@@ -72,7 +72,7 @@ export default function Careers() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900">
           <div className="absolute inset-0 opacity-20">
             {/* Add a pattern or texture here */}

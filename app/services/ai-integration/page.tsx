@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import ServiceBanner from '../banner';
+import ServiceBanner from '../ServiceBanner';
 
 export default function AIIntegration() {
   return (

@@ -89,12 +89,12 @@ export default function Blog() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   
   return (
-    <div className="min-h-screen bg-gray-50 font-['Inter',sans-serif]">
+    <div className="min-h-screen bg-gray-50 font-['Inter',sans-serif] ">
       {/* Hero Banner with SVG Pattern */}
       <DarkPatternBanner
         title="Our Latest Articles"
         description="Insights, tutorials, and updates from our team of experts"
-        height="h-[40vh] min-h-[350px]" // Adjusted height for better balance without the buttons
+        height="h-[85vh] min-h-[600px]" // Adjusted height for better balance without the buttons
       />
       
       {/* Blog Grid Section */}
