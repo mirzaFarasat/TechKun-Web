@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { ChevronRight, Users, Target, Lightbulb, Award, Heart, Code, Stethoscope, GraduationCap, Utensils, Truck, ArrowRight, Quote, Star, Calendar, MapPin, Coffee } from 'lucide-react';
 
 const TechKunAboutPage = () => {
@@ -105,41 +106,93 @@ const TechKunAboutPage = () => {
 
   return (
     <div className="min-h-screen transition-all duration-500 bg-white text-gray-900">
-      {/* Hero Section */}
+      {/* Hero Section - Futuristic Dark Theme */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50">
-          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+        {/* Dark background with deep gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-950 to-purple-950">
+          {/* Digital grid pattern overlay */}
+          <div 
+            className="absolute inset-0 w-full h-full opacity-20" 
+            style={{
+              backgroundImage: `url('/Images/blog-pattern.svg')`,
+              backgroundSize: '500px 500px',
+              backgroundRepeat: 'repeat',
+            }}
+          ></div>
+          
+          {/* Animated glowing elements */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500 rounded-full mix-blend-screen filter blur-[100px] opacity-15 animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-pulse" style={{animationDelay: '3.5s'}}></div>
+          
+          {/* Tech circuit lines */}
+          <div className="absolute inset-0 opacity-10">
+            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(59, 130, 246, 0.5)" strokeWidth="0.1"></path>
+              <path d="M0,50 L100,50" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="0.1" strokeDasharray="0.5,0.5"></path>
+              <path d="M50,0 L50,100" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="0.1" strokeDasharray="0.5,0.5"></path>
+              <path d="M25,0 L25,100" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="0.05" strokeDasharray="0.2,0.8"></path>
+              <path d="M75,0 L75,100" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="0.05" strokeDasharray="0.2,0.8"></path>
+              <path d="M0,25 L100,25" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="0.05" strokeDasharray="0.2,0.8"></path>
+              <path d="M0,75 L100,75" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="0.05" strokeDasharray="0.2,0.8"></path>
+            </svg>
+          </div>
+          
+          {/* Data stream animation */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <div className="absolute h-[300%] w-[300%] -top-[100%] -left-[100%]">
+              {[...Array(20)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute bg-blue-400 h-0.5 w-16 rounded-full opacity-50"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
+                    animation: `dataStream ${5 + Math.random() * 10}s linear infinite`,
+                    animationDelay: `${Math.random() * 5}s`
+                  }}
+                ></div>
+              ))}
+            </div>
+          </div>
         </div>
         
+        {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <div 
             id="hero-content"
             data-animate
             className={`transition-all duration-1000 ${isVisible['hero-content'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-gray-900">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white">
               Driving Innovation
-              <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent">
                 Across Industries
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-gray-600">
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-gray-300">
               We're building the future of technology, one breakthrough at a time. 
               <br />From healthcare to education, we make the impossible possible.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
-                See What We Do
-                <ArrowRight className="inline ml-2 w-5 h-5" />
-              </button>
-              <button className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300">
-                Meet the Team
-              </button>
+              <Link href="/services">
+                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20">
+                  See What We Do
+                  <ArrowRight className="inline ml-2 w-5 h-5" />
+                </button>
+              </Link>
+              {/* <Link href="/contact-us">
+                <button className="border-2 border-blue-400/30 text-gray-200 hover:bg-blue-900/20 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300">
+                  Get in Touch
+                </button>
+              </Link> */}
             </div>
           </div>
         </div>
+        
+        {/* Bottom fade for smooth transition to next section */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-10"></div>
       </section>
 
       {/* Who We Are */}
@@ -398,10 +451,11 @@ const TechKunAboutPage = () => {
               achieve breakthrough innovations and sustainable growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
-                Get in Touch
-                <ArrowRight className="inline ml-2 w-5 h-5" />
-              </button>
+            <Link href="/contact-us">
+                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20">
+                  Get in Touch
+                </button>
+              </Link>
               <button className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300">
                 Schedule a Demo
               </button>
