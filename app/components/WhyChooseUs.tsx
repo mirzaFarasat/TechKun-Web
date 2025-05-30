@@ -10,6 +10,7 @@ import {
   Sparkles,
   LucideIcon
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Feature {
   id: number;
@@ -152,6 +153,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
 };
 
 const WhyChooseUs = () => {
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
@@ -192,6 +194,19 @@ const WhyChooseUs = () => {
         damping: 10
       }
     }
+  };
+
+  const handleContactNavigation = () => {
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Navigate to the contact page
+    router.push('/contact-us');
+    
+    // Reset scroll behavior after navigation
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    }, 1000);
   };
 
   return (
@@ -250,6 +265,7 @@ const WhyChooseUs = () => {
             }}
             whileTap={{ scale: 0.98 }}
             aria-label="Schedule a Consultation"
+            onClick={handleContactNavigation}
           >
             Schedule a Consultation
           </motion.button>

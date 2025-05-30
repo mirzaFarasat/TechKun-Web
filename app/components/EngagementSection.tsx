@@ -7,18 +7,21 @@ const cards = [
     title: 'IT staff augmentation',
     description: 'Boost your team, instantly. Scale your development capabilities on-demand with our expert engineers. Whether you need one developer or a full squad, our vetted professionals integrate seamlessly with your existing team to accelerate delivery — with zero overhead.',
     image: '/Images/Model/IT Staff.jpeg', // Replace with actual image path
+    route: '/services/it-staff-augmentation'
   },
   {
     label: { text: 'Fit for products', color: 'bg-green-500' },
     title: 'Dedicated teams',
     description: 'Your dream team, delivered. We build dedicated, cross-functional teams tailored to your project needs. From developers and designers to project managers and QA experts — your custom squad works exclusively on your goals, ensuring deep focus and alignment.',
     image: '/Images/Model/Team.jpeg', // Replace with actual image path
+    route: '/services/dedicated-teams'
   },
   {
     label: { text: 'For enterprise', color: 'bg-blue-500' },
     title: 'Offshore development center',
     description: 'Global talent. Local results. Set up your own Offshore Development Center with us and unlock access to a pool of highly-skilled developers — without the hassle of infrastructure, compliance, or hiring. We handle the backend, you focus on building great products.',
     image: '/Images/Model/Center.jpeg', // Replace with actual image path
+    route: '/services/offshore-development-center'
   }
 ];
 
@@ -69,7 +72,7 @@ export default function EngagementSection() {
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed flex-grow">{card.description}</p>
                 <Link 
-                  href="#" 
+                  href={card.route} 
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-xs mt-auto"
                 >
                   Learn more

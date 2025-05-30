@@ -1,12 +1,15 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { RxExternalLink } from 'react-icons/rx';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 export default function Services() {
+  const router = useRouter();
+
   useEffect(() => {
     AOS.init({
       duration: 600,
@@ -28,6 +31,7 @@ export default function Services() {
         'Leverage artificial intelligence to transform your business operations.',
       image: '/Images/landing-page-images/AI .jpeg',
       icon: RxExternalLink,
+      path: '/services/ai-integration'
     },
     {
       title: 'Mobile Application Development',
@@ -35,6 +39,7 @@ export default function Services() {
         'Deliver mobile apps with exceptional user experiences.',
       image: '/Images/landing-page-images/App development.jpeg',                                   
       icon: RxExternalLink,
+      path: '/services/app-development'
     },
     {
       title: 'Web Development',
@@ -42,8 +47,23 @@ export default function Services() {
         'Create responsive websites using modern technologies.',
       image: '/Images/landing-page-images/Web development.jpeg',
       icon: RxExternalLink,
+      path: '/services/web-development'
     },
   ];
+
+  // Function to handle navigation with smooth scroll
+  const handleNavigation = (path: string) => {
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Navigate to the service page
+    router.push(path);
+    
+    // Reset scroll behavior after navigation
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    }, 1000);
+  };
 
   return (
     <div className="bg-gradient-to-br from-primary-50 via-white to-primary-100 overflow-x-hidden overflow-y-visible min-h-screen snap-y snap-mandatory">
@@ -95,7 +115,10 @@ export default function Services() {
                   <p className="text-base text-gray-600 leading-relaxed">{service.description}</p>
                 </div>
                 <div className="mt-6">
-                  <button className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-800 transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary-700">
+                  <button 
+                    onClick={() => handleNavigation(service.path)}
+                    className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-800 transition-colors duration-300 group-hover:translate-x-1 group-hover:text-primary-700"
+                  >
                     Discover more
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
