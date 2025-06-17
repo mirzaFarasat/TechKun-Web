@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import techkunLogo from "@/public/Images/icon.png";
 import { RiMenu3Fill, RiCloseFill } from "react-icons/ri";
-import { FaGlobe, FaCloud, FaMobile, FaRobot, FaNewspaper, FaBlog, FaBriefcase } from 'react-icons/fa';
+import { FaGlobe, FaCloud, FaMobile, FaRobot, FaBlog, FaBriefcase } from 'react-icons/fa';
 import { Poppins } from 'next/font/google';
 
 // Load Poppins font
@@ -16,10 +16,6 @@ const poppins = Poppins({
     display: 'swap',
 });
 
-const links = [
-    { label: 'Services', href: '/services' },
-    { label: 'About Us', href: '/about-us' }
-];
 
 const services = [
     {

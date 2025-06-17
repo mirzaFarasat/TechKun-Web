@@ -5,41 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-const bannerStyle = {
-    backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/Images/banner-images/Services banner2.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-};
-
-const Banner = () => {
-    return (
-        <div
-            className="relative w-full flex flex-col justify-center items-left"
-            style={bannerStyle}
-        >
-            <div className="case-responsive-container py-56 text-white">
-                <div className="w-full md:w-7/12" style={{
-                    overflowWrap: "normal"
-                }}>
-                    <h1 className="mb-4 banner-heading">
-                        Your Vision, Our Expertise: <br />
-                        Custom Software to <span className='text-primary-500'>Elevate Your Business</span>
-                    </h1>
-                    <p className="mb-6 banner-subtext text-white">
-                        Custom software solutions tailored to elevate your business.
-                    </p>
-                </div>
-                <button className="px-6 py-2 bg-white text-black rounded-lg font-semibold hover:bg-primary-500 hover:text-white">
-                    <Link href="/contact-us">Connect with us</Link>
-                </button>
-            </div>
-        </div>
-    );
-};
 
 const ServiceBanner = () => {
     const pathname = usePathname();
-    
+
     // Determine which service page we're on to customize content
     const getServiceInfo = () => {
         if (pathname.includes('web-development')) {
@@ -86,10 +55,10 @@ const ServiceBanner = () => {
     };
 
     const serviceInfo = getServiceInfo();
-    
+
     // Icon components
     const renderIcon = () => {
-        switch(serviceInfo.icon) {
+        switch (serviceInfo.icon) {
             case "code":
                 return (
                     <svg className="w-16 h-16 text-blue-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +99,7 @@ const ServiceBanner = () => {
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0 bg-[url('/Images/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
             </div>
-            
+
             {/* Digital circuit lines */}
             <div className="absolute inset-0">
                 <svg className="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -139,16 +108,16 @@ const ServiceBanner = () => {
                     <path className="text-cyan-500/5" fill="none" stroke="currentColor" strokeWidth="0.5" d="M0,70 Q50,30 50,70 T100,70" />
                 </svg>
             </div>
-            
+
             {/* Glowing orbs */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl"></div>
-            
+
             {/* Service-specific icon */}
             <div className="absolute right-10 bottom-10 opacity-30 transform rotate-12">
                 {renderIcon()}
             </div>
-            
+
             {/* Content */}
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
                 <motion.div

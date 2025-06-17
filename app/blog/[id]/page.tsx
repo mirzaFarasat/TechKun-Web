@@ -5,9 +5,21 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
+interface Post{
+  id:number;
+  title:string;
+  author: string;
+    authorAvatar: string;
+    date: string;
+    description: string;
+    category: string;
+    readTime: string;
+  content: string[];
+
+}
 
 // Sample blog data - in a real app, you would fetch this from an API or CMS
-const blogPosts = [
+const blogPosts :Post[]= [
   {
     id: 1,
     title: "The Future of AI in Web Development",
@@ -112,7 +124,7 @@ const blogPosts = [
 
 export default function BlogPost() {
   const params = useParams();
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<Post|null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -2,7 +2,7 @@
 
 // Remove unused Image import if not being used
 // import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +12,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function WhatWeDo() {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
     AOS.init({
@@ -118,8 +117,6 @@ export default function WhatWeDo() {
                   className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:translate-y-[-4px] h-[320px]"
                   data-aos="fade-up"
                   data-aos-delay={item.delay}
-                  onMouseEnter={() => setActiveCard(index)}
-                  onMouseLeave={() => setActiveCard(null)}
                 >
                   <div className={`h-2 ${item.color} w-full`}></div>
                   <div className="p-6 flex flex-col h-full">

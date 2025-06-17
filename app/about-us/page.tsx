@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Users, Target, Lightbulb, Award, Heart, Code, Stethoscope, GraduationCap, Utensils, Truck, ArrowRight, Quote, Star, Calendar, MapPin, Coffee } from 'lucide-react';
+import { Users, Code, Stethoscope, GraduationCap, Utensils, Truck, ArrowRight, Quote, Star, Coffee } from 'lucide-react';
 
 const TechKunAboutPage = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
+  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -111,20 +111,20 @@ const TechKunAboutPage = () => {
         {/* Dark background with deep gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-950 to-purple-950">
           {/* Digital grid pattern overlay */}
-          <div 
-            className="absolute inset-0 w-full h-full opacity-20" 
+          <div
+            className="absolute inset-0 w-full h-full opacity-20"
             style={{
               backgroundImage: `url('/Images/blog-pattern.svg')`,
               backgroundSize: '500px 500px',
               backgroundRepeat: 'repeat',
             }}
           ></div>
-          
+
           {/* Animated glowing elements */}
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500 rounded-full mix-blend-screen filter blur-[100px] opacity-15 animate-pulse" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-pulse" style={{animationDelay: '3.5s'}}></div>
-          
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500 rounded-full mix-blend-screen filter blur-[100px] opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-cyan-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-pulse" style={{ animationDelay: '3.5s' }}></div>
+
           {/* Tech circuit lines */}
           <div className="absolute inset-0 opacity-10">
             <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -137,12 +137,12 @@ const TechKunAboutPage = () => {
               <path d="M0,75 L100,75" stroke="rgba(59, 130, 246, 0.2)" strokeWidth="0.05" strokeDasharray="0.2,0.8"></path>
             </svg>
           </div>
-          
+
           {/* Data stream animation */}
           <div className="absolute inset-0 overflow-hidden opacity-20">
             <div className="absolute h-[300%] w-[300%] -top-[100%] -left-[100%]">
               {[...Array(20)].map((_, i) => (
-                <div 
+                <div
                   key={i}
                   className="absolute bg-blue-400 h-0.5 w-16 rounded-full opacity-50"
                   style={{
@@ -157,10 +157,10 @@ const TechKunAboutPage = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <div 
+          <div
             id="hero-content"
             data-animate
             className={`transition-all duration-1000 ${isVisible['hero-content'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -172,7 +172,7 @@ const TechKunAboutPage = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-gray-300">
-              We're building the future of technology, one breakthrough at a time. 
+              We're building the future of technology, one breakthrough at a time.
               <br />From healthcare to education, we make the impossible possible.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -190,7 +190,7 @@ const TechKunAboutPage = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Bottom fade for smooth transition to next section */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-10"></div>
       </section>
@@ -198,7 +198,7 @@ const TechKunAboutPage = () => {
       {/* Who We Are */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             id="who-we-are"
             data-animate
             className={`grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ${isVisible['who-we-are'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -208,12 +208,12 @@ const TechKunAboutPage = () => {
                 Who We Are
               </h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-600">
-                TechKun is more than a tech company—we're digital architects crafting tomorrow's solutions today. 
-                Founded by visionaries who believe technology should enhance human potential, we specialize in 
+                TechKun is more than a tech company—we're digital architects crafting tomorrow's solutions today.
+                Founded by visionaries who believe technology should enhance human potential, we specialize in
                 creating intelligent systems that solve real-world problems across multiple industries.
               </p>
               <p className="text-lg leading-relaxed text-gray-600">
-                Our passion lies in the intersection of innovation and impact, where cutting-edge technology 
+                Our passion lies in the intersection of innovation and impact, where cutting-edge technology
                 meets genuine human needs. We don't just build software—we build futures.
               </p>
             </div>
@@ -235,7 +235,7 @@ const TechKunAboutPage = () => {
       {/* Journey Timeline */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             id="timeline-header"
             data-animate
             className={`text-center mb-16 transition-all duration-1000 ${isVisible['timeline-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -251,14 +251,13 @@ const TechKunAboutPage = () => {
           <div className="relative">
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500"></div>
             {timeline.map((item, index) => (
-              <div 
+              <div
                 key={index}
                 id={`timeline-${index}`}
                 data-animate
-                className={`flex items-center mb-16 transition-all duration-1000 ${
-                  isVisible[`timeline-${index}`] ? 'opacity-100 translate-x-0' : `opacity-0 ${index % 2 === 0 ? '-translate-x-10' : 'translate-x-10'}`
-                } ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                style={{transitionDelay: `${index * 200}ms`}}
+                className={`flex items-center mb-16 transition-all duration-1000 ${isVisible[`timeline-${index}`] ? 'opacity-100 translate-x-0' : `opacity-0 ${index % 2 === 0 ? '-translate-x-10' : 'translate-x-10'}`
+                  } ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'}`}>
                   <div className="p-6 rounded-xl bg-gray-50 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -284,7 +283,7 @@ const TechKunAboutPage = () => {
       {/* Our Verticals */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             id="verticals-header"
             data-animate
             className={`text-center mb-16 transition-all duration-1000 ${isVisible['verticals-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -299,14 +298,13 @@ const TechKunAboutPage = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {verticals.map((vertical, index) => (
-              <div 
+              <div
                 key={index}
                 id={`vertical-${index}`}
                 data-animate
-                className={`group cursor-pointer transition-all duration-1000 ${
-                  isVisible[`vertical-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{transitionDelay: `${index * 150}ms`}}
+                className={`group cursor-pointer transition-all duration-1000 ${isVisible[`vertical-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="p-8 rounded-2xl h-full transition-all duration-300 group-hover:scale-105 bg-white hover:shadow-xl shadow-lg">
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${vertical.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -328,7 +326,7 @@ const TechKunAboutPage = () => {
       {/* Meet the Team */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             id="team-header"
             data-animate
             className={`text-center mb-16 transition-all duration-1000 ${isVisible['team-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -343,14 +341,13 @@ const TechKunAboutPage = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div 
+              <div
                 key={index}
                 id={`team-${index}`}
                 data-animate
-                className={`group transition-all duration-1000 ${
-                  isVisible[`team-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{transitionDelay: `${index * 200}ms`}}
+                className={`group transition-all duration-1000 ${isVisible[`team-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <div className="text-center p-8 rounded-2xl transition-all duration-300 group-hover:scale-105 bg-gray-50 hover:bg-white hover:shadow-xl">
                   <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 p-1">
@@ -380,7 +377,7 @@ const TechKunAboutPage = () => {
       {/* Testimonials */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             id="testimonials-header"
             data-animate
             className={`text-center mb-16 transition-all duration-1000 ${isVisible['testimonials-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -422,9 +419,8 @@ const TechKunAboutPage = () => {
                 <button
                   key={index}
                   onClick={() => setActiveTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    activeTestimonial === index ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
                 />
               ))}
             </div>
@@ -435,7 +431,7 @@ const TechKunAboutPage = () => {
       {/* Call to Action */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div 
+          <div
             id="cta"
             data-animate
             className={`transition-all duration-1000 ${isVisible['cta'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
@@ -447,11 +443,11 @@ const TechKunAboutPage = () => {
               </span>
             </h2>
             <p className="text-xl mb-8 leading-relaxed text-gray-600">
-              Ready to transform your industry? Let's discuss how TechKun can help you 
+              Ready to transform your industry? Let's discuss how TechKun can help you
               achieve breakthrough innovations and sustainable growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact-us">
+              <Link href="/contact-us">
                 <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20">
                   Get in Touch
                 </button>
