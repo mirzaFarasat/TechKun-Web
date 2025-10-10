@@ -361,12 +361,12 @@ const TechKunAboutPage = () => {
                   <p className="mb-3 text-blue-600 font-semibold">
                     {member.role}
                   </p>
-                  <div className="flex items-center justify-center text-sm">
+                  {/* <div className="flex items-center justify-center text-sm">
                     <Coffee className="w-4 h-4 mr-2 text-gray-500" />
                     <span className="text-gray-600">
                       {member.funFact}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
