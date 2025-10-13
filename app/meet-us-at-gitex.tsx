@@ -26,7 +26,7 @@ export default function MeetUsAtGitex() {
                         {/* Left Side - Content */}
                         <div className="w-full md:w-1/2 p-8 md:p-12">
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                Meet Me at GITEX Global Dubai!
+                                Meet Us at GITEX Global Dubai!
                             </h2>
                             <p className="text-gray-600 mb-8 text-sm md:text-base">
                                 We'll be attending <b>GITEX Global Dubai</b> this year!
