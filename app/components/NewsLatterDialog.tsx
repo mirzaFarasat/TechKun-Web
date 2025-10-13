@@ -36,7 +36,7 @@ export default function NewsletterDialog({ isOpen, onClose }: NewsletterDialogPr
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                    className="absolute top-4 right-4 text-gray-600 hover:text-black transition-colors z-10"
                     aria-label="Close dialog"
                 >
                     <X />
@@ -49,7 +49,7 @@ export default function NewsletterDialog({ isOpen, onClose }: NewsletterDialogPr
                             Meet Me at GITEX Global Dubai!
                         </h2>
                         <p className="text-gray-600 mb-8 text-sm md:text-base">
-                            I’ll be attending <b>GITEX Global Dubai</b> this year!
+                            We’ll be attending <b>GITEX Global Dubai</b> this year!
                             If you’re into tech, innovation, or startups, let’s connect and share ideas.
                             Don’t miss this chance to meet in person — it’s going to be an amazing experience!
                         </p>
