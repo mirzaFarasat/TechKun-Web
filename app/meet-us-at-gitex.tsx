@@ -12,7 +12,7 @@ export default function MeetUsAtGitex() {
 
     return (
         showToast && (
-            <div className="fixed top-4 right-4 z-50 max-w-4xl w-11/12 md:w-auto animate-slide-in">
+            <div className="fixed top-4 right-4 z-[100] max-w-4xl w-11/12 md:w-auto animate-slide-in">
                 <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
                     {/* Close Button */}
                     <button
@@ -47,7 +47,7 @@ export default function MeetUsAtGitex() {
                                 <div className="relative toast-float">
                                     <div className="bg-white rounded-2xl shadow-xl p-8 transform rotate-3">
                                         <div className="flex items-center justify-center mb-4">
-                                            <Image src="/GITEX_GLOBAL_2025.png" alt="GITEX Global 2025" />
+                                            <Image src="/GITEX_GLOBAL_2025.png" alt="GITEX Global 2025" width={100} height={100} className="h-full w-full" />
                                         </div>
                                     </div>
                                     {/* Decorative stars */}
