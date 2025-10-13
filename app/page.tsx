@@ -116,7 +116,7 @@ export default function Home() {
                                     <div className="relative toast-float">
                                         <div className="bg-white rounded-2xl shadow-xl p-8 transform rotate-3">
                                             <div className="flex items-center justify-center mb-4">
-                                                <img src="/GITEX_GLOBAL_2025.png" alt="GITEX Global 2025" />
+                                                <Image src="/GITEX_GLOBAL_2025.png" alt="GITEX Global 2025" />
                                             </div>
                                         </div>
                                         {/* Decorative stars */}

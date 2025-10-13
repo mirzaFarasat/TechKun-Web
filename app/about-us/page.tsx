@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Users, Code, Stethoscope, GraduationCap, Utensils, Truck, ArrowRight, Quote, Star, Coffee } from 'lucide-react';
+import { Users, Code, Stethoscope, GraduationCap, Utensils, Truck, ArrowRight, Quote, Star } from 'lucide-react';
 
 const TechKunAboutPage = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);

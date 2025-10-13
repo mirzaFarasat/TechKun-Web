@@ -155,13 +155,11 @@ const GetCustomerDetails = () => {
                                     {servicesList.map(service => (
                                         <div className='flex flex-row items-start' key={service}>
                                             <CheckboxGroup.Root
-                                            value={formData.services}
-                                             className='pt-0.5 pr-2' size="1">
-                                                <CheckboxGroup.Item 
-                                                    value={service}
-                                                
-                                                    onCheckedChange={(checked: any) => handleCheckboxChange(service, checked as boolean)}
-                                                />
+                                                value={formData.services}
+                                                onValueChange={e => setFormData(prev => ({ ...prev, services: e }))}
+                                                className='pt-0.5 pr-2' size="1"
+                                            >
+                                                <CheckboxGroup.Item value={service} />
                                             </CheckboxGroup.Root>
                                             <label className='font-medium cursor-pointer' onClick={() => handleCheckboxChange(service, !formData.services.includes(service))}>
                                                 {service}

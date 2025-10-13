@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import Link from 'next/link';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 interface NewsletterDialogProps {
     isOpen: boolean;
     onClose: () => void;
@@ -69,7 +70,7 @@ export default function NewsletterDialog({ isOpen, onClose }: NewsletterDialogPr
                                 <div className="bg-white rounded-2xl shadow-xl p-8 transform rotate-3">
                                     <div className="flex items-center justify-center mb-4">
 
-                                        <img src="/GITEX_GLOBAL_2025.png" alt="" />
+                                        <Image src="/GITEX_GLOBAL_2025.png" alt="" />
 
                                     </div>
                                 </div>
