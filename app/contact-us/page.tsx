@@ -59,7 +59,7 @@ const GetCustomerDetails = () => {
 
             alert('Form submitted successfully! We will get back to you soon.');
             
-            // Reset form
+          
             setFormData({
                 name: '',
                 email: '',

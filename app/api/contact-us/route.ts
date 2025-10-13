@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend("re_L3T6qVsk_22YMdkPYLiYtGsRfMBhL4BLK");
 
 interface EmailRequest {
   name: string;
