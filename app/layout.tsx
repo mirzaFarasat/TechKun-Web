@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { Theme } from '@radix-ui/themes';
 import Footer from "./Footer";
 import NextTopLoader from 'nextjs-toploader';
+import CookieConsent from './components/CookieConsent';
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -29,13 +30,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en ">
+        <html lang="en">
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Theme>
                     <Navbar />
                     <NextTopLoader />
                     <main className='overflow-hidden'>{children}</main>
+                    <CookieConsent />
                 </Theme>
                 <Footer />
             </body>
