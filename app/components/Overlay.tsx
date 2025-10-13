@@ -1,3 +1,5 @@
+'use client';
+
 import { memo, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState, ReactNode } from "react";
 
 export interface OverlayRef {
@@ -15,18 +17,40 @@ export interface OverlayProps {
 const Overlay = memo(forwardRef<OverlayRef, OverlayProps>(({ children, isOpen, onToggle }, ref) => {
     const [isMounted, setMounted] = useState(false);
     const overlayRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [scrollY, setScrollY] = useState(0);
+
+    // Track scroll position for animation effects
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+        
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Initial check
+        
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const show = useCallback(() => {
         setMounted(true);
         onToggle(true);
+        document.body.style.overflow = 'hidden';
     }, [onToggle]);
 
     const hide = useCallback(() => {
         onToggle(false);
+        document.body.style.overflow = '';
+        // Add a small delay to allow animation to complete
+        setTimeout(() => setMounted(false), 300);
     }, [onToggle]);
 
     const toggle = useCallback(() => {
-        isOpen ? hide() : show();
+        if (isOpen) {
+            hide();
+        } else {
+            show();
+        }
     }, [isOpen, hide, show]);
 
     useImperativeHandle(ref, () => ({
@@ -35,35 +59,46 @@ const Overlay = memo(forwardRef<OverlayRef, OverlayProps>(({ children, isOpen, o
         toggle,
     }), [show, hide, toggle]);
 
-    const onAnimationEnd = useCallback((e: AnimationEvent) => {
-        e.animationName === "overlay-exit" && setMounted(false);
-    }, []);
-
+    // Handle click outside
     useEffect(() => {
-        const overlay = overlayRef.current;
-        overlay?.addEventListener("animationend", onAnimationEnd);
-        return () => overlay?.removeEventListener("animationend", onAnimationEnd);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [overlayRef.current, onAnimationEnd]);
-
-    useEffect(() => {
-        const onClickBelow = (event: MouseEvent) => {
-            const element = overlayRef.current;
-            const rect = element?.getBoundingClientRect();
-            if (rect && (event.clientY > rect.bottom))
+        const handleClickOutside = (event: MouseEvent) => {
+            if (overlayRef.current && 
+                contentRef.current && 
+                !contentRef.current.contains(event.target as Node) && 
+                event.target === overlayRef.current) {
                 hide();
+            }
         };
 
-        document.addEventListener("click", onClickBelow);
-        return () => document.removeEventListener("click", onClickBelow);
-    }, [hide]);
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen, hide]);
+
+    // Calculate backdrop blur based on scroll position
+    const backdropBlur = Math.min(8, scrollY / 100);
 
     return isMounted ? (
-        <div ref={overlayRef}
-            className={`${isOpen ? "animate-[overlay-entry_0.3s_ease-in]" : "animate-[overlay-exit_0.3s_ease-in] opacity-0"}`}
-            onClick={hide}
+        <div 
+            ref={overlayRef}
+            className={`fixed inset-0 z-50 flex flex-col items-center transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
+            style={{
+                backdropFilter: `blur(${backdropBlur}px)`,
+                backgroundColor: `rgba(0, 0, 0, ${Math.min(0.3, scrollY / 1000)})`,
+                pointerEvents: isOpen ? 'auto' : 'none'
+            }}
         >
-            {children}
+            <div 
+                ref={contentRef} 
+                className={`w-full h-full transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {children}
+            </div>
         </div>
     ) : null;
 }));
