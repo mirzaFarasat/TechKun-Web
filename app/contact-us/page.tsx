@@ -56,8 +56,7 @@ const GetCustomerDetails = () => {
             if (!response.ok || !data.success) {
                 throw new Error(data.msg || 'Failed to send message');
             }
-
-            alert('Form submitted successfully! We will get back to you soon.');
+           
             
           
             setFormData({
