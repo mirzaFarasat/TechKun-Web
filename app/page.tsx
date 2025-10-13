@@ -17,7 +17,6 @@ import hiretalenttLogo from "@/public/Images/logos/hiretalentt-logo.png";
 import productivitiImage from "@/public/Images/productiviti-images/productiviti.webp";
 import hiretalenttImage from "@/public/Images/hiretalentt-images/hiretalentt.png";
 import WhyChooseUs from './components/WhyChooseUs';
-import MeetUsAtGitex from './meet-us-at-gitex';
 
 
 export default function Home() {
@@ -72,7 +71,6 @@ export default function Home() {
 
     return (
         <div>
-            <MeetUsAtGitex />
 
             <Banner />
             <AboutUs />
