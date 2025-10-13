@@ -1,9 +1,11 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Image, { StaticImageData } from 'next/image'
 import { RxExternalLink } from "react-icons/rx";
 import Link from 'next/link';
 import Banner from './components/Banner';
 import AboutUs from './components/AboutUs';
+import NewsletterDialog from './components/NewsLatterDialog';
 
 import imageMobileApp1 from '@/public/Images/landing-page-images/Health Tech.jpeg';
 import imageMobileApp2 from '@/public/Images/landing-page-images/Ed-tech.jpeg';
@@ -20,6 +22,17 @@ import WhyChooseUs from './components/WhyChooseUs';
 
 
 export default function Home() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    useEffect(() => {
+        
+     
+            setIsDialogOpen(true);
+    
+
+        
+    }, []);
+
     const services: {
         title: string;
         description: string;
@@ -67,10 +80,15 @@ export default function Home() {
     },
 
 
-        ];
+    ];
 
     return (
         <div>
+            <NewsletterDialog 
+                isOpen={isDialogOpen} 
+                onClose={() => setIsDialogOpen(false)} 
+            />
+
             <Banner />
             <AboutUs />
 
@@ -211,4 +229,3 @@ export default function Home() {
         </div>
     );
 };
-
