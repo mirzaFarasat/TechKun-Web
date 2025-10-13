@@ -56,6 +56,7 @@ const GetCustomerDetails = () => {
             if (!response.ok || !data.success) {
                 throw new Error(data.msg || 'Failed to send message');
             }
+
            
             
           
@@ -153,10 +154,12 @@ const GetCustomerDetails = () => {
                                     <div className='col-span-2 text-gray-600 text-xs'>Services (Optional)</div>
                                     {servicesList.map(service => (
                                         <div className='flex flex-row items-start' key={service}>
-                                            <CheckboxGroup.Root className='pt-0.5 pr-2' size="1">
+                                            <CheckboxGroup.Root
+                                            value={formData.services}
+                                             className='pt-0.5 pr-2' size="1">
                                                 <CheckboxGroup.Item 
                                                     value={service}
-                                                    checked={formData.services.includes(service)}
+                                                
                                                     onCheckedChange={(checked: any) => handleCheckboxChange(service, checked as boolean)}
                                                 />
                                             </CheckboxGroup.Root>
