@@ -1,7 +1,4 @@
 'use client';
-
-import { Point } from "../../lib/svg-utils/svg";
-import { PathBuilder } from "../../lib/svg-utils/path";
 import { useEffect, useState } from "react";
 
 const stringPath = `

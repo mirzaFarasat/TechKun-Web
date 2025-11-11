@@ -31,19 +31,37 @@ self.onmessage = function(e) {
         .l(Point.of(shaftLength - cornerCurveRoom, 0));
     
     const initialAngle = Math.PI / 4;
-    const numberOfArcs = 4;
-    const rotation = 3 * Math.PI / 2 / numberOfArcs;
+    const rotation = 3 * Math.PI / 8;
     const radius = thickness + 2;
     pathBuilder.cSmoothConnector(Point.of(thickness * 7 / 16, -thickness * 9 / 40), undefined, 3 * initialAngle, 1/3);
-    for (let i = 0; i < numberOfArcs; i++) {
-        pathBuilder.cForCircularArc(
-            Point.of(
-                radius * Math.cos(initialAngle + i * rotation),
-                radius * Math.sin(initialAngle + i * rotation)
-            ),
-            rotation
-        );
-    }
+    pathBuilder.cForCircularArc(
+        Point.of(
+            radius * Math.cos(initialAngle + 0 * rotation),
+            radius * Math.sin(initialAngle + 0 * rotation)
+        ),
+        rotation
+    );
+    pathBuilder.cForCircularArc(
+        Point.of(
+            radius * Math.cos(initialAngle + 1 * rotation),
+            radius * Math.sin(initialAngle + 1 * rotation)
+        ),
+        rotation
+    );
+    pathBuilder.cForCircularArc(
+        Point.of(
+            radius * Math.cos(initialAngle + 2 * rotation),
+            radius * Math.sin(initialAngle + 2 * rotation)
+        ),
+        rotation
+    );
+    pathBuilder.cForCircularArc(
+        Point.of(
+            radius * Math.cos(initialAngle + 3 * rotation),
+            radius * Math.sin(initialAngle + 3 * rotation)
+        ),
+        rotation
+    );
     pathBuilder.cSmoothConnector(
         Point.of(-(thickness * 7 / 16), thickness + (thickness * 9 / 40) - radius * 2 * Math.sin(Math.PI / 4)), undefined, 0, 1/3
     );
