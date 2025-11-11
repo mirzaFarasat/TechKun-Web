@@ -1,12 +1,11 @@
 'use client';
 
-import { Point } from "../svg-utils/svg";
-import { PathBuilder } from "../svg-utils/path";
-
-const origin: Point = Point.of(695, 490);
+import { Point } from "../../lib/svg-utils/svg";
+import { PathBuilder } from "../../lib/svg-utils/path";
+import { useEffect, useState } from "react";
 
 const stringPath = `
-    m ${origin.x} ${origin.y}
+    m 695 490
     c -11.0457 0 -20 8.9543 -20 20
     l 0 200
     c 0 71.797 -58.203 130 -130 130
@@ -48,67 +47,18 @@ const stringPath = `
     z
 `;
 
-const pathBuilder = PathBuilder.m(origin)
-    .cSmoothConnector(Point.of(-25, 25), Math.PI, -Math.PI / 2, 1 / Math.SQRT2)
-    .l(Point.of(0, 195))
-    .cForCircularArc(Math.PI / 2, Point.of(-130, 130))
-    .cForCircularArc(Math.PI / 2, Point.of(-130, -130))
-    .l(Point.of(0, -360))
-    .cSmoothConnector(Point.of(-25, -25), -Math.PI / 2, 0, 1 / Math.SQRT2)
-    .l(Point.of(-210, 0))
-    .cForCircularArc(Math.PI / 2, Point.of(-130, -130))
-    .cForCircularArc(Math.PI / 2, Point.of(130, -130))
-    .l(Point.of(195, 0))
-    // .c(Point.of(52.3327, 0), Point.of(100, 55.8413), Point.of(100, 115))
-    .cSmoothConnector(Point.of(120, 145), undefined, -Math.PI / 2, 1/2, 1/Math.sqrt(6))
-    .l(Point.of(0, 10))
-    .cSmoothConnector(Point.of(25, 25), Math.PI / 2, Math.PI, 1 / Math.SQRT2)
-    .l(Point.of(290, 0));
-
-const initialAngle = Math.PI / 4;
-const numberOfArcs = 4;
-const rotation = 3 * Math.PI / 2 / numberOfArcs;
-const radius = 82;
-pathBuilder.cSmoothConnector(Point.of(35, -18), undefined, 3 * initialAngle, 1/3);
-for (let i = 0; i < numberOfArcs; i++) {
-    pathBuilder.cForCircularArc(
-        Point.of(
-            radius * Math.cos(initialAngle + i * rotation),
-            radius * Math.sin(initialAngle + i * rotation)
-        ),
-        rotation
-    );
-}
-pathBuilder.cSmoothConnector(
-    Point.of(-35, 80 + 18 - radius * 2 * Math.sin(Math.PI / 4)), undefined, 0, 1/3
-);
-
-pathBuilder.l(Point.of(-290, 0))
-    .cSmoothConnector(Point.of(-25, 25), Math.PI, -Math.PI / 2, 1 / Math.SQRT2)
-    .l(Point.of(0, 360))
-    .cForCircularArc(-Math.PI / 2, Point.of(50, 50))
-    .cForCircularArc(-Math.PI / 2, Point.of(50, -50))
-    .l(Point.of(0, -260))
-    .cForCircularArc(Math.PI / 2, Point.of(40, -40))
-    .l(Point.of(220, 0))
-    .cForCircularArc(Math.PI / 2, Point.of(40, 40))
-    .cForCircularArc(Math.PI / 2, Point.of(-40, 40))
-    .z()
-    .m(Point.of(-310, -245))
-    .cSmoothConnector(Point.of(25, -25), 0, Math.PI / 2, 1 / Math.SQRT2)
-    // .l(Point.of(0, -1))
-    // .c(Point.of(0, -19.33), Point.of(-22.3858, -35), Point.of(-50, -35))
-    .cSmoothConnector(Point.of(-50, -75), undefined, 0, 1/Math.sqrt(6), 1/2)
-    .l(Point.of(-185, 0))
-    .cForCircularArc(-Math.PI / 2, Point.of(-50, 50))
-    .cForCircularArc(-Math.PI / 2, Point.of(50, 50))
-    .z();
-
-const path = pathBuilder.toString();
-
 export default function LogoAnimated() {
+    const [path, setPath] = useState('');
+    useEffect(() => {
+        const worker = new Worker(new URL("../../lib/techkun-logo-path.ts", import.meta.url));
+        worker.postMessage(null);
+        worker.onmessage = e => setPath(e.data);
+        return () => worker.terminate();
+    }, []);
+    // const viewBoxWidth = spiralLength + 4 * breathingRoom + 3 * thickness + startHandLength;
+    // const viewBoxHeight = gapBwStartHandAndShaft + 7 * breathingRoom / 2 + 4 * thickness + tailLength;
     return <div>
-        <svg width={500} height={500} viewBox="0 0 1200 900">
+        <svg width={550} height={500} viewBox={`0 0 1100 1000`}>
             <path d={path}
                 style={{
                     transition: "d 1000ms"
@@ -117,4 +67,4 @@ export default function LogoAnimated() {
             />
         </svg>
     </div>;
-}
+};
