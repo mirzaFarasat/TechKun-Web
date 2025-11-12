@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function MeetUsAtGitex() {
+export default function MeetUsAtBengaluruTechSummit() {
     const [showToast, setShowToast] = useState(true);
 
     return (
@@ -32,16 +32,16 @@ export default function MeetUsAtGitex() {
                             {/* Left Side - Content */}
                             <div className="w-full md:w-1/2 p-8 md:p-12">
                                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                    Meet Us at GITEX Global Dubai!
+                                    Meet Us at Bengaluru Tech Summit!
                                 </h2>
                                 <p className="text-gray-600 mb-8 text-sm md:text-base">
-                                    We'll be attending <b>GITEX Global Dubai</b> this year!
+                                    We'll be attending <b>Bengaluru Tech Summit</b> on 18, 19, 20 November!
                                     If you're into tech, innovation, or startups, let's connect and share ideas.
                                     Don't miss this chance to meet in person — it's going to be an amazing experience!
                                 </p>
                                 <Link href="/contact-us" onClick={() => setShowToast(false)}>
                                     <button className="text-primary-700 w-full py-3 px-6 rounded-lg bg-primary-700 text-white transition duration-300 transform hover:scale-105 font-semibold">
-                                            Contact Us
+                                        Contact Us
                                     </button>
                                 </Link>
                             </div>
@@ -52,7 +52,7 @@ export default function MeetUsAtGitex() {
                                     <div className="relative toast-float">
                                         <div className="bg-white rounded-2xl shadow-xl p-8 transform rotate-3">
                                             <div className="flex items-center justify-center mb-4">
-                                                <Image src="/GITEX_GLOBAL_2025.png" alt="GITEX Global 2025" width={100} height={100} className="h-full w-full" />
+                                                <Image src="/logo-BTS-25-N.png" alt="Bengaluru Tech Summit 2025" width={100} height={100} className="h-full w-full" />
                                             </div>
                                         </div>
                                         {/* Decorative stars */}
