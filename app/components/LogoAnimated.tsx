@@ -1,4 +1,5 @@
 'use client';
+import { normalize } from "@/lib/svg-utils/math";
 import { PathBuilder } from "@/lib/svg-utils/path";
 import { Point } from "@/lib/svg-utils/svg";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
@@ -53,11 +54,14 @@ function pathData(props: PathProps) {
     
     const arcDivisions = 4;
     const rotation = (Math.PI - orbEntryAngle * 2) / arcDivisions;
-    
-    const base = thickness * 7 / 16;
+
+    const base = Math.min(
+        normalize(Math.abs(orbEntryAngle), 0, 7 / 16, 0, thickness * 7 / 16),
+        thickness * 7 / 16
+    );
     const height = base * Math.tan(orbEntryAngle * orbBaseAngleRatio);
-    const endcapCircleRadius = (thickness - 2 * height) / 2 / Math.cos(orbEntryAngle);
-    
+    const endcapCircleRadius = (thickness / 2 - height) / Math.cos(orbEntryAngle);
+
     pathBuilder.cSmoothConnector(
         Point.of(base, height), 0, orbEntryAngle + Math.PI, 1/3
     );
@@ -72,7 +76,7 @@ function pathData(props: PathProps) {
     }
     pathBuilder.cSmoothConnector(
         Point.of(-base, height), undefined, 0, 1/3
-    );Math.sec
+    );
 
     pathBuilder.l(Point.of(-(upperArmLength - cornerCurveSize), 0))
         .cSmoothConnector(Point.of(-cornerCurveSize, cornerCurveSize), Math.PI, -Math.PI / 2, 1 / Math.SQRT2)
