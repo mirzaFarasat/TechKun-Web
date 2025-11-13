@@ -5,14 +5,18 @@ import { Point } from "@/lib/svg-utils/svg";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 
-interface Animations {
-    upperArmEmerging: {
+interface PathAnimations {
+    upperArmEmerging?: {
         value: number;
         stages: [
             upperArmAppears: number,
             upperArmElongates: number,
             orbAppears: number
         ];
+    };
+    loopForming?: {
+        value: number;
+        stages: []
     };
 };
 
@@ -32,7 +36,7 @@ interface PathProps {
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
 
-function pathData(animations: Animations, props: PathProps = finalProps) {
+function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
         thickness, innerSpacing,
         cornerCurveSize,
@@ -41,7 +45,10 @@ function pathData(animations: Animations, props: PathProps = finalProps) {
         bottomDropLength, loopWidth
     } = props;
     const {
-        upperArmEmerging
+        upperArmEmerging = {
+            value: 1,
+            stages: [0.25, 0.6, 1]
+        }
     } = animations;
     const upperArmLength = clampedNormalize(
         upperArmEmerging.value,
@@ -175,7 +182,7 @@ const finalProps: PathProps = {
     orbEntryAngle: -Math.PI / 4
 };
 
-const finalAnimationState: Animations = {
+const finalAnimationState: PathAnimations = {
     upperArmEmerging: {
         value: 1,
         stages: [0.25, 0.6, 1]
@@ -188,7 +195,7 @@ export default function LogoAnimated() {
         upperArmEmerging,
         value => pathData({
             upperArmEmerging: {
-                ...finalAnimationState.upperArmEmerging,
+                ...finalAnimationState.upperArmEmerging!,
                 value: value
             }
         })

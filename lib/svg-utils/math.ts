@@ -38,6 +38,11 @@ export function normalize(
     newScaleMin = 0,
     newScaleMax = 1
   ) {
+    if (value <= currentScaleMin)
+        return newScaleMin;
+    if (value >= currentScaleMax)
+        return newScaleMax;
+
     return clamp(
       normalize(
         value,
