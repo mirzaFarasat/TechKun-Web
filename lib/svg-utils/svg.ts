@@ -9,6 +9,10 @@ export class Point {
     public add(vector: Vector): Point {
         return new Point(this.x + vector.x, this.y + vector.y);
     }
+
+    public toVector(): Vector {
+        return new Vector(this.x, this.y);
+    }
 }
 
 export enum RotationDirection {
@@ -17,6 +21,8 @@ export enum RotationDirection {
 
 export class Vector {
     private _magnitude: number;
+
+    static readonly NULL_VECTOR = new Vector(0, 0);
 
     constructor(private _x: number, private _y: number) {
         this._magnitude = Math.hypot(_x, _y);
@@ -45,6 +51,8 @@ export class Vector {
     }
 
     public unit(): Vector {
+        if (this._magnitude === 0)
+            return Vector.NULL_VECTOR;
         return new Vector(this.x / this._magnitude, this.y / this._magnitude);
     }
 
@@ -75,5 +83,9 @@ export class Vector {
         const newY = this.x * sine + this.y * cosine;
         this._x = newX;
         this._y = newY;
+    }
+
+    public toPoint(): Point {
+        return new Point(this.x, this.y);
     }
 };

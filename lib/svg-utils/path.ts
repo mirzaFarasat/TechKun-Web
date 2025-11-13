@@ -9,7 +9,7 @@ export abstract class Command {
 };
 
 export class MoveCommand extends Command {
-    constructor(readonly point: Point) {
+    constructor(readonly point: Vector) {
         super();
         // super(previous);
     }
@@ -20,7 +20,7 @@ export class MoveCommand extends Command {
 };
 
 export class LineCommand extends Command {
-    constructor(readonly endPoint: Point) {
+    constructor(readonly endPoint: Vector) {
         super();
         // super(previous);
     }
@@ -31,7 +31,7 @@ export class LineCommand extends Command {
 };
 
 export class QuadraticBezierCurveCommand extends Command {
-    constructor(readonly controlPoint: Point, readonly endPoint: Point) {
+    constructor(readonly controlPoint: Vector, readonly endPoint: Vector) {
         super();
         // super(previous);
     }
@@ -43,9 +43,9 @@ export class QuadraticBezierCurveCommand extends Command {
 
 export class CubicBezierCurveCommand extends Command {
     constructor(
-        readonly firstControlPoint: Point,
-        readonly secondControlPoint: Point,
-        readonly endPoint: Point
+        readonly firstControlPoint: Vector,
+        readonly secondControlPoint: Vector,
+        readonly endPoint: Vector
     ) {
         super();
         // super(previous);
@@ -63,7 +63,7 @@ export class EllipticalArcCommand extends Command {
         readonly xAxisRotation: number,
         readonly largeArcFlag: 0 | 1,
         readonly sweepFlag: 0 | 1,
-        readonly endPoint: Point
+        readonly endPoint: Vector
     ) {
         super();
         // super(previous);
@@ -95,11 +95,11 @@ export class Path {
 
 export class PathBuilder {
     private commands: Command[] = [];
-    private constructor(point: Point) {
+    private constructor(point: Vector) {
         this.m(point);
     }
 
-    public static m(point: Point) {
+    public static m(point: Vector) {
         return new PathBuilder(point);
     }
 
@@ -108,66 +108,66 @@ export class PathBuilder {
             null : this.commands[this.commands.length - 1];
     }
 
-    public m(point: Point) {
+    public m(point: Vector) {
         this.commands.push(new MoveCommand(point));
         return this;
     }
 
-    public l(point: Point) {
+    public l(point: Vector) {
         this.commands.push(new LineCommand(point));
         return this;
     }
 
-    public q(controlPoint: Point, endPoint: Point) {
+    public q(controlPoint: Vector, endPoint: Vector) {
         this.commands.push(new QuadraticBezierCurveCommand(controlPoint, endPoint));
         return this;
     }
 
-    public c(firstControlPoint: Point, secondControlPoint: Point, endPoint: Point) {
+    public c(firstControlPoint: Vector, secondControlPoint: Vector, endPoint: Vector) {
         this.commands.push(new CubicBezierCurveCommand(firstControlPoint, secondControlPoint, endPoint));
         return this;
     }
 
-    public cForCircularArc(angle: number, endingPoint: Point): PathBuilder;
-    public cForCircularArc(center: Point, angle: number): PathBuilder;
+    public cForCircularArc(angle: number, endingPoint: Vector): PathBuilder;
+    public cForCircularArc(center: Vector, angle: number): PathBuilder;
 
     public cForCircularArc(
-        ...args: [angle: number, endingPoint: Point] |
-            [center: Point, angle: number]
+        ...args: [angle: number, endingPoint: Vector] |
+            [center: Vector, angle: number]
     ) {
         const startingPoint = Point.of(0, 0);
         let cubicBezierCurve;
-        if (typeof args[0] === "number" && args[1] instanceof Point)
-            cubicBezierCurve = cubicBezierCurveForCircularArc(startingPoint, args[0], args[1]);
-        else if (args[0] instanceof Point && typeof args[1] === "number")
-            cubicBezierCurve = cubicBezierCurveForCircularArc(args[0], startingPoint, args[1]);
+        if (typeof args[0] === "number" && args[1] instanceof Vector)
+            cubicBezierCurve = cubicBezierCurveForCircularArc(startingPoint, args[0], args[1].toPoint());
+        else if (args[0] instanceof Vector && typeof args[1] === "number")
+            cubicBezierCurve = cubicBezierCurveForCircularArc(args[0].toPoint(), startingPoint, args[1]);
         else
             throw new Error("Invalid Arguments");
 
         const { firstControlPoint, secondControlPoint, endingPoint } = cubicBezierCurve;
         this.commands.push(new CubicBezierCurveCommand(
-            Point.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
-            Point.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
-            endingPoint
+            Vector.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
+            Vector.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
+            endingPoint.toVector()
         ));
         return this;
     }
 
     public cForEllipticalArc(
-        center: Point, angle: number, axisRatio: number, ellipseRotation: number = 0
+        center: Vector, angle: number, axisRatio: number, ellipseRotation: number = 0
     ) {
-        const cubicBezierCurve = cubicBezierCurveForEllipticalArc(center, Point.of(0, 0), angle, axisRatio, ellipseRotation);
+        const cubicBezierCurve = cubicBezierCurveForEllipticalArc(center.toPoint(), Point.of(0, 0), angle, axisRatio, ellipseRotation);
         const { firstControlPoint, secondControlPoint, endingPoint } = cubicBezierCurve;
         this.commands.push(new CubicBezierCurveCommand(
-            Point.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
-            Point.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
-            endingPoint
+            Vector.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
+            Vector.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
+            endingPoint.toVector()
         ));
         return this;
     }
 
     public cSmoothConnector(
-        endingPoint: Point,
+        endingPoint: Vector,
         startAngle?: number, endAngle?: number,
         curvatureA: number = 1/3,
         curvatureB: number = curvatureA
@@ -178,11 +178,11 @@ export class PathBuilder {
         } else {
             const lastCommand = this.lastCommand();
             if (lastCommand instanceof LineCommand) {
-                startDirection = Vector.from(Point.of(0, 0), lastCommand.endPoint).unit();
+                startDirection = Vector.from(Point.of(0, 0), lastCommand.endPoint.toPoint()).unit();
             } else if (lastCommand instanceof CubicBezierCurveCommand) {
-                startDirection = Vector.from(lastCommand.secondControlPoint, lastCommand.endPoint).unit();
+                startDirection = Vector.from(lastCommand.secondControlPoint.toPoint(), lastCommand.endPoint.toPoint()).unit();
             } else if (lastCommand instanceof QuadraticBezierCurveCommand) {
-                startDirection = Vector.from(lastCommand.controlPoint, lastCommand.endPoint).unit();
+                startDirection = Vector.from(lastCommand.controlPoint.toPoint(), lastCommand.endPoint.toPoint()).unit();
             }
         }
         let endDirection: Vector | null = null;
@@ -190,13 +190,13 @@ export class PathBuilder {
             endDirection = Vector.of(Math.cos(endAngle), Math.sin(endAngle));
         }
         const { firstControlPoint, secondControlPoint } = cubicBezierBetween(
-            Point.of(0, 0), endingPoint,
+            Point.of(0, 0), endingPoint.toPoint(),
             startDirection ?? undefined, endDirection ?? undefined,
             curvatureA, curvatureB
         );
         this.commands.push(new CubicBezierCurveCommand(
-            Point.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
-            Point.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
+            Vector.of(round(firstControlPoint.x, 4), round(firstControlPoint.y, 4)),
+            Vector.of(round(secondControlPoint.x, 4), round(secondControlPoint.y, 4)),
             endingPoint
         ));
         return this;
@@ -208,7 +208,7 @@ export class PathBuilder {
         xAxisRotation: number,
         largeArcFlag: 0 | 1,
         sweepFlag: 0 | 1,
-        endPoint: Point
+        endPoint: Vector
     ) {
         this.commands.push(new EllipticalArcCommand(xRadius, yRadius, xAxisRotation, largeArcFlag, sweepFlag, endPoint));
         return this;

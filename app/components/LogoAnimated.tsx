@@ -1,7 +1,7 @@
 'use client';
 import { clampedNormalize } from "@/lib/svg-utils/math";
 import { PathBuilder } from "@/lib/svg-utils/path";
-import { Point } from "@/lib/svg-utils/svg";
+import { Point, Vector } from "@/lib/svg-utils/svg";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 
@@ -16,7 +16,14 @@ interface PathAnimations {
     };
     loopForming?: {
         value: number;
-        stages: []
+        stages: [
+            loopTopBendAppears: number,
+            loopTopWidthAppears: number,
+            loopTopCurveAppears: number,
+            loopBottomCurveAppears: number,
+            loopBottomWidthAppears: number,
+            loopCloses: number
+        ];
     };
 };
 
@@ -48,6 +55,10 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         upperArmEmerging = {
             value: 1,
             stages: [0.25, 0.6, 1]
+        },
+        loopForming = {
+            value: 1,
+            stages: [0.2, 0.35, 0.5, 0.65, 0.8, 1]
         }
     } = animations;
     const upperArmLength = clampedNormalize(
@@ -66,103 +77,165 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         orbEntryAngle, props.orbEntryAngle
     );
 
-    const origin: Point = Point.of(
+    const origin: Vector = Vector.of(
         loopWidth + 5 * innerSpacing / 2 + 3 * thickness + cornerCurveSize,
         interArmGap + 2 * innerSpacing + 3 * thickness
     );
     
     const pathBuilder = PathBuilder.m(origin)
-        .cSmoothConnector(Point.of(-cornerCurveSize, cornerCurveSize), Math.PI, -Math.PI / 2, 1 / Math.SQRT2)
-        .l(Point.of(0, bottomDropLength - cornerCurveSize))
-        .cForCircularArc(Math.PI / 2, Point.of(-(thickness + innerSpacing / 2), (thickness + innerSpacing / 2)))
-        .cForCircularArc(Math.PI / 2, Point.of(-(thickness + innerSpacing / 2), -(thickness + innerSpacing / 2)))
-        .l(Point.of(0, -(bottomDropLength + thickness + interArmGap - cornerCurveSize)))
-        .cSmoothConnector(Point.of(-cornerCurveSize, -cornerCurveSize), -Math.PI / 2, 0, 1 / Math.SQRT2);
-    pathBuilder
-        .m(Point.of(0, -thickness))
-        .cSmoothConnector(Point.of(cornerCurveSize, -cornerCurveSize), 0, Math.PI / 2, 1 / Math.SQRT2)
-        .cSmoothConnector(Point.of(-50, -(innerSpacing - cornerCurveSize)), undefined, 0, 1/Math.sqrt(6), 1/2)
-        .l(Point.of(-(loopWidth - 50), 0))
-        .cForCircularArc(-Math.PI / 2, Point.of(-innerSpacing / 2, innerSpacing / 2))
-        .cForCircularArc(-Math.PI / 2, Point.of(innerSpacing / 2, innerSpacing / 2))
-        .z();
-    pathBuilder
-        .m(Point.of(0, thickness))
-        .l(Point.of(-(loopWidth - cornerCurveSize), 0))
-        .cForCircularArc(Math.PI / 2, Point.of(-(thickness + innerSpacing / 2), -(thickness + innerSpacing / 2)))
-        .cForCircularArc(Math.PI / 2, Point.of(thickness + innerSpacing / 2, -(thickness + innerSpacing / 2)))
-        .l(Point.of(loopWidth - (50 - 10), 0))
-        .cSmoothConnector(Point.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10), undefined, -Math.PI / 2, 1/2, 1/Math.sqrt(6))
-        .l(Point.of(0, 10));
-
-    const cornerAngle = clampedNormalize(
-        upperArmEmerging.value,
-        upperArmEmerging.stages[0], upperArmEmerging.stages[1],
-        orbEntryAngle + Math.PI, Math.PI
-    );
-    const cornerXDistance = clampedNormalize(
-        upperArmEmerging.value,
-        0, upperArmEmerging.stages[0],
-        0, cornerCurveSize
-    );
-    const cornerYDistance = clampedNormalize(
-        upperArmEmerging.value,
-        upperArmEmerging.stages[0], upperArmEmerging.stages[1],
-        cornerCurveSize + thickness / 2 * (1 - Math.cos(orbEntryAngle)), cornerCurveSize
-    );
-    const cornerCurvature = clampedNormalize(
-        upperArmEmerging.value,
-        0, upperArmEmerging.stages[0],
-        0, Math.SQRT1_2
-    );
-
-    pathBuilder.cSmoothConnector(Point.of(cornerXDistance, cornerYDistance), Math.PI / 2, cornerAngle, cornerCurvature)
-        .l(Point.of(upperArmLength - cornerCurveSize, 0));
-    
-    const arcDivisions = 4;
-    const rotation = (Math.PI - orbEntryAngle * 2) / arcDivisions;
-
-    const base = clampedNormalize(
-        upperArmEmerging.value,
-        upperArmEmerging.stages[0], upperArmEmerging.stages[1],
-        0, thickness * 7 / 16
-    );
-    const height = base * Math.tan(orbEntryAngle * orbBaseAngleRatio);
-    const cosine = Math.cos(orbEntryAngle);
-    const endcapCircleRadius = clampedNormalize(
-        upperArmEmerging.value,
-        upperArmEmerging.stages[0], upperArmEmerging.stages[1],
-        thickness / 2, cosine !== 0 ? (thickness / 2 - height) / cosine: 0
-    );
-
-    pathBuilder.cSmoothConnector(
-        Point.of(base, height), 0, orbEntryAngle + Math.PI, 1/3
-    );
-    for (let i = 0; i < arcDivisions; i++) {
-        pathBuilder.cForCircularArc(
-            Point.of(
-                -endcapCircleRadius * Math.sin(orbEntryAngle + i * rotation),
-                endcapCircleRadius * Math.cos(orbEntryAngle + i * rotation)
-            ),
-            rotation
+        .cSmoothConnector(Vector.of(-cornerCurveSize, cornerCurveSize), Math.PI, -Math.PI / 2, Math.SQRT1_2)
+        .l(Vector.of(0, bottomDropLength - cornerCurveSize))
+        .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), (thickness + innerSpacing / 2)))
+        .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), -(thickness + innerSpacing / 2)))
+        .l(Vector.of(0, -(bottomDropLength + thickness + interArmGap - cornerCurveSize)));
+    {
+        const loopTopWidth = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[0], loopForming.stages[1],
+            0, loopWidth - 50
         );
+        const loopTopCurveAngle = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[1], loopForming.stages[2],
+            0, -Math.PI / 2
+        );
+        const topCurveAngleSine = Math.sin(loopTopCurveAngle);
+        const topCurveAngleCosine = Math.cos(loopTopCurveAngle);
+
+        const loopBottomCurveAngle = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[2], loopForming.stages[3],
+            0, -Math.PI / 2
+        );
+        const bottomCurveAngleSine = Math.sin(loopBottomCurveAngle);
+        const bottomCurveAngleCosine = Math.cos(loopBottomCurveAngle);
+        
+        const loopLinecapAngle = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[4], loopForming.stages[5],
+            Math.PI / 2, 0
+        );
+        const cornerCurvature = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[4], loopForming.stages[5],
+            0, Math.SQRT1_2
+        );
+        const linecapAngleSine = thickness / 2 * Math.sin(loopLinecapAngle);
+        const linecapAngleCosine = thickness / 2 * Math.cos(loopLinecapAngle);
+
+        const cornerCurveClamp = Math.max(0, cornerCurveSize - linecapAngleSine);
+        const loopLineOffset = Math.max(cornerCurveSize, linecapAngleSine);
+        const loopBottomWidth = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[3], loopForming.stages[4],
+            0, loopWidth - loopLineOffset
+        );
+
+        pathBuilder
+            .cSmoothConnector(
+                Vector.of(-cornerCurveClamp, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
+                -Math.PI / 2, -loopLinecapAngle, cornerCurvature
+            )
+            .l(Vector.of(0, -2 * linecapAngleCosine))
+            .cSmoothConnector(
+                Vector.of(cornerCurveClamp, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
+                loopLinecapAngle, Math.PI / 2, cornerCurvature
+            )
+            .cSmoothConnector(Vector.of(-50, -(innerSpacing - cornerCurveSize)), -Math.PI / 2, 0, 1/Math.sqrt(6), 1/2)
+            .l(Vector.of(-loopTopWidth, 0))
+            .cForCircularArc(Vector.of(0, innerSpacing / 2), loopTopCurveAngle)
+            .cForCircularArc(Vector.of(innerSpacing / 2, 0), loopBottomCurveAngle)
+            .l(Vector.of(loopBottomWidth, 0));
+            const linecapCenterFromInnerEdge = Vector.of(-thickness / 2 * bottomCurveAngleCosine, -thickness / 2 * bottomCurveAngleSine);
+            linecapCenterFromInnerEdge.rotate(Math.PI / 2 + loopTopCurveAngle);
+            const linecapCenterFromOuterEdge = Vector.of(
+                -linecapAngleSine,
+                -linecapAngleCosine
+            );
+            linecapCenterFromOuterEdge.rotate(Math.PI / 2 + loopBottomCurveAngle);
+            linecapCenterFromOuterEdge.rotate(Math.PI / 2 + loopTopCurveAngle);
+        pathBuilder
+            .cForCircularArc(linecapCenterFromInnerEdge, loopLinecapAngle)
+            .l(Vector.of(0, 2 * linecapAngleCosine))
+            .cForCircularArc(linecapCenterFromOuterEdge, loopLinecapAngle)
+            .l(Vector.of(-loopBottomWidth, 0))
+            .cForCircularArc(Vector.of((thickness + innerSpacing / 2) * bottomCurveAngleCosine, (thickness + innerSpacing / 2) * bottomCurveAngleSine), -loopBottomCurveAngle)
+            .cForCircularArc(Vector.of(-(thickness + innerSpacing / 2) * topCurveAngleSine, (thickness + innerSpacing / 2) * topCurveAngleCosine), -loopTopCurveAngle)
+            .l(Vector.of(loopTopWidth + 10, 0))
+            .cSmoothConnector(Vector.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10), 0, -Math.PI / 2, 1/2, 1/Math.sqrt(6))
+            .l(Vector.of(0, 10));
     }
-    pathBuilder.cSmoothConnector(
-        Point.of(-base, height), undefined, 0, 1/3
-    );
 
-    pathBuilder.l(Point.of(-(upperArmLength - cornerCurveSize), 0))
-        .cSmoothConnector(Point.of(-cornerXDistance, cornerYDistance), -cornerAngle, -Math.PI / 2, cornerCurvature);
+    {
+        const cornerAngle = clampedNormalize(
+            upperArmEmerging.value,
+            upperArmEmerging.stages[0], upperArmEmerging.stages[1],
+            orbEntryAngle + Math.PI, Math.PI
+        );
+        const cornerXDistance = clampedNormalize(
+            upperArmEmerging.value,
+            0, upperArmEmerging.stages[0],
+            0, cornerCurveSize
+        );
+        const cornerYDistance = clampedNormalize(
+            upperArmEmerging.value,
+            upperArmEmerging.stages[0], upperArmEmerging.stages[1],
+            cornerCurveSize + thickness / 2 * (1 - Math.cos(orbEntryAngle)), cornerCurveSize
+        );
+        const cornerCurvature = clampedNormalize(
+            upperArmEmerging.value,
+            0, upperArmEmerging.stages[0],
+            0, Math.SQRT1_2
+        );
 
-    pathBuilder.l(Point.of(0, bottomDropLength + thickness + interArmGap - cornerCurveSize))
-        .cForCircularArc(-Math.PI / 2, Point.of(innerSpacing / 2, innerSpacing / 2))
-        .cForCircularArc(-Math.PI / 2, Point.of(innerSpacing / 2, -innerSpacing / 2))
-        .l(Point.of(0, -(bottomDropLength + thickness / 2)))
-        .cForCircularArc(Math.PI / 2, Point.of(thickness / 2, -thickness / 2))
-        .l(Point.of(lowerArmLength, 0))
-        .cForCircularArc(Math.PI / 2, Point.of(thickness / 2, thickness / 2))
-        .cForCircularArc(Math.PI / 2, Point.of(-thickness / 2, thickness / 2))
-        .l(Point.of(-(lowerArmLength - thickness / 2 - cornerCurveSize), 0))
+        pathBuilder.cSmoothConnector(Vector.of(cornerXDistance, cornerYDistance), Math.PI / 2, cornerAngle, cornerCurvature)
+            .l(Vector.of(upperArmLength - cornerCurveSize, 0));
+        
+        const arcDivisions = 4;
+        const rotation = (Math.PI - orbEntryAngle * 2) / arcDivisions;
+
+        const base = clampedNormalize(
+            upperArmEmerging.value,
+            upperArmEmerging.stages[0], upperArmEmerging.stages[1],
+            0, thickness * 7 / 16
+        );
+        const height = base * Math.tan(orbEntryAngle * orbBaseAngleRatio);
+        const cosine = Math.cos(orbEntryAngle);
+        const endcapCircleRadius = clampedNormalize(
+            upperArmEmerging.value,
+            upperArmEmerging.stages[0], upperArmEmerging.stages[1],
+            thickness / 2, cosine !== 0 ? (thickness / 2 - height) / cosine: 0
+        );
+
+        pathBuilder.cSmoothConnector(
+            Vector.of(base, height), 0, orbEntryAngle + Math.PI, 1/3
+        );
+        for (let i = 0; i < arcDivisions; i++) {
+            pathBuilder.cForCircularArc(
+                Vector.of(
+                    -endcapCircleRadius * Math.sin(orbEntryAngle + i * rotation),
+                    endcapCircleRadius * Math.cos(orbEntryAngle + i * rotation)
+                ),
+                rotation
+            );
+        }
+        pathBuilder.cSmoothConnector(
+            Vector.of(-base, height), undefined, 0, 1/3
+        );
+
+        pathBuilder.l(Vector.of(-(upperArmLength - cornerCurveSize), 0))
+            .cSmoothConnector(Vector.of(-cornerXDistance, cornerYDistance), -cornerAngle, -Math.PI / 2, cornerCurvature);
+    }
+
+    pathBuilder.l(Vector.of(0, bottomDropLength + thickness + interArmGap - cornerCurveSize))
+        .cForCircularArc(-Math.PI / 2, Vector.of(innerSpacing / 2, innerSpacing / 2))
+        .cForCircularArc(-Math.PI / 2, Vector.of(innerSpacing / 2, -innerSpacing / 2))
+        .l(Vector.of(0, -(bottomDropLength + thickness / 2)))
+        .cForCircularArc(Math.PI / 2, Vector.of(thickness / 2, -thickness / 2))
+        .l(Vector.of(lowerArmLength, 0))
+        .cForCircularArc(Math.PI / 2, Vector.of(thickness / 2, thickness / 2))
+        .cForCircularArc(Math.PI / 2, Vector.of(-thickness / 2, thickness / 2))
+        .l(Vector.of(-(lowerArmLength - thickness / 2 - cornerCurveSize), 0))
         .z();
 
     return pathBuilder.toString();
@@ -183,6 +256,10 @@ const finalProps: PathProps = {
 };
 
 const finalAnimationState: PathAnimations = {
+    loopForming: {
+        value: 1,
+        stages: [0.25, 0.4, 0.55, 0.7, 0.85, 1]
+    },
     upperArmEmerging: {
         value: 1,
         stages: [0.25, 0.6, 1]
@@ -190,25 +267,37 @@ const finalAnimationState: PathAnimations = {
 };
 
 export default function LogoAnimated() {
+    const loopForming = useMotionValue(0.25);
     const upperArmEmerging = useMotionValue(0);
     const path = useTransform<number, string>(
-        upperArmEmerging,
+        [loopForming, upperArmEmerging],
         value => pathData({
+            loopForming: {
+                ...finalAnimationState.loopForming!,
+                value: value[0]
+            },
             upperArmEmerging: {
                 ...finalAnimationState.upperArmEmerging!,
-                value: value
+                value: value[1]
             }
         })
     );
     async function startAnimation() {
+        await animate(loopForming, 1, {
+            duration: 1,
+            delay: 1
+        });
         await animate(upperArmEmerging, 1, {
-            duration: 0.5,
-            delay: 0.5
+            duration: 1,
+            // delay: 1
         });
     };
     async function reverseAnimation() {
         await animate(upperArmEmerging, 0, {
-            duration: 0.5
+            duration: 1
+        });
+        await animate(loopForming, 0.25, {
+            duration: 1
         });
         startAnimation();
     };
