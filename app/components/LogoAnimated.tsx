@@ -1,7 +1,7 @@
 'use client';
 import { clampedNormalize } from "@/lib/svg-utils/math";
 import { PathBuilder } from "@/lib/svg-utils/path";
-import { Point, Vector } from "@/lib/svg-utils/svg";
+import { Vector } from "@/lib/svg-utils/svg";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 
@@ -54,7 +54,7 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
         upperArmEmerging = {
             value: 1,
-            stages: [0.25, 0.6, 1]
+            stages: [0.3, 0.6, 1]
         },
         loopForming = {
             value: 1,
@@ -97,70 +97,71 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         const loopTopCurveAngle = clampedNormalize(
             loopForming.value,
             loopForming.stages[1], loopForming.stages[2],
-            0, -Math.PI / 2
+            0, Math.PI / 2
         );
-        const topCurveAngleSine = Math.sin(loopTopCurveAngle);
-        const topCurveAngleCosine = Math.cos(loopTopCurveAngle);
 
         const loopBottomCurveAngle = clampedNormalize(
             loopForming.value,
             loopForming.stages[2], loopForming.stages[3],
-            0, -Math.PI / 2
+            0, Math.PI / 2
         );
-        const bottomCurveAngleSine = Math.sin(loopBottomCurveAngle);
-        const bottomCurveAngleCosine = Math.cos(loopBottomCurveAngle);
         
         const loopLinecapAngle = clampedNormalize(
             loopForming.value,
             loopForming.stages[4], loopForming.stages[5],
             Math.PI / 2, 0
         );
+        const linecapAngleVector = Vector.of(Math.cos(loopLinecapAngle), Math.sin(loopLinecapAngle));
+        linecapAngleVector.scale(thickness / 2);
+
         const cornerCurvature = clampedNormalize(
             loopForming.value,
             loopForming.stages[4], loopForming.stages[5],
             0, Math.SQRT1_2
         );
-        const linecapAngleSine = thickness / 2 * Math.sin(loopLinecapAngle);
-        const linecapAngleCosine = thickness / 2 * Math.cos(loopLinecapAngle);
 
-        const cornerCurveClamp = Math.max(0, cornerCurveSize - linecapAngleSine);
-        const loopLineOffset = Math.max(cornerCurveSize, linecapAngleSine);
+        const cornerCurveClamped = Math.max(0, cornerCurveSize - linecapAngleVector.y);
         const loopBottomWidth = clampedNormalize(
             loopForming.value,
             loopForming.stages[3], loopForming.stages[4],
-            0, loopWidth - loopLineOffset
+            0, loopWidth - Math.max(cornerCurveSize, linecapAngleVector.y)
         );
 
         pathBuilder
             .cSmoothConnector(
-                Vector.of(-cornerCurveClamp, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
+                Vector.of(-cornerCurveClamped, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
                 -Math.PI / 2, -loopLinecapAngle, cornerCurvature
             )
-            .l(Vector.of(0, -2 * linecapAngleCosine))
+            .l(Vector.of(0, -2 * linecapAngleVector.x))
             .cSmoothConnector(
-                Vector.of(cornerCurveClamp, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
+                Vector.of(cornerCurveClamped, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
                 loopLinecapAngle, Math.PI / 2, cornerCurvature
             )
             .cSmoothConnector(Vector.of(-50, -(innerSpacing - cornerCurveSize)), -Math.PI / 2, 0, 1/Math.sqrt(6), 1/2)
             .l(Vector.of(-loopTopWidth, 0))
-            .cForCircularArc(Vector.of(0, innerSpacing / 2), loopTopCurveAngle)
-            .cForCircularArc(Vector.of(innerSpacing / 2, 0), loopBottomCurveAngle)
+            .cForCircularArc(Vector.of(0, innerSpacing / 2), -loopTopCurveAngle)
+            .cForCircularArc(Vector.of(innerSpacing / 2, 0), -loopBottomCurveAngle)
             .l(Vector.of(loopBottomWidth, 0));
-            const linecapCenterFromInnerEdge = Vector.of(-thickness / 2 * bottomCurveAngleCosine, -thickness / 2 * bottomCurveAngleSine);
-            linecapCenterFromInnerEdge.rotate(Math.PI / 2 + loopTopCurveAngle);
-            const linecapCenterFromOuterEdge = Vector.of(
-                -linecapAngleSine,
-                -linecapAngleCosine
-            );
-            linecapCenterFromOuterEdge.rotate(Math.PI / 2 + loopBottomCurveAngle);
-            linecapCenterFromOuterEdge.rotate(Math.PI / 2 + loopTopCurveAngle);
+
+        const linecapCenterFromInnerEdge = Vector.of(0, thickness / 2);
+        linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
+        linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
+        const linecapCenterFromOuterEdge = Vector.of(0, -thickness / 2);
+        linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
+        linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
+        linecapCenterFromOuterEdge.rotate(-loopLinecapAngle);
         pathBuilder
             .cForCircularArc(linecapCenterFromInnerEdge, loopLinecapAngle)
-            .l(Vector.of(0, 2 * linecapAngleCosine))
-            .cForCircularArc(linecapCenterFromOuterEdge, loopLinecapAngle)
+            .l(Vector.of(0, 2 * linecapAngleVector.x))
+            .cForCircularArc(linecapCenterFromOuterEdge, loopLinecapAngle);
+        const bottomCurveCenterFromOuterEdge = Vector.of(0, -(thickness + innerSpacing / 2));
+        bottomCurveCenterFromOuterEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
+        const topCurveCenterFromOuterEdge = Vector.of(thickness + innerSpacing / 2, 0);
+        topCurveCenterFromOuterEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
+        pathBuilder
             .l(Vector.of(-loopBottomWidth, 0))
-            .cForCircularArc(Vector.of((thickness + innerSpacing / 2) * bottomCurveAngleCosine, (thickness + innerSpacing / 2) * bottomCurveAngleSine), -loopBottomCurveAngle)
-            .cForCircularArc(Vector.of(-(thickness + innerSpacing / 2) * topCurveAngleSine, (thickness + innerSpacing / 2) * topCurveAngleCosine), -loopTopCurveAngle)
+            .cForCircularArc(bottomCurveCenterFromOuterEdge, loopBottomCurveAngle)
+            .cForCircularArc(topCurveCenterFromOuterEdge, loopTopCurveAngle)
             .l(Vector.of(loopTopWidth + 10, 0))
             .cSmoothConnector(Vector.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10), 0, -Math.PI / 2, 1/2, 1/Math.sqrt(6))
             .l(Vector.of(0, 10));
@@ -262,7 +263,7 @@ const finalAnimationState: PathAnimations = {
     },
     upperArmEmerging: {
         value: 1,
-        stages: [0.25, 0.6, 1]
+        stages: [0.3, 0.6, 1]
     }
 };
 
