@@ -46,8 +46,8 @@ interface PathProps {
 };
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
-const SQRT1_3 = 1 / Math.sqrt(3);
-const SQRT1_6 = 1 / Math.sqrt(6);
+const SQRT1_3 = 1 / 2;
+const SQRT1_6 = 1 / Math.sqrt(5);
 
 function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
@@ -91,12 +91,12 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         orbEntryAngle, props.orbEntryAngle
     );
 
-    const origin: Vector = Vector.of(
+    const origin: Point = Point.of(
         loopWidth + 5 * innerSpacing / 2 + 3 * thickness + cornerCurveSize,
         interArmGap + 2 * innerSpacing + 3 * thickness
     );
     
-    const pathBuilder = PathBuilder.m(origin)
+    const pathBuilder = PathBuilder.M(origin)
         .cSmoothConnector(Vector.of(-cornerCurveSize, cornerCurveSize), Math.PI, -Math.PI / 2, Math.SQRT1_2)
         .l(Vector.of(0, bottomDropLength - cornerCurveSize))
         .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), (thickness + innerSpacing / 2)))
@@ -376,7 +376,7 @@ export default function LogoAnimated() {
         // animate(upperArmEmerging, 1, {
         //     duration: 5
         // });
-        animate(loopForming, (loopForming.get() === 0 ? 0.25 : 0), {
+        animate(loopForming, (loopForming.get() === 0 ? 0.5 : 0), {
             duration: 2
         });
     };
