@@ -7,6 +7,75 @@ export class CubicBezierCurve {
         readonly secondControlPoint: Point,
         readonly endingPoint: Point
     ) { }
+
+    public getPointAt(t: number): Point {
+        const u = 1 - t;
+    
+        const p0 = this.startingPoint;
+        const p1 = this.firstControlPoint;
+        const p2 = this.secondControlPoint;
+        const p3 = this.endingPoint;
+    
+        const x =
+            u*u*u * p0.x +
+            3*u*u*t * p1.x +
+            3*u*t*t * p2.x +
+            t*t*t * p3.x;
+    
+        const y =
+            u*u*u * p0.y +
+            3*u*u*t * p1.y +
+            3*u*t*t * p2.y +
+            t*t*t * p3.y;
+    
+        return Point.of(x, y);
+    }
+
+    public getTangentAt(t: number): Vector {
+        const u = 1 - t;
+    
+        const p0 = this.startingPoint;
+        const p1 = this.firstControlPoint;
+        const p2 = this.secondControlPoint;
+        const p3 = this.endingPoint;
+    
+        const dx =
+            3*u*u * (p1.x - p0.x) +
+            6*u*t * (p2.x - p1.x) +
+            3*t*t * (p3.x - p2.x);
+    
+        const dy =
+            3*u*u * (p1.y - p0.y) +
+            6*u*t * (p2.y - p1.y) +
+            3*t*t * (p3.y - p2.y);
+    
+        return Vector.of(dx, dy);
+    }
+
+    private lerp(a: Point, b: Point, t: number) {
+        return Point.of(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t);
+    }    
+
+    public splitAt(
+        t: number,
+        side: 'left' | 'right' = 'left'
+    ) {
+        const q0 = this.lerp(this.startingPoint, this.firstControlPoint, t);
+        const q1 = this.lerp(this.firstControlPoint, this.secondControlPoint, t);
+        const q2 = this.lerp(this.secondControlPoint, this.endingPoint, t);
+    
+        const r0 = this.lerp(q0, q1, t);
+        const r1 = this.lerp(q1, q2, t);
+    
+        const s = this.lerp(r0, r1, t);
+    
+        if (side === 'left')
+            return new CubicBezierCurve(this.startingPoint, q0, r0, s);
+    
+        const rel = (p: Point): Point => Point.of(p.x - s.x, p.y - s.y);
+      
+        return new CubicBezierCurve(Point.of(0, 0), rel(r1), rel(q2), rel(this.endingPoint));
+    }
 };
 
 function midPoint(pointA: Point, pointB: Point) {

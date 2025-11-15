@@ -1,18 +1,14 @@
 'use client';
-import { clampedNormalize } from "@/lib/svg-utils/math";
+import { cubicBezierBetween } from "@/lib/svg-utils/cubic-bezier-curve";
+import { clampedNormalize, round } from "@/lib/svg-utils/math";
 import { PathBuilder } from "@/lib/svg-utils/path";
-import { Vector } from "@/lib/svg-utils/svg";
+import { Point, Vector } from "@/lib/svg-utils/svg";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 
 interface PathAnimations {
-    upperArmEmerging?: {
+    shaftEmerging?: {
         value: number;
-        stages: [
-            upperArmAppears: number,
-            upperArmElongates: number,
-            orbAppears: number
-        ];
     };
     loopForming?: {
         value: number;
@@ -23,6 +19,14 @@ interface PathAnimations {
             loopBottomCurveAppears: number,
             loopBottomWidthAppears: number,
             loopCloses: number
+        ];
+    };
+    upperArmEmerging?: {
+        value: number;
+        stages: [
+            upperArmAppears: number,
+            upperArmElongates: number,
+            orbAppears: number
         ];
     };
 };
@@ -42,6 +46,7 @@ interface PathProps {
 };
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
+const SQRT1_6 = 1 / Math.sqrt(6);
 
 function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
@@ -59,8 +64,16 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         loopForming = {
             value: 1,
             stages: [0.2, 0.35, 0.5, 0.65, 0.8, 1]
+        },
+        shaftEmerging = {
+            value: 1
         }
     } = animations;
+    const shaftLength = clampedNormalize(
+        shaftEmerging.value,
+        0, 1,
+        0, (bottomDropLength + thickness + interArmGap - cornerCurveSize)
+    );
     const upperArmLength = clampedNormalize(
         upperArmEmerging.value,
         upperArmEmerging.stages[0], upperArmEmerging.stages[1],
@@ -87,7 +100,7 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         .l(Vector.of(0, bottomDropLength - cornerCurveSize))
         .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), (thickness + innerSpacing / 2)))
         .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), -(thickness + innerSpacing / 2)))
-        .l(Vector.of(0, -(bottomDropLength + thickness + interArmGap - cornerCurveSize)));
+        .l(Vector.of(0, -shaftLength));
     {
         const loopTopWidth = clampedNormalize(
             loopForming.value,
@@ -136,8 +149,44 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
             .cSmoothConnector(
                 Vector.of(cornerCurveClamped, -(cornerCurveSize + thickness / 2 * (1 - Math.cos(loopLinecapAngle)))),
                 loopLinecapAngle, Math.PI / 2, cornerCurvature
+            );
+
+        const elbowOuterOffset = clampedNormalize(
+            loopForming.value,
+            loopForming.stages[0], loopForming.stages[1],
+            0, 10
+        );
+        let loopElbowInner = cubicBezierBetween(
+            Point.of(0, 0), Point.of(-50, -(innerSpacing - cornerCurveSize)),
+            Vector.ofAngle(-Math.PI / 2), Vector.ofAngle(0),
+            SQRT1_6, 1/2
+        );
+        // let loopElbowOuter = cubicBezierBetween(
+        //     Point.of(0, 0), Point.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10),
+        //     Vector.ofAngle(0), Vector.ofAngle(-Math.PI / 2),
+        //     1/2, SQRT1_6
+        // );
+        const t = clampedNormalize(
+            loopForming.value,
+            0, loopForming.stages[0]
+        );
+        loopElbowInner = loopElbowInner.splitAt(t);
+        let elbowInnerAngle = Math.atan(
+            Vector.from(
+                loopElbowInner.endingPoint,
+                loopElbowInner.secondControlPoint
+            ).slope
+        );
+        elbowInnerAngle = Number.isNaN(elbowInnerAngle) ? Math.PI / 2: elbowInnerAngle;
+
+        const elbowInnerStartPosition = pathBuilder.currentPosition;
+        const elbowInnerEndingPointVector = loopElbowInner.endingPoint.toVector();
+        pathBuilder
+            .c(
+                loopElbowInner.firstControlPoint.toVector(),
+                loopElbowInner.secondControlPoint.toVector(),
+                elbowInnerEndingPointVector
             )
-            .cSmoothConnector(Vector.of(-50, -(innerSpacing - cornerCurveSize)), -Math.PI / 2, 0, 1/Math.sqrt(6), 1/2)
             .l(Vector.of(-loopTopWidth, 0))
             .cForCircularArc(Vector.of(0, innerSpacing / 2), -loopTopCurveAngle)
             .cForCircularArc(Vector.of(innerSpacing / 2, 0), -loopBottomCurveAngle)
@@ -146,10 +195,12 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         const linecapCenterFromInnerEdge = Vector.of(0, thickness / 2);
         linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
         linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
+        linecapCenterFromInnerEdge.rotate(elbowInnerAngle);
         const linecapCenterFromOuterEdge = Vector.of(0, -thickness / 2);
+        linecapCenterFromOuterEdge.rotate(-loopLinecapAngle);
         linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
         linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
-        linecapCenterFromOuterEdge.rotate(-loopLinecapAngle);
+        linecapCenterFromOuterEdge.rotate(elbowInnerAngle);
         pathBuilder
             .cForCircularArc(linecapCenterFromInnerEdge, loopLinecapAngle)
             .l(Vector.of(0, 2 * linecapAngleVector.x))
@@ -161,10 +212,20 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         pathBuilder
             .l(Vector.of(-loopBottomWidth, 0))
             .cForCircularArc(bottomCurveCenterFromOuterEdge, loopBottomCurveAngle)
-            .cForCircularArc(topCurveCenterFromOuterEdge, loopTopCurveAngle)
-            .l(Vector.of(loopTopWidth + 10, 0))
-            .cSmoothConnector(Vector.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10), 0, -Math.PI / 2, 1/2, 1/Math.sqrt(6))
-            .l(Vector.of(0, 10));
+            .cForCircularArc(topCurveCenterFromOuterEdge, loopTopCurveAngle);
+
+        pathBuilder
+            .l(Vector.of(loopTopWidth + elbowOuterOffset, 0));
+        const innerLoopStartToOuterLoopEnd = Vector.of(thickness, -elbowOuterOffset);
+        pathBuilder
+            .CSmoothConnector(
+                elbowInnerStartPosition.add(innerLoopStartToOuterLoopEnd),
+                elbowInnerAngle, -Math.PI / 2,
+                Vector.from(loopElbowInner.endingPoint, loopElbowInner.secondControlPoint).magnitude /
+                    elbowInnerEndingPointVector.magnitude,
+                loopElbowInner.firstControlPoint.toVector().magnitude / elbowInnerEndingPointVector.magnitude
+            )
+            .l(Vector.of(0, elbowOuterOffset));
     }
 
     {
@@ -228,7 +289,7 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
             .cSmoothConnector(Vector.of(-cornerXDistance, cornerYDistance), -cornerAngle, -Math.PI / 2, cornerCurvature);
     }
 
-    pathBuilder.l(Vector.of(0, bottomDropLength + thickness + interArmGap - cornerCurveSize))
+    pathBuilder.l(Vector.of(0, shaftLength))
         .cForCircularArc(-Math.PI / 2, Vector.of(innerSpacing / 2, innerSpacing / 2))
         .cForCircularArc(-Math.PI / 2, Vector.of(innerSpacing / 2, -innerSpacing / 2))
         .l(Vector.of(0, -(bottomDropLength + thickness / 2)))
@@ -257,6 +318,9 @@ const finalProps: PathProps = {
 };
 
 const finalAnimationState: PathAnimations = {
+    shaftEmerging: {
+        value: 1
+    },
     loopForming: {
         value: 1,
         stages: [0.25, 0.4, 0.55, 0.7, 0.85, 1]
@@ -268,46 +332,62 @@ const finalAnimationState: PathAnimations = {
 };
 
 export default function LogoAnimated() {
-    const loopForming = useMotionValue(0.25);
+    const shaftEmerging = useMotionValue(1)
+    const loopForming = useMotionValue(0);
     const upperArmEmerging = useMotionValue(0);
     const path = useTransform<number, string>(
-        [loopForming, upperArmEmerging],
+        [shaftEmerging, loopForming, upperArmEmerging],
         value => pathData({
+            shaftEmerging: {
+                value: value[0]
+            },
             loopForming: {
                 ...finalAnimationState.loopForming!,
-                value: value[0]
+                value: value[1]
             },
             upperArmEmerging: {
                 ...finalAnimationState.upperArmEmerging!,
-                value: value[1]
+                value: value[2]
             }
         })
     );
     async function startAnimation() {
-        await animate(loopForming, 1, {
-            duration: 1,
-            delay: 1
-        });
-        await animate(upperArmEmerging, 1, {
+        await animate(shaftEmerging, 1, {
             duration: 1,
             // delay: 1
+        })
+        await animate(loopForming, 1, {
+            duration: 5
+        });
+        await animate(upperArmEmerging, 1, {
+            duration: 1
         });
     };
     async function reverseAnimation() {
         await animate(upperArmEmerging, 0, {
             duration: 1
         });
-        await animate(loopForming, 0.25, {
-            duration: 1
+        await animate(loopForming, 0, {
+            duration: 5
         });
-        startAnimation();
+        await animate(shaftEmerging, 0, {
+            duration: 1
+        })
+    }
+    function toggleLoop() {
+        // animate(upperArmEmerging, 1, {
+        //     duration: 5
+        // });
+        animate(loopForming, (loopForming.get() === 0 ? 0.5 : 0), {
+            duration: 5
+        });
     };
-    useEffect(() => {
-        startAnimation();
-    }, []);
+    // useEffect(() => {
+    //     startAnimation();
+    // }, []);
     // const viewBoxWidth = spiralLength + 4 * breathingRoom + 3 * thickness + startHandLength;
     // const viewBoxHeight = gapBwStartHandAndShaft + 7 * breathingRoom / 2 + 4 * thickness + tailLength;
-    return <div onClick={reverseAnimation}>
+    return <div onClick={toggleLoop}>
         <motion.svg width={550} height={500} viewBox={`0 0 1100 1000`}>
             <motion.path
                 d={path}
