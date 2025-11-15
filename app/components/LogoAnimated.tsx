@@ -91,12 +91,12 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         orbEntryAngle, props.orbEntryAngle
     );
 
-    const origin: Vector = Vector.of(
+    const origin: Point = Point.of(
         loopWidth + 5 * innerSpacing / 2 + 3 * thickness + cornerCurveSize,
         interArmGap + 2 * innerSpacing + 3 * thickness
     );
     
-    const pathBuilder = PathBuilder.m(origin)
+    const pathBuilder = PathBuilder.M(origin)
         .cSmoothConnector(Vector.of(-cornerCurveSize, cornerCurveSize), Math.PI, -Math.PI / 2, Math.SQRT1_2)
         .l(Vector.of(0, bottomDropLength - cornerCurveSize))
         .cForCircularArc(Math.PI / 2, Vector.of(-(thickness + innerSpacing / 2), (thickness + innerSpacing / 2)))
@@ -384,7 +384,7 @@ export default function LogoAnimated() {
         //     duration: 5
         // });
         animate(loopForming, (loopForming.get() === 0 ? 0.5 : 0), {
-            duration: 5
+            duration: 2
         });
     };
     // useEffect(() => {
