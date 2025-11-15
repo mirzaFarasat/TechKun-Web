@@ -142,7 +142,11 @@ export class PathBuilder {
     private openPathStack: MoveCommand[] = [];
 
     get currentPosition() {
-        return this.lastCommand()?.getEndPoint() ?? Point.of(0, 0);
+        return this.lastCommand?.getEndPoint() ?? Point.of(0, 0);
+    }
+    get lastCommand() {
+        return this.commands.length === 0 ?
+            null : this.commands[this.commands.length - 1];
     }
 
     private constructor(point: Vector | Point) {
@@ -160,10 +164,6 @@ export class PathBuilder {
         return new PathBuilder(point);
     }
 
-    private lastCommand(): Command | null {
-        return this.commands.length === 0 ?
-            null : this.commands[this.commands.length - 1];
-    }
 
     // Relative move
     public m(point: Vector) {
@@ -329,7 +329,7 @@ export class PathBuilder {
         if (startAngle !== undefined) {
             startDirection = Vector.of(Math.cos(startAngle), Math.sin(startAngle))
         } else {
-            const lastCommand = this.lastCommand();
+            const lastCommand = this.lastCommand;
             if (lastCommand instanceof LineCommand) {
                 startDirection = lastCommand.endPoint.unit();
             } else if (lastCommand instanceof CubicBezierCurveCommand) {
@@ -374,7 +374,7 @@ export class PathBuilder {
         if (startAngle !== undefined) {
             startDirection = Vector.of(Math.cos(startAngle), Math.sin(startAngle))
         } else {
-            const lastCommand = this.lastCommand();
+            const lastCommand = this.lastCommand;
             if (lastCommand instanceof LineCommand) {
                 startDirection = lastCommand.endPoint.unit();
             } else if (lastCommand instanceof CubicBezierCurveCommand) {

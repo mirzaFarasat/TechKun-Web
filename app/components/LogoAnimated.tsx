@@ -46,6 +46,7 @@ interface PathProps {
 };
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
+const SQRT1_3 = 1 / Math.sqrt(3);
 const SQRT1_6 = 1 / Math.sqrt(6);
 
 function pathData(animations: PathAnimations, props: PathProps = finalProps) {
@@ -151,41 +152,41 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
                 loopLinecapAngle, Math.PI / 2, cornerCurvature
             );
 
-        const elbowOuterOffset = clampedNormalize(
-            loopForming.value,
-            loopForming.stages[0], loopForming.stages[1],
-            0, 10
-        );
-        let loopElbowInner = cubicBezierBetween(
-            Point.of(0, 0), Point.of(-50, -(innerSpacing - cornerCurveSize)),
-            Vector.ofAngle(-Math.PI / 2), Vector.ofAngle(0),
-            SQRT1_6, 1/2
-        );
-        // let loopElbowOuter = cubicBezierBetween(
-        //     Point.of(0, 0), Point.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10),
-        //     Vector.ofAngle(0), Vector.ofAngle(-Math.PI / 2),
-        //     1/2, SQRT1_6
+        // let loopElbowInner = cubicBezierBetween(
+        //     Point.of(0, 0), Point.of(-50, -(innerSpacing - cornerCurveSize)),
+        //     Vector.ofAngle(-Math.PI / 2), Vector.ofAngle(0),
+        //     SQRT1_6, 1/2
         // );
+        
+        let loopElbowOuter = cubicBezierBetween(
+            Point.of(0, 0), Point.of(50 + thickness, innerSpacing - cornerCurveSize + thickness),
+            Vector.ofAngle(0), Vector.ofAngle(-Math.PI / 2),
+            SQRT1_3, SQRT1_6
+        );
         const t = clampedNormalize(
             loopForming.value,
             0, loopForming.stages[0]
         );
-        loopElbowInner = loopElbowInner.splitAt(t);
-        let elbowInnerAngle = Math.atan(
-            Vector.from(
-                loopElbowInner.endingPoint,
-                loopElbowInner.secondControlPoint
-            ).slope
+        // loopElbowInner = loopElbowInner.splitAt(t);
+        loopElbowOuter = loopElbowOuter.splitAt(1 - t, 'right');
+        let elbowOuterAngle = Math.atan(
+            loopElbowOuter.firstControlPoint.toVector().slope
         );
-        elbowInnerAngle = Number.isNaN(elbowInnerAngle) ? Math.PI / 2: elbowInnerAngle;
+        elbowOuterAngle = Number.isNaN(elbowOuterAngle) ? Math.PI / 2: elbowOuterAngle;
+        const elbowInnerStart = pathBuilder.currentPosition;
+        const elbowOuterEnd = elbowInnerStart.add(Vector.of(thickness, 0));
+        const elbowOuterStart = elbowOuterEnd.add(loopElbowOuter.endingPoint.toVector().opposite());
+        const elbowOuterStartToInnerEnd = Vector.of(0, thickness);
+        elbowOuterStartToInnerEnd.rotate(elbowOuterAngle);
 
-        const elbowInnerStartPosition = pathBuilder.currentPosition;
-        const elbowInnerEndingPointVector = loopElbowInner.endingPoint.toVector();
         pathBuilder
-            .c(
-                loopElbowInner.firstControlPoint.toVector(),
-                loopElbowInner.secondControlPoint.toVector(),
-                elbowInnerEndingPointVector
+            .CSmoothConnector(
+                elbowOuterStart.add(elbowOuterStartToInnerEnd),
+                -Math.PI / 2, elbowOuterAngle,
+                Vector.from(loopElbowOuter.endingPoint, loopElbowOuter.secondControlPoint).magnitude /
+                    loopElbowOuter.endingPoint.toVector().magnitude,
+                loopElbowOuter.firstControlPoint.toVector().magnitude /
+                    loopElbowOuter.endingPoint.toVector().magnitude
             )
             .l(Vector.of(-loopTopWidth, 0))
             .cForCircularArc(Vector.of(0, innerSpacing / 2), -loopTopCurveAngle)
@@ -195,12 +196,12 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         const linecapCenterFromInnerEdge = Vector.of(0, thickness / 2);
         linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
         linecapCenterFromInnerEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
-        linecapCenterFromInnerEdge.rotate(elbowInnerAngle);
+        linecapCenterFromInnerEdge.rotate(elbowOuterAngle);
         const linecapCenterFromOuterEdge = Vector.of(0, -thickness / 2);
         linecapCenterFromOuterEdge.rotate(-loopLinecapAngle);
         linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopBottomCurveAngle);
         linecapCenterFromOuterEdge.rotate(Math.PI / 2 - loopTopCurveAngle);
-        linecapCenterFromOuterEdge.rotate(elbowInnerAngle);
+        linecapCenterFromOuterEdge.rotate(elbowOuterAngle);
         pathBuilder
             .cForCircularArc(linecapCenterFromInnerEdge, loopLinecapAngle)
             .l(Vector.of(0, 2 * linecapAngleVector.x))
@@ -215,17 +216,14 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
             .cForCircularArc(topCurveCenterFromOuterEdge, loopTopCurveAngle);
 
         pathBuilder
-            .l(Vector.of(loopTopWidth + elbowOuterOffset, 0));
-        const innerLoopStartToOuterLoopEnd = Vector.of(thickness, -elbowOuterOffset);
+            .l(Vector.of(loopTopWidth, 0));
+        const currentPosition = pathBuilder.currentPosition;
         pathBuilder
-            .CSmoothConnector(
-                elbowInnerStartPosition.add(innerLoopStartToOuterLoopEnd),
-                elbowInnerAngle, -Math.PI / 2,
-                Vector.from(loopElbowInner.endingPoint, loopElbowInner.secondControlPoint).magnitude /
-                    elbowInnerEndingPointVector.magnitude,
-                loopElbowInner.firstControlPoint.toVector().magnitude / elbowInnerEndingPointVector.magnitude
-            )
-            .l(Vector.of(0, elbowOuterOffset));
+            .C(
+                currentPosition.add(loopElbowOuter.firstControlPoint.toVector()),
+                currentPosition.add(loopElbowOuter.secondControlPoint.toVector()),
+                elbowOuterEnd
+            );
     }
 
     {
@@ -378,8 +376,8 @@ export default function LogoAnimated() {
         // animate(upperArmEmerging, 1, {
         //     duration: 5
         // });
-        animate(loopForming, (loopForming.get() === 0 ? 0.5 : 0), {
-            duration: 5
+        animate(loopForming, (loopForming.get() === 0 ? 0.25 : 0), {
+            duration: 2
         });
     };
     // useEffect(() => {

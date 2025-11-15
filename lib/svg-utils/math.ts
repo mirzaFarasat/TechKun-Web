@@ -3,11 +3,11 @@ export function round(num: number, decimalPlaces: number): number {
     return Math.round(num * factor) / factor;
 };
 
-export const clamp = (
+export function clamp(
     value: number,
     min = 0,
     max = 1
-  ) => {
+) {
     if (min > max) {
       [min, max] = [max, min];
     }
