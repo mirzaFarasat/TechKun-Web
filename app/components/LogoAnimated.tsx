@@ -46,7 +46,6 @@ interface PathProps {
 };
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
-const SQRT1_6 = 1 / Math.sqrt(6);
 
 function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
@@ -154,12 +153,12 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         const elbowOuterOffset = clampedNormalize(
             loopForming.value,
             loopForming.stages[0], loopForming.stages[1],
-            0, 10
+            0, 0
         );
         let loopElbowInner = cubicBezierBetween(
             Point.of(0, 0), Point.of(-50, -(innerSpacing - cornerCurveSize)),
             Vector.ofAngle(-Math.PI / 2), Vector.ofAngle(0),
-            SQRT1_6, 1/2
+            1 / 3, 1 / 2
         );
         // let loopElbowOuter = cubicBezierBetween(
         //     Point.of(0, 0), Point.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10),
@@ -178,6 +177,10 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
             ).slope
         );
         elbowInnerAngle = Number.isNaN(elbowInnerAngle) ? Math.PI / 2: elbowInnerAngle;
+        // console.log(Vector.from(
+        //     loopElbowInner.endingPoint,
+        //     loopElbowInner.secondControlPoint
+        // ));
 
         const elbowInnerStartPosition = pathBuilder.currentPosition;
         const elbowInnerEndingPointVector = loopElbowInner.endingPoint.toVector();
