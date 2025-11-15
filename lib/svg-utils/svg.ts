@@ -37,18 +37,41 @@ export class Vector {
     get magnitude() {
         return this._magnitude;
     }
+    get slope() {
+        return this._y / this._x;
+    }
 
     public static of(x: number, y: number): Vector {
         return new Vector(x, y);
+    }
+
+    public static ofAngle(angle: number): Vector {
+        return new Vector(Math.cos(angle), Math.sin(angle));
     }
 
     public static from(initialPoint: Point, terminalPoint: Point): Vector {
         return new Vector(terminalPoint.x - initialPoint.x, terminalPoint.y - initialPoint.y);
     }
 
+    public add(vector: Vector) {
+        return new Vector(this.x + vector.x, this.y + vector.y);
+    }
+
+    public subtract(vector: Vector) {
+        return new Vector(this.x - vector.x, this.y - vector.y);
+    }
+
+    public multiply(scalar: number) {
+        return new Vector(this.x * scalar, this.y * scalar);
+    }
+
     public dotProduct(vector: Vector) {
         return this.x * vector.x + this.y * vector.y;
     }
+
+    public crossProduct(vector: Vector): number {
+        return this.x * vector.y - this.y * vector.x;
+    }    
 
     public unit(): Vector {
         if (this._magnitude === 0)
