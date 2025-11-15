@@ -47,6 +47,8 @@ interface PathProps {
 
 const orbBaseAngleRatio = 4 * Math.atan(18 / 35) / Math.PI;
 
+const SQRT1_5 = 1 / Math.sqrt(5);
+
 function pathData(animations: PathAnimations, props: PathProps = finalProps) {
     const {
         thickness, innerSpacing,
@@ -158,7 +160,7 @@ function pathData(animations: PathAnimations, props: PathProps = finalProps) {
         let loopElbowInner = cubicBezierBetween(
             Point.of(0, 0), Point.of(-50, -(innerSpacing - cornerCurveSize)),
             Vector.ofAngle(-Math.PI / 2), Vector.ofAngle(0),
-            1 / 3, 1 / 2
+            SQRT1_5, 1 / 2
         );
         // let loopElbowOuter = cubicBezierBetween(
         //     Point.of(0, 0), Point.of(50 - 10 + thickness, innerSpacing - cornerCurveSize + thickness - 10),
