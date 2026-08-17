@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaLinkedinIn } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { HiOutlineMail } from 'react-icons/hi';
 import techkunLogo from '@/public/Images/icon.png';
 
 const PARTICLES = [
@@ -150,6 +152,24 @@ export default function ComingSoon() {
                         className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-primary-500 transition-colors duration-300 ring-1 ring-white/10"
                     >
                         <FaLinkedinIn size={16} />
+                    </motion.a>
+                    <motion.a
+                        href="https://x.com/TechKun_"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TechKun on X"
+                        whileHover={{ y: -3 }}
+                        className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-primary-500 transition-colors duration-300 ring-1 ring-white/10"
+                    >
+                        <FaXTwitter size={15} />
+                    </motion.a>
+                    <motion.a
+                        href="mailto:farasat@tech-kun.com"
+                        aria-label="Email TechKun"
+                        whileHover={{ y: -3 }}
+                        className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-primary-500 transition-colors duration-300 ring-1 ring-white/10"
+                    >
+                        <HiOutlineMail size={18} />
                     </motion.a>
                 </motion.div>
             </main>
