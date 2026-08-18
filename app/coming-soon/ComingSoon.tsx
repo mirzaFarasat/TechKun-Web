@@ -91,23 +91,23 @@ export default function ComingSoon() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.15 }}
-                    className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.25em] uppercase text-primary-200 mb-5 px-4 py-1.5 rounded-full bg-white/5 ring-1 ring-white/10"
+                    className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.2em] uppercase text-primary-200 mb-5 px-4 py-1.5 rounded-full bg-white/5 ring-1 ring-white/10"
                 >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    New site under construction
+                    A new look is on the way
                 </motion.p>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.25 }}
-                    className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-5"
+                    className="max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-5"
                 >
-                    We&apos;re building
-                    <br />
+                    Hello there! We have been working on a{' '}
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-200 via-white to-indigo-200">
-                        something great
+                        redesign
                     </span>
+                    , and it&apos;s just around the corner.
                 </motion.h1>
 
                 <motion.p
@@ -116,8 +116,9 @@ export default function ComingSoon() {
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="max-w-xl text-sm md:text-base text-gray-400 mb-10"
                 >
-                    TechKun is getting a fresh look. We&apos;re polishing every pixel to bring you a faster,
-                    sharper experience — launching very soon.
+                    We build software with beauty, precision, and identity. And we&apos;ve tried to bring those
+                    same values into our redesign. Be sure to check back soon and be among the first to
+                    experience it.
                 </motion.p>
 
                 {/* Indeterminate progress bar */}
@@ -127,15 +128,24 @@ export default function ComingSoon() {
                     transition={{ duration: 0.6, delay: 0.6 }}
                     className="w-full max-w-xs mb-10"
                 >
-                    <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                    <div className="relative h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
                         <motion.div
-                            className="h-full w-1/3 rounded-full bg-gradient-to-r from-primary-300 via-white to-primary-300"
-                            animate={{ x: ['-100%', '260%'] }}
+                            className="absolute top-0 h-full w-1/3 rounded-full bg-gradient-to-r from-primary-300 via-white to-primary-300"
+                            animate={{ left: ['-40%', '100%'] }}
                             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
                         />
                     </div>
-                    <p className="mt-3 text-[11px] tracking-widest uppercase text-gray-500">Crafting the experience</p>
+                    <p className="mt-3 text-[11px] tracking-widest uppercase text-gray-500">Brewing a little magic</p>
                 </motion.div>
+
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.65 }}
+                    className="text-[11px] tracking-widest uppercase text-gray-500 mb-4"
+                >
+                    In the meantime, you can find us here
+                </motion.p>
 
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
