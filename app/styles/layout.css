@@ -7,7 +7,7 @@
     --section-max-height: 1120px;
     --section-height: clamp(var(--section-min-height), 100vh, var(--section-max-height));
 
-    height: 100%;
+    block-size: 100%;
     position: relative;
 }
 
@@ -15,7 +15,7 @@
     scroll-snap-type: block proximity;
 }*/
 body {
-    min-height: 100%;
+    min-block-size: 100%;
     position: relative;
     margin: 0;
     --columns: 6;

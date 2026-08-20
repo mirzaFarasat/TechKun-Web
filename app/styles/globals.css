@@ -94,7 +94,7 @@ button {
     flex-wrap: wrap;
     justify-content: start;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
 
     .links {
         display: flex;

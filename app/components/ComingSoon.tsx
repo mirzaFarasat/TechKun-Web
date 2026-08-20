@@ -95,8 +95,8 @@ export default function ComingSoon() {
             {PARTICLES.map((p, i) => (
                 <motion.span
                     key={i}
-                    className="absolute rounded-full bg-white/40"
-                    style={{ left: p.left, bottom: '-2%', width: p.size, height: p.size }}
+                    className="absolute rounded-full"
+                    style={{ left: p.left, bottom: '-2%', width: p.size, height: p.size, backgroundColor: "var(--secondary-neutral-400)" }}
                     animate={{ y: ['0vh', '-105vh'], opacity: [0, 0.6, 0] }}
                     transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'linear' }}
                 />
@@ -106,12 +106,13 @@ export default function ComingSoon() {
         {/* Main content */}
         <main>
             <section>
-                <div className="flex flex-col" style={{ paddingBlock: "64px clamp(128px, 20vw, 160px)" }}>
+                <div className="flex flex-col" style={{ paddingBlock: "64px clamp(8rem, 20vw, 10rem)" }}>
                     <motion.p
                         initial={{ opacity: 0, y: -12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7 }}
-                        className="mb-20 display-text flex items-center gap-4"
+                        className="display-text flex items-center gap-4"
+                        style={{ marginBlockEnd: "5rem" }}
                     >
                         <Image src={techkunLogo} alt="TechKun" style={{ width: "1lh" }} priority />
                         <span>TechKun</span>
@@ -153,8 +154,9 @@ export default function ComingSoon() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.65 }}
-                        className="text-base tracking-widest font-bold uppercase mb-4"
+                        className="text-base tracking-widest font-bold uppercase"
                         style={{
+                            marginBlockEnd: "1rem",
                             textWrap: "pretty",
                             color: "var(--secondary-neutral-600)"
                         }}
@@ -166,13 +168,13 @@ export default function ComingSoon() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        className="flex items-center gap-4"
+                        className="flex items-center"
                     >
                         <div className="contact-options text-lg" style={{ color: "var(--secondary-neutral-300)" }}>
                             <EmailLink
                                 style={{ whiteSpace: "nowrap", color: "inherit" }}
                                 address="farasat@tech-kun.com" text="farasat@tech-kun.com"
-                                iconSize="1em" iconStrokeWidth="1.4"
+                                iconSize="1.125em" iconStrokeWidth="1.4"
                             />
                             <div className="links">
                                 {links.map(item => <Link
@@ -208,8 +210,8 @@ export default function ComingSoon() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-base pb-6"
-            style={{ color: "var(--secondary-neutral-600)" }}
+            className="text-base"
+            style={{ color: "var(--secondary-neutral-600)", marginBlockEnd: "1.5rem" }}
         >
             <p>© {year} TechKun. All rights reserved.</p>
         </motion.footer>

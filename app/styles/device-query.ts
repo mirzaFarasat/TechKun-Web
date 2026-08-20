@@ -9,11 +9,11 @@ export const deviceBreakpoint = {
 };
 
 export const deviceQuery = {
-    mobileS: `(min-width: ${deviceBreakpoint.mobileS}px)`,
-    mobileM: `(min-width: ${deviceBreakpoint.mobileM}px)`,
-    mobileL: `(min-width: ${deviceBreakpoint.mobileL}px)`,
-    tablet: `(min-width: ${deviceBreakpoint.tablet}px)`,
-    laptop: `(min-width: ${deviceBreakpoint.laptop}px)`,
-    laptopL: `(min-width: ${deviceBreakpoint.laptopL}px)`,
-    desktop: `(min-width: ${deviceBreakpoint.desktop}px)`,
+    mobileS: `(min-width: ${deviceBreakpoint.mobileS / 16}rem)`,
+    mobileM: `(min-width: ${deviceBreakpoint.mobileM / 16}rem)`,
+    mobileL: `(min-width: ${deviceBreakpoint.mobileL / 16}rem)`,
+    tablet: `(min-width: ${deviceBreakpoint.tablet / 16}rem)`,
+    laptop: `(min-width: ${deviceBreakpoint.laptop / 16}rem)`,
+    laptopL: `(min-width: ${deviceBreakpoint.laptopL / 16}rem)`,
+    desktop: `(min-width: ${deviceBreakpoint.desktop / 16}rem)`,
 };
