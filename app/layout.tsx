@@ -4,7 +4,7 @@ import "@/app/styles/globals.css";
 import {Quicksand} from "next/font/google";
 import Shared from "@/app/Shared";
 import {deviceBreakpoint} from "@/app/styles/device-query";
-import ComingSoon from "@/app/coming-soon/ComingSoon";
+import ComingSoon from "@/app/components/ComingSoon";
 
 // const rouge_script = Rouge_Script({ weight: "400" });
 const quicksand = Quicksand();

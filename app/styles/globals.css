@@ -62,3 +62,53 @@ button {
     cursor: pointer;
     border: none;
 }
+
+@property --gradient-color-1 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: currentColor;
+}
+@property --gradient-color-2 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: currentColor;
+}
+
+.email-link {
+    cursor: pointer;
+    text-decoration: none;
+    --gradient-color-1: currentColor;
+    --gradient-color-2: currentColor;
+    transition-property: --gradient-color-1, --gradient-color-2;
+
+    &:hover, &:focus-visible {
+        --gradient-color-1: var(--primary-500);
+        --gradient-color-2: var(--tertiary-500);
+        path {
+            d: var(--hover-path);
+        }
+    }
+}
+.contact-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    .links {
+        display: flex;
+        gap: inherit;
+        .link {
+            color: inherit;
+            --gradient-color-1: currentColor;
+            --gradient-color-2: currentColor;
+            transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition-property: --gradient-color-1, --gradient-color-2;
+        }
+        .link:hover, .link:focus-visible {
+            --gradient-color-1: var(--primary-500);
+            --gradient-color-2: var(--secondary-500);
+        }
+    }
+}

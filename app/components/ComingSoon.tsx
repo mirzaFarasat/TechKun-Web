@@ -6,6 +6,10 @@ import { FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
 import techkunLogo from '@/app/icon.svg';
+import Link from "next/link";
+import EmailLink from "@/app/components/EmailLink";
+import {LINKEDIN_LOGO_PATH_HREF, X_LOGO_PATH_HREF} from "@/app/Shared";
+import React from "react";
 
 const PARTICLES = [
     { left: '6%', size: 3, duration: 14, delay: 0 },
@@ -20,6 +24,30 @@ const PARTICLES = [
     { left: '88%', size: 3, duration: 12, delay: 3.5 },
     { left: '95%', size: 2, duration: 14, delay: 1 },
 ];
+
+const links = [{
+    iconJSX: <svg height="1.25em" viewBox="0 0 24 24">
+        <defs>
+            <linearGradient id="linkedin-gradient" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="20%" stopColor="var(--gradient-color-1)" />
+                <stop offset="80%" stopColor="var(--gradient-color-2)" />
+            </linearGradient>
+        </defs>
+        <use href={LINKEDIN_LOGO_PATH_HREF} fill="url(#linkedin-gradient)" />
+    </svg>,
+    link: "https://www.linkedin.com/company/techkunex/"
+}, {
+    iconJSX: <svg height="1.25em" viewBox="0 0 24 24">
+        <defs>
+            <linearGradient id="x-gradient" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="20%" stopColor="var(--gradient-color-1)" />
+                <stop offset="80%" stopColor="var(--gradient-color-2)" />
+            </linearGradient>
+        </defs>
+        <use href={X_LOGO_PATH_HREF} fill="url(#x-gradient)" />
+    </svg>,
+    link: "https://x.com/TechKun_"
+}];
 
 export default function ComingSoon() {
     const year = new Date().getFullYear();
@@ -81,7 +109,6 @@ export default function ComingSoon() {
         {/* Main content */}
         <main>
             <section>
-
                 <div className="flex flex-col px-6 py-24">
                     <motion.p
                         initial={{ opacity: 0, y: -12 }}
@@ -142,34 +169,20 @@ export default function ComingSoon() {
                         transition={{ duration: 0.6, delay: 0.7 }}
                         className="mb-10 flex items-center gap-4"
                     >
-                        <motion.a
-                            href="https://www.linkedin.com/company/techkunex/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="TechKun on LinkedIn"
-                            className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm hover:opacity-80 transition-colors duration-300"
-                            style={{backgroundColor: "var(--secondary-neutral-800)"}}
-                        >
-                            <FaLinkedinIn size={16} />
-                        </motion.a>
-                        <motion.a
-                            href="https://x.com/TechKun_"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="TechKun on X"
-                            className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm hover:opacity-80 transition-colors duration-300"
-                            style={{backgroundColor: "var(--secondary-neutral-800)"}}
-                        >
-                            <FaXTwitter size={15} />
-                        </motion.a>
-                        <motion.a
-                            href="mailto:farasat@tech-kun.com"
-                            aria-label="Email TechKun"
-                            className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-sm hover:opacity-80 transition-colors duration-300"
-                            style={{backgroundColor: "var(--secondary-neutral-800)"}}
-                        >
-                            <HiOutlineMail size={18} />
-                        </motion.a>
+                        <div className="contact-options text-base" style={{ color: "var(--secondary-neutral-200)" }}>
+                            <EmailLink
+                                style={{ whiteSpace: "nowrap", color: "inherit" }}
+                                address="farasat@tech-kun.com" text="farasat@tech-kun.com"
+                                iconSize="1em" iconStrokeWidth="1.4"
+                            />
+                            <div className="links">
+                                {links.map(item => <Link
+                                    className="link"
+                                    key={item.link} href={item.link}
+                                    target="_blank" rel="noopener noreferrer"
+                                >{item.iconJSX}</Link>)}
+                            </div>
+                        </div>
                     </motion.div>
 
                     {/* Indeterminate progress bar */}
@@ -196,7 +209,8 @@ export default function ComingSoon() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="relative text-center text-xs text-gray-500 pb-6"
+            className="relative text-center text-sm pb-6"
+            style={{ color: "var(--secondary-neutral-400)" }}
         >
             <p>© {year} TechKun. All rights reserved.</p>
         </motion.footer>
