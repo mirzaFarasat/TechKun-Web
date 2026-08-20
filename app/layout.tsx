@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
     title: "TechKun — Coming Soon",
-    description: "TechKun's new website is launching soon. We're building something great.",
+    description: "TechKun's new website is just around the corner.",
 };
 
 export default function RootLayout() {
