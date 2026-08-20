@@ -1,0 +1,67 @@
+:root {
+    --page-max-width: 84rem;
+    --page-padding: clamp(16px, 4vw, 32px);
+
+    --navbar-height: 4.8rem;
+    --section-min-height: 768px;
+    --section-max-height: 1120px;
+    --section-height: clamp(var(--section-min-height), 100vh, var(--section-max-height));
+
+    height: 100%;
+    position: relative;
+}
+
+/*html {
+    scroll-snap-type: block proximity;
+}*/
+body {
+    min-height: 100%;
+    margin: 0;
+    --columns: 6;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        [breakout-start] var(--page-padding)
+        [page-start] minmax(0, calc(var(--page-max-width) - 2 * var(--page-padding))) [page-end]
+        var(--page-padding) [breakout-end]
+        minmax(0, 1fr);
+    grid-template-rows:
+        [content-start] 1fr
+        [content-end footer-start] max-content
+        [footer-end];
+
+    & > main, footer {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: subgrid;
+    }
+    & > main {
+        /*--section-clamped-height: clamp(*/
+        /*    var(--section-min-height),*/
+        /*    80vh,*/
+        /*    var(--section-basis-height)*/
+        /*);*/
+
+        grid-row: content;
+        grid-auto-rows: auto;
+        isolation: isolate;
+
+        & > section {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-template-rows: 1fr;
+            overflow-x: clip;
+        }
+    }
+    & > footer {
+        grid-row: footer;
+    }
+    & > header > *,
+    & > main > section > *,
+    & > footer > * {
+        /*padding-inline: var(--page-padding);*/
+        grid-column: page;
+    }
+}
