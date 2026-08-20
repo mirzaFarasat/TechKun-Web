@@ -20,11 +20,7 @@ export const metadata: Metadata = {
     description: "TechKun's new website is launching soon. We're building something great.",
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout() {
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
