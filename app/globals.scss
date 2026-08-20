@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "/app/theme/color-variables.scss";
+@import "./theme/color-variables.scss";
 
 :root {
     --background: #ffffff;
