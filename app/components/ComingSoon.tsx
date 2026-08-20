@@ -1,10 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { FaLinkedinIn } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
-import { HiOutlineMail } from 'react-icons/hi';
+import { motion } from 'motion/react';
 import techkunLogo from '@/app/icon.svg';
 import Link from "next/link";
 import EmailLink from "@/app/components/EmailLink";
@@ -109,28 +106,28 @@ export default function ComingSoon() {
         {/* Main content */}
         <main>
             <section>
-                <div className="flex flex-col px-6 py-24">
+                <div className="flex flex-col" style={{ paddingBlock: "64px clamp(128px, 20vw, 160px)" }}>
                     <motion.p
                         initial={{ opacity: 0, y: -12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7 }}
-                        className="mb-12 display-text flex items-center gap-4"
+                        className="mb-20 display-text flex items-center gap-4"
                     >
                         <Image src={techkunLogo} alt="TechKun" style={{ width: "1lh" }} priority />
                         <span>TechKun</span>
                     </motion.p>
 
-                    <p className="text-base" style={{
+                    <p className="text-lg" style={{
                         marginBlockEnd: "0.5em",
                         fontWeight: "500",
-                        color: "var(--secondary-neutral-400)"
+                        color: "var(--secondary-neutral-500)"
                     }}>Hello there!</p>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.25 }}
                         className="text-3xl font-bold tracking-tight leading-[1.15]"
-                        style={{ textWrap: 'balance', marginBlockEnd: "0.5em" }}
+                        style={{ textWrap: 'pretty', marginBlockEnd: "0.75em" }}
                     >
                         We have been working on a redesign, and it&apos;s just around the&nbsp;corner.
                     </motion.h1>
@@ -139,11 +136,12 @@ export default function ComingSoon() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        className="text-base mb-10"
+                        className="text-lg"
                         style={{
                             fontWeight: "500",
                             textWrap: "pretty",
-                            color: "var(--secondary-neutral-400)"
+                            color: "var(--secondary-neutral-500)",
+                            marginBlockEnd: "4em",
                         }}
                     >
                         We build software with beauty, precision, and identity. And we&apos;ve tried to bring those
@@ -155,8 +153,9 @@ export default function ComingSoon() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.65 }}
-                        className="text-sm tracking-widest font-bold uppercase mb-4"
+                        className="text-base tracking-widest font-bold uppercase mb-4"
                         style={{
+                            textWrap: "pretty",
                             color: "var(--secondary-neutral-600)"
                         }}
                     >
@@ -167,9 +166,9 @@ export default function ComingSoon() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        className="mb-10 flex items-center gap-4"
+                        className="flex items-center gap-4"
                     >
-                        <div className="contact-options text-base" style={{ color: "var(--secondary-neutral-200)" }}>
+                        <div className="contact-options text-lg" style={{ color: "var(--secondary-neutral-300)" }}>
                             <EmailLink
                                 style={{ whiteSpace: "nowrap", color: "inherit" }}
                                 address="farasat@tech-kun.com" text="farasat@tech-kun.com"
@@ -209,8 +208,8 @@ export default function ComingSoon() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="relative text-center text-sm pb-6"
-            style={{ color: "var(--secondary-neutral-400)" }}
+            className="text-base pb-6"
+            style={{ color: "var(--secondary-neutral-600)" }}
         >
             <p>© {year} TechKun. All rights reserved.</p>
         </motion.footer>

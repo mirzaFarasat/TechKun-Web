@@ -1,5 +1,5 @@
 :root {
-    --page-max-width: 60rem;
+    --page-max-width: 52rem;
     --page-padding: clamp(16px, 4vw, 32px);
 
     --navbar-height: 4.8rem;
@@ -16,6 +16,7 @@
 }*/
 body {
     min-height: 100%;
+    position: relative;
     margin: 0;
     --columns: 6;
 
