@@ -60,7 +60,7 @@ export default function EmailLink(
                 transitionProperty: "d",
                 stroke: `url(#${gradientId})`,
                 '--hover-path': `path("${variants[FOCUSED].d}")`
-            }}
+            } as React.CSSProperties}
         ></motion.path>
     </svg>;
 
