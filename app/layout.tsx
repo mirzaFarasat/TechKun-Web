@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout() {
     return (
-        <html lang="en">
+        <html lang="en" className="bg-background">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <ComingSoon />
             </body>

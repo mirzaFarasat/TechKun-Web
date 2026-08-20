@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
-import techkunLogo from '@/public/Images/icon.png';
+import techkunLogo from '@/app/icon.svg';
 
 const PARTICLES = [
     { left: '6%', size: 3, duration: 14, delay: 0 },
@@ -61,53 +61,25 @@ export default function ComingSoon() {
                 ))}
             </div>
 
-            {/* Faint grid overlay */}
-            <div
-                className="absolute inset-0 opacity-[0.07] pointer-events-none"
-                style={{
-                    backgroundImage:
-                        'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-                    backgroundSize: '48px 48px',
-                }}
-            />
-
             {/* Main content */}
             <main className="relative flex-1 flex flex-col items-center justify-center text-center px-6 py-24">
                 <motion.div
                     initial={{ opacity: 0, y: -12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
-                    className="relative w-20 h-20 md:w-24 md:h-24 mb-8 rounded-2xl bg-white/10 backdrop-blur-sm ring-1 ring-white/20 flex items-center justify-center"
+                    className="relative mb-8 flex items-center justify-center"
                 >
-                    <motion.div
-                        className="absolute inset-0 rounded-2xl bg-primary-400/40 blur-xl"
-                        animate={{ opacity: [0.4, 0.8, 0.4] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                    />
                     <Image src={techkunLogo} alt="TechKun" className="relative w-11 h-11 md:w-14 md:h-14" priority />
                 </motion.div>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    className="inline-flex items-center gap-2 text-[11px] md:text-xs tracking-[0.2em] uppercase text-primary-200 mb-5 px-4 py-1.5 rounded-full bg-white/5 ring-1 ring-white/10"
-                >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    A new look is on the way
-                </motion.p>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.25 }}
                     className="max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-5"
+                    style={{ textWrap: 'balance' }}
                 >
-                    Hello there! We have been working on a{' '}
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-200 via-white to-indigo-200">
-                        redesign
-                    </span>
-                    , and it&apos;s just around the corner.
+                    Hello there!<br/>We have been working on a redesign, and it&apos;s just around the&nbsp;corner.
                 </motion.h1>
 
                 <motion.p
@@ -121,37 +93,20 @@ export default function ComingSoon() {
                     experience it.
                 </motion.p>
 
-                {/* Indeterminate progress bar */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    className="w-full max-w-xs mb-10"
-                >
-                    <div className="relative h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
-                        <motion.div
-                            className="absolute top-0 h-full w-1/3 rounded-full bg-gradient-to-r from-primary-300 via-white to-primary-300"
-                            animate={{ left: ['-40%', '100%'] }}
-                            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                        />
-                    </div>
-                    <p className="mt-3 text-[11px] tracking-widest uppercase text-gray-500">Brewing a little magic</p>
-                </motion.div>
-
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.65 }}
                     className="text-[11px] tracking-widest uppercase text-gray-500 mb-4"
                 >
-                    In the meantime, you can find us here
+                    In the meantime, you can find us at:
                 </motion.p>
 
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.7 }}
-                    className="flex items-center gap-4"
+                    className="mb-10 flex items-center gap-4"
                 >
                     <motion.a
                         href="https://www.linkedin.com/company/techkunex/"
@@ -181,6 +136,23 @@ export default function ComingSoon() {
                     >
                         <HiOutlineMail size={18} />
                     </motion.a>
+                </motion.div>
+
+                {/* Indeterminate progress bar */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    className="w-full max-w-xs"
+                >
+                    <div className="relative h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                        <motion.div
+                            className="absolute top-0 h-full w-1/3 rounded-full bg-gradient-to-r from-primary-300 via-white to-primary-300"
+                            animate={{ left: ['-40%', '100%'] }}
+                            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                    </div>
+                    <p className="mt-3 text-[14px] tracking-widest text-gray-500">Brewing a fresh look...</p>
                 </motion.div>
             </main>
 
