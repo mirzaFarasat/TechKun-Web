@@ -194,7 +194,7 @@ export default function ComingSoon() {
                         className="slide-up text-3xl font-bold tracking-tight leading-[1.15]"
                         style={{ '--i': 1, textWrap: 'pretty', marginBlockEnd: "0.375em" } as React.CSSProperties}
                     >
-                        Our New Website is Coming Soon.
+                        Our New Website is <strong style={{ fontWeight: "500", fontSize: "1.1em", color: "var(--secondary-neutral-100)" }}>Coming Soon.</strong>
                     </h1>
 
                     <p
@@ -202,7 +202,7 @@ export default function ComingSoon() {
                         style={{
                             '--i': 2,
                             fontWeight: "500",
-                            textWrap: "balance",
+                            textWrap: "pretty",
                             color: "var(--secondary-neutral-500)",
                             marginBlockEnd: "3rem"
                         } as React.CSSProperties}
@@ -211,11 +211,11 @@ export default function ComingSoon() {
                         experience it.
                     </p>
                 </div>
-                <div style={{gridColumn: "breakout"}}>
+                <div>
                     <div className="slide-up" style={{
                         '--i': 3,
-                        padding: "2rem",
-                        border: "1px solid var(--secondary-neutral-700)",
+                        padding: "clamp(1.5rem, 5vw, 2rem)",
+                        boxShadow: "0 0 4px var(--secondary-neutral-700)",
                         borderRadius: "1rem",
                         // backgroundColor: "oklch(from var(--secondary-neutral-900) l c h / 0.375)",
                         // marginBlockEnd: "3rem"
@@ -255,7 +255,6 @@ export default function ComingSoon() {
                     {/*        '--i': 4,*/}
                     {/*        marginBlockEnd: "1.2rem",*/}
                     {/*        textWrap: "pretty",*/}
-                    {/*        paddingInline: "var(--page-padding)",*/}
                     {/*        color: "var(--secondary-neutral-400)"*/}
                     {/*    } as React.CSSProperties}*/}
                     {/*>*/}
@@ -267,7 +266,6 @@ export default function ComingSoon() {
                     {/*        '--i': 4,*/}
                     {/*        fontWeight: "500",*/}
                     {/*        textWrap: "pretty",*/}
-                    {/*        paddingInline: "var(--page-padding)",*/}
                     {/*        color: "var(--secondary-neutral-500)",*/}
                     {/*        marginBlockEnd: "0",*/}
                     {/*    } as React.CSSProperties}*/}
