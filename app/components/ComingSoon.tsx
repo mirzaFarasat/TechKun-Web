@@ -6,7 +6,7 @@ import techkunLogo from '@/app/icon.svg';
 import Link from "next/link";
 import EmailLink from "@/app/components/EmailLink";
 import {LINKEDIN_LOGO_PATH_HREF, X_LOGO_PATH_HREF} from "@/app/Shared";
-import React, {useEffect} from "react";
+import React from "react";
 
 const PARTICLES = [
     { left: '6%', size: 3, duration: 14, delay: 0 },
@@ -45,57 +45,118 @@ const links = [{
     </svg>,
     link: "https://x.com/TechKun_"
 }];
-
-const BG_GRADIENT_HIGHER_OPACITY = 1;
-const BG_GRADIENT_LOWER_OPACITY = 0.5;
+const BG_GRADIENT_HIGHER_OPACITY = 0.75;
+const BG_GRADIENT_LOWER_OPACITY = 0.25;
 export default function ComingSoon() {
     const year = new Date().getFullYear();
 
-    useEffect(() => {
-        const VISIBILITY_DURATION = 3;
-        const OPACITY_CHANGE_DURATION = 3;
-        const ONE_ROUND = VISIBILITY_DURATION + OPACITY_CHANGE_DURATION;
-        const container = document.querySelector('.background-gradients');
-        if (!container) return;
-        const gradientElements = container.querySelectorAll(".gradient-element.animated");
-        const TOTAL_DURATION = gradientElements.length * ONE_ROUND - VISIBILITY_DURATION;
-        gradientElements.forEach((element, i) => {
-            if (i === 0) {
-                element.animate({
-                    opacity: [BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_HIGHER_OPACITY],
-                    offset: [0, OPACITY_CHANGE_DURATION, TOTAL_DURATION - OPACITY_CHANGE_DURATION, TOTAL_DURATION].map(v => v / TOTAL_DURATION),
-                    easing: ["ease-in-out", "linear", "ease-in-out"]
-                }, {
-                    duration: TOTAL_DURATION * 1000,
-                    delay: VISIBILITY_DURATION * 1000,
-                    fill: "both",
-                    iterations: Infinity
-                });
-                return;
-            }
-            const DURATION_BEFORE = (i - 1) * ONE_ROUND;
-            element.animate({
-                opacity: [BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_LOWER_OPACITY],
-                offset: [DURATION_BEFORE, DURATION_BEFORE + OPACITY_CHANGE_DURATION, i * ONE_ROUND, i * ONE_ROUND + OPACITY_CHANGE_DURATION].map(v => v / TOTAL_DURATION),
-                easing: ["ease-in-out", "linear", "ease-in-out"]
-            }, {
-                duration: TOTAL_DURATION * 1000,
-                delay: VISIBILITY_DURATION * 1000,
-                fill: "both",
-                iterations: Infinity
-            });
-        });
-    }, []);
+    // useEffect(() => {
+    //     const VISIBILITY_DURATION = 3;
+    //     const OPACITY_CHANGE_DURATION = 3;
+    //     const ONE_ROUND = VISIBILITY_DURATION + OPACITY_CHANGE_DURATION;
+    //     const container = document.querySelector('.background-gradients');
+    //     if (!container) return;
+    //     const gradientElements = container.querySelectorAll(".gradient-element.animated");
+    //     const TOTAL_DURATION = gradientElements.length * ONE_ROUND - VISIBILITY_DURATION;
+    //     gradientElements.forEach((element, i) => {
+    //         if (i === 0) {
+    //             element.animate({
+    //                 opacity: [BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_HIGHER_OPACITY],
+    //                 offset: [0, OPACITY_CHANGE_DURATION, TOTAL_DURATION - OPACITY_CHANGE_DURATION, TOTAL_DURATION].map(v => v / TOTAL_DURATION),
+    //                 easing: ["ease-in-out", "linear", "ease-in-out"]
+    //             }, {
+    //                 duration: TOTAL_DURATION * 1000,
+    //                 delay: VISIBILITY_DURATION * 1000,
+    //                 fill: "both",
+    //                 iterations: Infinity
+    //             });
+    //             return;
+    //         }
+    //         const DURATION_BEFORE = (i - 1) * ONE_ROUND;
+    //         element.animate({
+    //             opacity: [BG_GRADIENT_LOWER_OPACITY, BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_HIGHER_OPACITY, BG_GRADIENT_LOWER_OPACITY],
+    //             offset: [DURATION_BEFORE, DURATION_BEFORE + OPACITY_CHANGE_DURATION, i * ONE_ROUND, i * ONE_ROUND + OPACITY_CHANGE_DURATION].map(v => v / TOTAL_DURATION),
+    //             easing: ["ease-in-out", "linear", "ease-in-out"]
+    //         }, {
+    //             duration: TOTAL_DURATION * 1000,
+    //             delay: VISIBILITY_DURATION * 1000,
+    //             fill: "both",
+    //             iterations: Infinity
+    //         });
+    //     });
+    // }, []);
 
     return (<>
+        <style jsx>{`
+            @keyframes waving-opacity {
+                0%, 25%, 75%, 100% { opacity: ${BG_GRADIENT_LOWER_OPACITY}; }
+                50% { opacity: ${BG_GRADIENT_HIGHER_OPACITY}; }
+            }
+            .background-gradients {
+                --gradient-size: calc(100vw / 2);
+                --gradient-position-x: 50%;
+                --gradient-position-y: calc(100% + var(--gradient-size) * 0.6);
+                pointer-events: none;
+                z-index: -1;
+                isolation: isolate;
+                &, & .gradient-element {
+                    position: absolute;
+                    inset: 0;
+                }
+                .gradient-element {
+                    z-index: 0;
+                    animation: waving-opacity 6s calc(var(--i) * 0.5s) infinite ease-in-out both;
+                    background: radial-gradient(
+                        circle var(--gradient-size) at var(--gradient-position-x) var(--gradient-position-y) in oklch,
+                        var(--gradient-color),
+                        transparent
+                    );
+                }
+                .gradient-element[data-index="0"] {
+                    --gradient-position-x: calc(50% - 50vw);
+                    --gradient-color: var(--primary-500);
+                }
+                .gradient-element[data-index="1"] {
+                    --gradient-color: var(--secondary-500);
+                }
+                .gradient-element[data-index="2"] {
+                    --gradient-position-x: calc(50% + 50vw);
+                    --gradient-color: var(--tertiary-500);
+                }
+                &::before, &::after {
+                    content: "";
+                    position: absolute;
+                    inset: auto 0 0 0;
+                    height: var(--gradient-size);
+                    z-index: 1;
+                }
+                &::before {
+                    backdrop-filter: blur(8px);
+                    mask: linear-gradient(
+                        to bottom,
+                        white,
+                        transparent 90%
+                    );
+                }
+                &::after {
+                    backdrop-filter: blur(64px);
+                    mask: linear-gradient(
+                        to bottom,
+                        transparent,
+                        white 90%
+                    );
+                }
+            }
+        `}</style>
         {/* Ambient glow wash */}
         <div className="background-gradients">
-            {[
-                "radial-gradient(circle var(--gradient-size) at calc(var(--gradient-position) - 50vw) calc(100% + var(--gradient-size) / 2), var(--primary-500), transparent)",
-                "radial-gradient(circle var(--gradient-size) at var(--gradient-position) calc(100% + var(--gradient-size) / 2), var(--secondary-500), transparent)",
-                "radial-gradient(circle var(--gradient-size) at calc(var(--gradient-position) + 50vw) calc(100% + var(--gradient-size) / 2), var(--tertiary-500), transparent)"
-            ].map((g, i) => (
-                <div className={"gradient-element " + (i < 3 ? "animated" : "")} key={i} style={{ background: g, opacity: i === 0 ? BG_GRADIENT_HIGHER_OPACITY : BG_GRADIENT_LOWER_OPACITY }} />
+            {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                    key={i}
+                    style={{ '--i': i } as React.CSSProperties}
+                    className={"gradient-element animated"}
+                    data-index={i}
+                />
             ))}
         </div>
 
@@ -202,7 +263,7 @@ export default function ComingSoon() {
 
         <footer
             className="text-base z-0 fade-in"
-            style={{ color: "var(--secondary-neutral-500)", marginBlockEnd: "1.5rem" }}
+            style={{ color: "var(--secondary-neutral-400)", marginBlockEnd: "1.5rem" }}
         >
             <p suppressHydrationWarning>© {year} TechKun. All rights reserved.</p>
         </footer>

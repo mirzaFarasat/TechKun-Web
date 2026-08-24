@@ -113,47 +113,6 @@ button {
     }
 }
 
-.background-gradients {
-    --gradient-size: calc(100vw / 2);
-    --gradient-position: 50%;
-    pointer-events: none;
-    z-index: -1;
-    isolation: isolate;
-    &, & .gradient-element {
-        position: absolute;
-        inset: 0;
-    }
-    .gradient-element {
-        z-index: 0;
-    }
-    &::before {
-        /*content: "";*/
-        position: absolute;
-        inset: auto 0 0 0;
-        height: var(--gradient-size);
-        z-index: 1;
-        backdrop-filter: blur(32px);
-        mask: linear-gradient(
-            to bottom,
-            transparent,
-            white 75%
-        );
-    }
-    &::after {
-        content: "";
-        position: absolute;
-        inset: auto 0 0 0;
-        height: var(--gradient-size);
-        z-index: 1;
-        backdrop-filter: blur(64px);
-        mask: linear-gradient(
-            to bottom,
-            transparent,
-            white 75%
-        );
-    }
-}
-
 .progressive-blur-gradient {
     position: absolute;
     inset: auto 0 0 0;
