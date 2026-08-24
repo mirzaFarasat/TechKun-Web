@@ -114,43 +114,113 @@ button {
 }
 
 .background-gradients {
+    --gradient-size: calc(100vw / 2);
+    --gradient-position: 50%;
     pointer-events: none;
+    z-index: -1;
+    isolation: isolate;
     &, & .gradient-element {
         position: absolute;
         inset: 0;
     }
     .gradient-element {
-        filter: blur(8px);
+        z-index: 0;
+    }
+    &::before {
+        /*content: "";*/
+        position: absolute;
+        inset: auto 0 0 0;
+        height: var(--gradient-size);
+        z-index: 1;
+        backdrop-filter: blur(32px);
+        mask: linear-gradient(
+            to bottom,
+            transparent,
+            white 75%
+        );
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: var(--gradient-size);
+        z-index: 1;
+        backdrop-filter: blur(64px);
+        mask: linear-gradient(
+            to bottom,
+            transparent,
+            white 75%
+        );
+    }
+}
+
+.progressive-blur-gradient {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: min(100vw, var(--page-max-width));
+    height: 16rem;
+    --remaining-width: calc(100vw - min(100vw, var(--page-max-width)));
+    --remaining-height: calc(100vh - min(100vh, var(--page-max-width) * 2 / 3));
+    --max-blur-amount: calc(1px * pow(2, var(--layers) + 2));
+    margin-inline: auto;
+    isolation: isolate;
+    /*&::before {*/
+    /*    content: "";*/
+    /*    position: absolute;*/
+    /*    inset: 0 0 0 0;*/
+    /*    z-index: 0;*/
+    /*    background: linear-gradient(to top, var(--primary-color), var(--secondary-color) 25%, var(--tertiary-color));*/
+    /*    mask: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.5));*/
+    /*}*/
+    > .blur-filter {
+        --blur-amount: calc(1px * pow(2, var(--i) + 2));
+        --progression-step: 12.5%;
+        position: absolute;
+        inset: clamp(-0.5 * var(--remaining-width), -64px, 0px) clamp(-0.5 * var(--remaining-width), -2 * var(--max-blur-amount), 0px) 0;
+        z-index: 1;
+        backdrop-filter: blur(var(--blur-amount));
+        mask: linear-gradient(
+            to bottom,
+            transparent calc(var(--i) * var(--progression-step)),
+            black calc((var(--i) + 1) * var(--progression-step)),
+            black calc((var(--i) + 2) * var(--progression-step)),
+            transparent calc((var(--i) + 3) * var(--progression-step))
+        );
     }
 }
 
 @keyframes slide-down {
     from {
         opacity: 0;
-        transform: translateY(calc(-1 * var(--shift)));
+        filter: blur(var(--blur));
+        transform: translateY(calc(-1 * var(--slide-offset)));
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        filter: none;
+        transform: none;
     }
 }
 @keyframes slide-up {
     from {
         opacity: 0;
-        transform: translateY(var(--shift));
+        filter: blur(var(--blur));
+        transform: translateY(var(--slide-offset));
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        filter: none;
+        transform: none;
     }
 }
 .slide-in-children {
     --min-delay: 0.3s;
-    --stagger: 0.1s;
+    --stagger: 0.12s;
     --duration: 0.6s;
-    --shift: 1.5rem;
+    --slide-offset: 1.25rem;
+    --blur: 4px;
     .slide-down, .slide-up {
-        animation: var(--duration) calc(var(--min-delay) + var(--i) * var(--stagger)) ease-out both;
+        animation: var(--duration) calc(var(--min-delay) + var(--i) * var(--stagger)) cubic-bezier(0.39,0.57,0.56,1) backwards;
     }
     .slide-down {
         animation-name: slide-down;
@@ -158,4 +228,13 @@ button {
     .slide-up {
         animation-name: slide-up;
     }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fade-in 0.6s 1.2s ease-out both;
 }

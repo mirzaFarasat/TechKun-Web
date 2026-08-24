@@ -46,8 +46,8 @@ const links = [{
     link: "https://x.com/TechKun_"
 }];
 
-const BG_GRADIENT_HIGHER_OPACITY = 0.3;
-const BG_GRADIENT_LOWER_OPACITY = 0.15;
+const BG_GRADIENT_HIGHER_OPACITY = 1;
+const BG_GRADIENT_LOWER_OPACITY = 0.5;
 export default function ComingSoon() {
     const year = new Date().getFullYear();
 
@@ -57,7 +57,7 @@ export default function ComingSoon() {
         const ONE_ROUND = VISIBILITY_DURATION + OPACITY_CHANGE_DURATION;
         const container = document.querySelector('.background-gradients');
         if (!container) return;
-        const gradientElements = container.querySelectorAll(".gradient-element");
+        const gradientElements = container.querySelectorAll(".gradient-element.animated");
         const TOTAL_DURATION = gradientElements.length * ONE_ROUND - VISIBILITY_DURATION;
         gradientElements.forEach((element, i) => {
             if (i === 0) {
@@ -86,20 +86,21 @@ export default function ComingSoon() {
             });
         });
     }, []);
+
     return (<>
         {/* Ambient glow wash */}
         <div className="background-gradients">
             {[
-                "radial-gradient(ellipse var(--page-max-width) 100% at calc(50% - var(--page-max-width) / 2) 125%, var(--primary-500), transparent)",
-                "radial-gradient(ellipse var(--page-max-width) 100% at 50% 125%, var(--secondary-500), transparent)",
-                "radial-gradient(ellipse var(--page-max-width) 100% at calc(50% + var(--page-max-width) / 2) 125%, var(--tertiary-500), transparent)"
+                "radial-gradient(circle var(--gradient-size) at calc(var(--gradient-position) - 50vw) calc(100% + var(--gradient-size) / 2), var(--primary-500), transparent)",
+                "radial-gradient(circle var(--gradient-size) at var(--gradient-position) calc(100% + var(--gradient-size) / 2), var(--secondary-500), transparent)",
+                "radial-gradient(circle var(--gradient-size) at calc(var(--gradient-position) + 50vw) calc(100% + var(--gradient-size) / 2), var(--tertiary-500), transparent)"
             ].map((g, i) => (
-                <div className="gradient-element" key={i} style={{ background: g, opacity: i === 0 ? BG_GRADIENT_HIGHER_OPACITY : BG_GRADIENT_LOWER_OPACITY }} />
+                <div className={"gradient-element " + (i < 3 ? "animated" : "")} key={i} style={{ background: g, opacity: i === 0 ? BG_GRADIENT_HIGHER_OPACITY : BG_GRADIENT_LOWER_OPACITY }} />
             ))}
         </div>
 
         {/* Rising particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-1">
             {PARTICLES.map((p, i) => (
                 <motion.span
                     key={i}
@@ -112,7 +113,7 @@ export default function ComingSoon() {
         </div>
 
         {/* Main content */}
-        <main>
+        <main className="z-0">
             <section>
                 <div className="slide-in-children flex flex-col" style={{ paddingBlock: "64px clamp(8rem, 20vw, 10rem)" }}>
                     <p
@@ -163,7 +164,7 @@ export default function ComingSoon() {
                     </p>
 
                     <div
-                        className="slide-up contact-options text-lg" style={{ '--i': 4, color: "var(--secondary-neutral-300)" } as React.CSSProperties}
+                        className="slide-up contact-options text-lg" style={{ '--i': 3, color: "var(--secondary-neutral-300)" } as React.CSSProperties}
                     >
                         <EmailLink
                             style={{ whiteSpace: "nowrap", color: "inherit" }}
@@ -199,14 +200,11 @@ export default function ComingSoon() {
             </section>
         </main>
 
-        <motion.footer
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-base"
-            style={{ color: "var(--secondary-neutral-600)", marginBlockEnd: "1.5rem" }}
+        <footer
+            className="text-base z-0 fade-in"
+            style={{ color: "var(--secondary-neutral-500)", marginBlockEnd: "1.5rem" }}
         >
             <p suppressHydrationWarning>© {year} TechKun. All rights reserved.</p>
-        </motion.footer>
+        </footer>
     </>);
 }
