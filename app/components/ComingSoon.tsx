@@ -175,8 +175,8 @@ export default function ComingSoon() {
 
         {/* Main content */}
         <main className="z-0">
-            <section>
-                <div className="slide-in-children flex flex-col" style={{ paddingBlock: "64px clamp(8rem, 20vw, 10rem)" }}>
+            <section className="slide-in-children" style={{ paddingBlock: "64px clamp(8rem, 20vw, 10rem)" }}>
+                <div>
                     <p
                         className="slide-down display-text flex items-center gap-4"
                         style={{ marginBlockEnd: "5rem", '--i': 0 } as React.CSSProperties}
@@ -192,9 +192,9 @@ export default function ComingSoon() {
                     }}>Hello there!</p>
                     <h1
                         className="slide-up text-3xl font-bold tracking-tight leading-[1.15]"
-                        style={{ '--i': 1, textWrap: 'pretty', marginBlockEnd: "0.75em" } as React.CSSProperties}
+                        style={{ '--i': 1, textWrap: 'pretty', marginBlockEnd: "0.375em" } as React.CSSProperties}
                     >
-                        We have been working on a redesign, and it&apos;s just around the&nbsp;corner.
+                        Our New Website is Coming Soon.
                     </h1>
 
                     <p
@@ -202,61 +202,80 @@ export default function ComingSoon() {
                         style={{
                             '--i': 2,
                             fontWeight: "500",
-                            textWrap: "pretty",
+                            textWrap: "balance",
                             color: "var(--secondary-neutral-500)",
-                            marginBlockEnd: "4em",
+                            marginBlockEnd: "3rem"
                         } as React.CSSProperties}
                     >
-                        We build software with beauty, precision, and identity. And we&apos;ve tried to bring those
-                        same values into our redesign. Be sure to check back soon and be among the first to
+                        We've been working on a redesign and it's just around the corner. Be sure to check back soon and be among the first to
                         experience it.
                     </p>
-
-                    <p
-                        className="slide-up text-base tracking-widest font-bold uppercase"
-                        style={{
-                            '--i': 3,
-                            marginBlockEnd: "1rem",
-                            textWrap: "pretty",
-                            color: "var(--secondary-neutral-600)"
-                        } as React.CSSProperties}
-                    >
-                        In the meantime, you can find us at:
-                    </p>
-
-                    <div
-                        className="slide-up contact-options text-lg" style={{ '--i': 3, color: "var(--secondary-neutral-300)" } as React.CSSProperties}
-                    >
-                        <EmailLink
-                            style={{ whiteSpace: "nowrap", color: "inherit" }}
-                            address="farasat@tech-kun.com" text="farasat@tech-kun.com"
-                            iconSize="1.125em" iconStrokeWidth="1.4"
-                        />
-                        <div className="links">
-                            {links.map(item => <Link
-                                className="link"
-                                key={item.link} href={item.link}
-                                target="_blank" rel="noopener noreferrer"
-                            >{item.iconJSX}</Link>)}
+                </div>
+                <div style={{gridColumn: "breakout"}}>
+                    <div className="slide-up" style={{
+                        '--i': 3,
+                        padding: "2rem",
+                        border: "1px solid var(--secondary-neutral-700)",
+                        borderRadius: "1rem",
+                        // backgroundColor: "oklch(from var(--secondary-neutral-900) l c h / 0.375)",
+                        // marginBlockEnd: "3rem"
+                    } as React.CSSProperties}>
+                        <p
+                            className="text-base tracking-widest font-bold uppercase"
+                            style={{
+                                marginBlockEnd: "1.2rem",
+                                textWrap: "pretty",
+                                color: "var(--secondary-neutral-400)"
+                            }}
+                        >
+                            In the meantime, you can find us at:
+                        </p>
+                        <div
+                            className="contact-options text-lg" style={{
+                            color: "var(--secondary-neutral-100)",
+                        }}
+                        >
+                            <EmailLink
+                                style={{ whiteSpace: "nowrap", color: "inherit" }}
+                                address="farasat@tech-kun.com" text="farasat@tech-kun.com"
+                                iconSize="1.125em" iconStrokeWidth="1.4"
+                            />
+                            <div className="links">
+                                {links.map(item => <Link
+                                    className="link"
+                                    key={item.link} href={item.link}
+                                    target="_blank" rel="noopener noreferrer"
+                                >{item.iconJSX}</Link>)}
+                            </div>
                         </div>
                     </div>
-
-                    {/* Indeterminate progress bar */}
-                    {/*<motion.div*/}
-                    {/*    initial={{ opacity: 0 }}*/}
-                    {/*    animate={{ opacity: 1 }}*/}
-                    {/*    transition={{ duration: 0.6, delay: 0.6 }}*/}
-                    {/*    className="w-full max-w-xs"*/}
+                    {/*<p*/}
+                    {/*    className="slide-up text-base tracking-widest font-bold uppercase"*/}
+                    {/*    style={{*/}
+                    {/*        '--i': 4,*/}
+                    {/*        marginBlockEnd: "1.2rem",*/}
+                    {/*        textWrap: "pretty",*/}
+                    {/*        paddingInline: "var(--page-padding)",*/}
+                    {/*        color: "var(--secondary-neutral-400)"*/}
+                    {/*    } as React.CSSProperties}*/}
                     {/*>*/}
-                    {/*    <div className="relative h-1.5 w-full rounded-full bg-white/10 overflow-hidden">*/}
-                    {/*        <motion.div*/}
-                    {/*            className="absolute top-0 h-full w-1/3 rounded-full bg-gradient-to-r from-primary-300 via-white to-primary-300"*/}
-                    {/*            animate={{ left: ['-40%', '100%'] }}*/}
-                    {/*            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}*/}
-                    {/*        />*/}
-                    {/*    </div>*/}
-                    {/*    <p className="mt-3 text-[14px] tracking-widest text-gray-500">Brewing a fresh look...</p>*/}
-                    {/*</motion.div>*/}
+                    {/*    Or read about us here:*/}
+                    {/*</p>*/}
+                    {/*<p*/}
+                    {/*    className="slide-up text-lg"*/}
+                    {/*    style={{*/}
+                    {/*        '--i': 4,*/}
+                    {/*        fontWeight: "500",*/}
+                    {/*        textWrap: "pretty",*/}
+                    {/*        paddingInline: "var(--page-padding)",*/}
+                    {/*        color: "var(--secondary-neutral-500)",*/}
+                    {/*        marginBlockEnd: "0",*/}
+                    {/*    } as React.CSSProperties}*/}
+                    {/*>*/}
+                    {/*    We build software with beauty, precision, and identity. And we&apos;ve tried to bring those*/}
+                    {/*    same values into our redesign. Be sure to check back soon and be among the first to*/}
+                    {/*    experience it.*/}
+                    {/*</p>*/}
                 </div>
             </section>
         </main>
