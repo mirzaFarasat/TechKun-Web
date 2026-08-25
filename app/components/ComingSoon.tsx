@@ -192,9 +192,9 @@ export default function ComingSoon() {
                     }}>Hello there!</p>
                     <h1
                         className="slide-up text-3xl font-bold tracking-tight leading-[1.15]"
-                        style={{ '--i': 1, textWrap: 'pretty', marginBlockEnd: "0.375em" } as React.CSSProperties}
+                        style={{ '--i': 1, textWrap: 'pretty', marginBlockEnd: "0.375em", color: "var(--secondary-neutral-100)" } as React.CSSProperties}
                     >
-                        Our New Website is <strong style={{ fontWeight: "500", fontSize: "1.1em", color: "var(--secondary-neutral-100)" }}>Coming Soon.</strong>
+                        Our New Website is <span style={{color: "var(--secondary-neutral-50)"}}>Coming Soon.</span>
                     </h1>
 
                     <p
@@ -215,7 +215,7 @@ export default function ComingSoon() {
                     <div className="slide-up" style={{
                         '--i': 3,
                         padding: "clamp(1.5rem, 5vw, 2rem)",
-                        boxShadow: "0 0 4px var(--secondary-neutral-700)",
+                        border: "1px solid var(--secondary-neutral-700)",
                         borderRadius: "1rem",
                         // backgroundColor: "oklch(from var(--secondary-neutral-900) l c h / 0.375)",
                         // marginBlockEnd: "3rem"
